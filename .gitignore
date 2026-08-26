@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Environments and editors
+.venv/
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+
+# Data, models, and experiment outputs
+data/raw/
+data/interim/
+data/processed/
+artifacts/
+checkpoints/
+outputs/
+mlruns/
+wandb/
+*.ckpt
+*.pt
+*.pth
+
+# Notebooks
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
