@@ -1,0 +1,18 @@
+project:
+  name: cloud2watt
+  seed: 42
+
+data:
+  history_minutes: 60
+  forecast_minutes: [15, 30, 60, 120, 180, 240]
+  image_size: [128, 128]
+  sample_interval_minutes: 15
+  timezone: UTC
+split:
+  strategy: chronological
+  train_fraction: 0.70
+  validation_fraction: 0.15
+  test_fraction: 0.15
+ramp_event:
+  window_minutes: 30
+  threshold_fraction_of_capacity: 0.20
