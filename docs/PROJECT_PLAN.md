@@ -396,13 +396,13 @@ checkpoint path
 
 ### 第一个 PR：数据访问验证
 
-- [ ] 新建 `docs/adr/001-data-sources.md`；
-- [ ] 写 `scripts/check_uk_pv_access.py`，只读取 metadata 和一个小分区；
-- [ ] 写 `scripts/inspect_satellite.py`，读取单时刻、小区域、少数通道；
-- [ ] 输出数据维度、坐标、时间、codec、块大小和读取耗时；
-- [ ] 生成一张卫星裁剪与站点位置叠加图；
-- [ ] 在 `data/README.md` 记录注册、环境变量和许可注意事项；
-- [ ] 为网络失败、缺 token 和错误时间范围提供清晰错误信息。
+- [x] 新建 `docs/adr/001-data-sources.md`；
+- [x] 写 `scripts/check_uk_pv_access.py`，只读取 metadata 和一个小分区；
+- [x] 写 `scripts/inspect_satellite.py`，读取单时刻、小区域、少数通道；
+- [x] 输出数据维度、坐标、时间、codec、块大小和读取耗时；
+- [x] 生成一张卫星裁剪与站点位置叠加图；
+- [x] 在 `data/README.md` 记录注册、环境变量和许可注意事项；
+- [x] 为网络失败、缺 token 和错误时间范围提供清晰错误信息。
 
 ### 第二个 PR：mini dataset
 

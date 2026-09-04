@@ -30,7 +30,9 @@ def test_aggregate_power_uses_right_closed_bins_and_normalizes_capacity() -> Non
             "generation_Wh": [100.0, 100.0, 100.0, 100.0],
         }
     )
-    result = aggregate_power_15min(frame, pd.Series({7: 2.0}))
+    result = aggregate_power_15min(
+        frame, pd.Series({7: 2.0}), value_semantics="interval_energy"
+    )
 
     assert result.loc[0, "datetime_GMT"] == pd.Timestamp("2020-12-01 00:15", tz="UTC")
     assert result.loc[0, "normalized_power"] == pytest.approx(0.6)
@@ -149,6 +151,7 @@ def test_end_to_end_power_mini_dataset() -> None:
         start_utc=datetime(2020, 12, 1, tzinfo=UTC),
         days=1,
         site_count=2,
+        power_value_semantics="interval_energy",
     )
     assert sites["ss_id"].tolist() == [1, 2]
     assert derived["datetime_GMT"].dt.tz is not None
@@ -179,6 +182,7 @@ def test_site_selection_ties_are_ordered_by_id() -> None:
         start_utc=datetime(2020, 12, 1, tzinfo=UTC),
         days=1,
         site_count=2,
+        power_value_semantics="interval_energy",
     )
     assert sites["ss_id"].tolist() == [10, 20]
 
@@ -197,6 +201,7 @@ def test_mini_dataset_uses_interval_end_window_boundaries() -> None:
         start_utc=datetime(2020, 12, 1, tzinfo=UTC),
         days=1,
         site_count=1,
+        power_value_semantics="interval_energy",
     )
     assert len(derived) == 96
     assert derived["datetime_GMT"].min() == pd.Timestamp("2020-12-01 00:15", tz="UTC")

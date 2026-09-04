@@ -18,6 +18,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--metadata", type=Path, required=True, help="UK PV metadata.csv")
     parser.add_argument("--bad-data", type=Path, help="Optional UK PV bad_data.csv")
     parser.add_argument("--source-revision", default="unknown")
+    parser.add_argument(
+        "--power-value-semantics",
+        choices=("interval_energy", "instantaneous_power"),
+        required=True,
+    )
     parser.add_argument("--start", default="2020-12-01", help="UTC start date (inclusive)")
     parser.add_argument("--days", type=int, default=7)
     parser.add_argument("--sites", type=int, default=20)
@@ -57,6 +62,7 @@ def main() -> int:
         site_count=args.sites,
         bad_periods=bad_periods,
         source_revision=args.source_revision,
+        power_value_semantics=args.power_value_semantics,
     )
     write_power_mini_dataset(args.output, derived, sites, manifest)
     print(f"mini dataset written to {args.output} ({len(derived)} rows)")

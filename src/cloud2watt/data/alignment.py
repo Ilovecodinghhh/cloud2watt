@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Literal
+
 import pandas as pd
 
 
@@ -14,6 +16,7 @@ def aggregate_power_15min(
     frame: pd.DataFrame,
     capacities_kwp: pd.Series,
     *,
+    value_semantics: Literal["interval_energy", "instantaneous_power"],
     minimum_readings: int = 3,
 ) -> pd.DataFrame:
     """Convert 5-minute interval energy to 15-minute mean normalized power.
@@ -46,7 +49,12 @@ def aggregate_power_15min(
         reading_count=("generation_Wh", "count"),
         capacity_kwp=("capacity_kwp", "first"),
     ).reset_index()
-    result["power_w"] = result["generation_Wh"] / 0.25
+    if value_semantics == "interval_energy":
+        result["power_w"] = result["generation_Wh"] / 0.25
+    elif value_semantics == "instantaneous_power":
+        result["power_w"] = result["generation_Wh"] / result["reading_count"]
+    else:
+        raise ValueError(f"unsupported value_semantics: {value_semantics}")
     result["normalized_power"] = result["power_w"] / (result["capacity_kwp"] * 1000.0)
     result.loc[result["reading_count"] < minimum_readings, "normalized_power"] = float("nan")
     return result.sort_values(["ss_id", "datetime_GMT"], ignore_index=True)
