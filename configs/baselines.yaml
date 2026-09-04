@@ -1,0 +1,12 @@
+run_name: naive-baselines-v1
+data_version: paired-30d-v1
+random_seed: 42
+embargo_hours: 4
+site_holdout_fraction: 0.20
+horizons_minutes: [15, 30, 60, 120, 180, 240]
+ramp:
+  primary_threshold: 0.20
+  validation_sensitivity_thresholds: [0.10, 0.15, 0.25]
+  tolerance_minutes: 15
+smart_persistence:
+  minimum_clear_sky_ghi_wm2: 20.0
