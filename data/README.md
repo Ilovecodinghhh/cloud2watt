@@ -143,3 +143,21 @@ python -m scripts.build_30d_dataset \
 `satellite_quality.parquet`、逐规则/站点/日期的 `build_report.json`、配置及 manifest
 SHA-256、太阳特征和规模外推。数据契约、真实构建统计和局限见
 [DATA_CARD.md](../docs/DATA_CARD.md) 与 [ADR-003](../docs/adr/003-30d-quality-policy.md)。
+
+## 无泄漏切分与朴素基线
+
+默认命令只评估 validation，保持 test 锁定：
+
+```bash
+python -m scripts.run_naive_baselines
+```
+
+在配置、阈值和模型选择全部冻结后，最终报告才允许显式解锁 test：
+
+```bash
+python -m scripts.run_naive_baselines --unlock-test
+```
+
+结果写入 `outputs/runs/<run_id>/`，包括不可变 split manifest、预测 Parquet、按时效 CSV、
+按站点/日期/太阳高度角指标、爬坡事件指标、运行 provenance 和指标曲线。默认配置见
+[baselines.yaml](../configs/baselines.yaml)。
