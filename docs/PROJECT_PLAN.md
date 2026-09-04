@@ -415,6 +415,9 @@ checkpoint path
 - [x] 为 20 个站点构建 7 天 fixture manifest；
 - [x] 增加端到端集成测试。
 
+PR #3 至 PR #5 的任务拆分、交付物、测试、风险和 Definition of Done 见
+[下一阶段实施计划](NEXT_STEPS.md)。
+
 ## 13. 主要风险
 
 | 风险 | 影响 | 缓解措施 |
