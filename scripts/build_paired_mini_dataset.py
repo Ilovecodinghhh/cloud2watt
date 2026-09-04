@@ -57,9 +57,7 @@ def parse_args() -> argparse.Namespace:
         required=True,
     )
     parser.add_argument("--cache-dir", type=Path, default=Path("outputs/cache/seviri-2020"))
-    parser.add_argument(
-        "--output", type=Path, default=Path("data/processed/paired-mini-v1")
-    )
+    parser.add_argument("--output", type=Path, default=Path("data/processed/paired-mini-v1"))
     parser.add_argument("--overwrite", action="store_true")
     return parser.parse_args()
 
@@ -99,19 +97,12 @@ def load_source_tables(
     return power, metadata, bad_data
 
 
-def apply_bad_data(
-    power: pd.DataFrame, bad_data: pd.DataFrame | None
-) -> tuple[pd.DataFrame, int]:
+def apply_bad_data(power: pd.DataFrame, bad_data: pd.DataFrame | None) -> tuple[pd.DataFrame, int]:
     if bad_data is None:
         return power, 0
     flagged = mark_source_bad_periods(power, bad_data)
     count = int(
-        (
-            flagged["quality_flags"].astype("uint16")
-            & int(QualityFlag.SOURCE_BAD_PERIOD)
-        )
-        .ne(0)
-        .sum()
+        (flagged["quality_flags"].astype("uint16") & int(QualityFlag.SOURCE_BAD_PERIOD)).ne(0).sum()
     )
     return flagged, count
 
@@ -200,9 +191,7 @@ def main() -> int:
     quality_counts["source_bad_period"] = source_bad_count
 
     issue_times, satellite_times = paired_time_grid(issue_start, issue_end)
-    source_time_indices = match_satellite_indices(
-        satellite_times, available_satellite_times
-    )
+    source_time_indices = match_satellite_indices(satellite_times, available_satellite_times)
     site_pixels = client.map_sites(sites)
     sites["satellite_x_index"] = [site.x_index for site in site_pixels]
     sites["satellite_y_index"] = [site.y_index for site in site_pixels]

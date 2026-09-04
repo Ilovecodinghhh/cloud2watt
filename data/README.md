@@ -124,3 +124,22 @@ python scripts/build_paired_mini_dataset.py \
 
 真实输出和远程缓存分别位于 `data/processed/` 与 `outputs/cache/`，两者均被 Git 忽略。
 决策和实测结果见 [ADR-002](../docs/adr/002-paired-mini-dataset.md)。
+
+## 30 天质量控制数据
+
+接受 UK PV 条款并取得固定 revision 的 2020 年 11、12 月分区后，用一条命令构建：
+
+```bash
+python -m scripts.build_30d_dataset \
+  --power "/path/to/5_minutely/year=2020/month=11/data.parquet" \
+          "/path/to/5_minutely/year=2020/month=12/data.parquet" \
+  --metadata "/path/to/metadata.csv" \
+  --bad-data "/path/to/bad_data.csv" \
+  --pv-revision "Hugging-Face-commit-SHA"
+```
+
+默认配置是 [paired-30d-v1.yaml](../configs/data/paired-30d-v1.yaml)，输出目录为
+`data/processed/paired-30d-v1`。构建器拒绝覆盖已存在的版本；输出还包含
+`satellite_quality.parquet`、逐规则/站点/日期的 `build_report.json`、配置及 manifest
+SHA-256、太阳特征和规模外推。数据契约、真实构建统计和局限见
+[DATA_CARD.md](../docs/DATA_CARD.md) 与 [ADR-003](../docs/adr/003-30d-quality-policy.md)。

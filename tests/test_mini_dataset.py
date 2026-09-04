@@ -30,9 +30,7 @@ def test_aggregate_power_uses_right_closed_bins_and_normalizes_capacity() -> Non
             "generation_Wh": [100.0, 100.0, 100.0, 100.0],
         }
     )
-    result = aggregate_power_15min(
-        frame, pd.Series({7: 2.0}), value_semantics="interval_energy"
-    )
+    result = aggregate_power_15min(frame, pd.Series({7: 2.0}), value_semantics="interval_energy")
 
     assert result.loc[0, "datetime_GMT"] == pd.Timestamp("2020-12-01 00:15", tz="UTC")
     assert result.loc[0, "normalized_power"] == pytest.approx(0.6)
@@ -189,9 +187,7 @@ def test_site_selection_ties_are_ordered_by_id() -> None:
 
 def test_mini_dataset_uses_interval_end_window_boundaries() -> None:
     times = pd.date_range("2020-12-01", "2020-12-02", freq="5min")
-    power = pd.DataFrame(
-        {"ss_id": 1, "datetime_GMT": times, "generation_Wh": 10.0}
-    )
+    power = pd.DataFrame({"ss_id": 1, "datetime_GMT": times, "generation_Wh": 10.0})
     metadata = pd.DataFrame(
         {"ss_id": [1], "latitude_rounded": [52.0], "longitude_rounded": [-1.0], "kWp": [1.0]}
     )

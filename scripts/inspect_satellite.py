@@ -158,9 +158,7 @@ def create_preview(
     channel_names = decode_zarr_chunk(store_url, metadata, "variable", "0", timeout)
     time_chunk_size = metadata["metadata"]["time/.zarray"]["chunks"][0]
     time_chunk_index, local_time_coordinate = divmod(time_index, time_chunk_size)
-    time_values = decode_zarr_chunk(
-        store_url, metadata, "time", str(time_chunk_index), timeout
-    )
+    time_values = decode_zarr_chunk(store_url, metadata, "time", str(time_chunk_index), timeout)
     channel_name = str(channel_names[channel_index])
     timestamp = str(np.datetime64(int(time_values[local_time_coordinate]), "ns"))
 
@@ -174,9 +172,7 @@ def create_preview(
     figure, axis = plt.subplots(figsize=(6, 6))
     plot = axis.imshow(image, cmap="gray")
     axis.scatter([local_x], [local_y], marker="+", s=180, linewidths=2, color="red")
-    axis.set_title(
-        f"SEVIRI {channel_name} near ({latitude:.3f}, {longitude:.3f})\n{timestamp} UTC"
-    )
+    axis.set_title(f"SEVIRI {channel_name} near ({latitude:.3f}, {longitude:.3f})\n{timestamp} UTC")
     axis.set_xlabel("x within Zarr chunk")
     axis.set_ylabel("y within Zarr chunk")
     figure.colorbar(plot, ax=axis, shrink=0.8)

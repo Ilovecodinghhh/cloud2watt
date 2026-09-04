@@ -15,9 +15,7 @@ def persistence(last_observation: float, horizons: int) -> npt.NDArray[np.float6
     return np.full(horizons, last_observation, dtype=np.float64)
 
 
-def normalized_mae(
-    observed: Sequence[float], predicted: Sequence[float], capacity: float
-) -> float:
+def normalized_mae(observed: Sequence[float], predicted: Sequence[float], capacity: float) -> float:
     """Return mean absolute error normalized by installed capacity."""
     if capacity <= 0 or not np.isfinite(capacity):
         raise ValueError("capacity must be finite and positive")

@@ -45,9 +45,7 @@ class ProbeReport:
         return asdict(self)
 
 
-def choose_smallest_file(
-    files: Iterable[RemoteFile], *, prefix: str, suffix: str
-) -> RemoteFile:
+def choose_smallest_file(files: Iterable[RemoteFile], *, prefix: str, suffix: str) -> RemoteFile:
     """Choose the smallest sized file within a constrained dataset subtree."""
     candidates = [
         file

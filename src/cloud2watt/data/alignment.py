@@ -35,6 +35,10 @@ def aggregate_power_15min(
 
     data = frame.loc[:, ["ss_id", "datetime_GMT", "generation_Wh"]].copy()
     data["datetime_GMT"] = to_utc(data["datetime_GMT"])
+    data["raw_duplicate"] = data.duplicated(["ss_id", "datetime_GMT"], keep=False)
+    data = data.groupby(["ss_id", "datetime_GMT"], as_index=False, sort=False).agg(
+        generation_Wh=("generation_Wh", "mean"), raw_duplicate=("raw_duplicate", "max")
+    )
     data["capacity_kwp"] = data["ss_id"].map(capacities_kwp)
     if data["capacity_kwp"].isna().any() or (data["capacity_kwp"] <= 0).any():
         raise ValueError("every site must have a positive capacity")
@@ -48,6 +52,7 @@ def aggregate_power_15min(
         generation_Wh=("generation_Wh", "sum"),
         reading_count=("generation_Wh", "count"),
         capacity_kwp=("capacity_kwp", "first"),
+        raw_duplicate=("raw_duplicate", "max"),
     ).reset_index()
     if value_semantics == "interval_energy":
         result["power_w"] = result["generation_Wh"] / 0.25
