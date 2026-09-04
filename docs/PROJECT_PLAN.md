@@ -406,14 +406,14 @@ checkpoint path
 
 ### 第二个 PR：mini dataset
 
-- [ ] 定义 Pydantic 或 dataclass 样本 schema；
-- [ ] 实现 UTC 时间对齐与区间结束时间转换；
-- [ ] 实现 15 分钟功率聚合和容量归一化；
-- [ ] 实现站点中心卫星裁剪；
-- [ ] 实现质量标志和过滤统计；
-- [ ] 写入本地 Zarr/Parquet 派生数据；
-- [ ] 为 20 个站点构建 7 天 fixture manifest；
-- [ ] 增加端到端集成测试。
+- [x] 定义 Pydantic 或 dataclass 样本 schema；
+- [x] 实现 UTC 时间对齐与区间结束时间转换；
+- [x] 实现 15 分钟功率聚合和容量归一化；
+- [x] 实现站点中心卫星裁剪；
+- [x] 实现质量标志和过滤统计；
+- [x] 写入本地 Zarr/Parquet 派生数据；
+- [x] 为 20 个站点构建 7 天 fixture manifest；
+- [x] 增加端到端集成测试。
 
 ## 13. 主要风险
 

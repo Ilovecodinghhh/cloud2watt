@@ -60,8 +60,8 @@ pytest
 
 - [x] 初始化可安装的 Python 项目和 CI
 - [x] 确定研究区域、卫星数据源与光伏功率数据源
-- [ ] 完成有凭据的 UK PV 小分区访问验证
-- [ ] 建立时空对齐和质量控制管道
+- [x] 完成有凭据的 UK PV 小分区访问验证
+- [x] 建立 mini dataset 的 UTC 对齐、空间裁剪和质量控制管道
 - [ ] 实现 Persistence、晴空和 Optical Flow 基线
 - [ ] 实现 ConvLSTM / U-Net 模型
 - [ ] 建立滚动时间验证与爬坡事件评估
