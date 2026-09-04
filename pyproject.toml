@@ -15,6 +15,16 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+data = [
+  "huggingface-hub>=0.34",
+  "matplotlib>=3.9",
+  "numpy>=1.26",
+  "ocf-blosc2>=0.0.14",
+  "pandas>=2.2",
+  "pyarrow>=17",
+  "pyproj>=3.7",
+  "zarr>=3.1,<4",
+]
 dev = [
   "pytest>=8.0",
   "ruff>=0.6",
