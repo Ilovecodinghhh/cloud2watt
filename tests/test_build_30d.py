@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from scripts.build_30d_dataset import annual_storage_estimates, validate_new_version_path
+from cloud2watt.data.versioning import annual_storage_estimates, validate_new_version_path
 
 
 def test_version_path_is_immutable(tmp_path: Path) -> None:
