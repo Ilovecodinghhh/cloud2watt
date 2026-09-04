@@ -12,6 +12,9 @@ Cloud2Watt 面向能源气象与机器学习场景，构建一条可复现的端
 4. 与 Persistence、晴空模型和 Optical Flow 等基线公平比较；
 5. 提供可复现评估、可视化动画和推理接口。
 
+详细的研究范围、数据路线、实验协议和十二周里程碑见
+[项目设计与实施计划](docs/PROJECT_PLAN.md)。
+
 ## 计划中的模型
 
 - Persistence / Smart Persistence
@@ -56,7 +59,8 @@ pytest
 ## 路线图
 
 - [x] 初始化可安装的 Python 项目和 CI
-- [ ] 确定研究区域、卫星数据源与光伏功率数据源
+- [x] 确定研究区域、卫星数据源与光伏功率数据源
+- [ ] 完成有凭据的 UK PV 小分区访问验证
 - [ ] 建立时空对齐和质量控制管道
 - [ ] 实现 Persistence、晴空和 Optical Flow 基线
 - [ ] 实现 ConvLSTM / U-Net 模型
