@@ -22,8 +22,7 @@ from pyproj import CRS, Transformer
 from cloud2watt.data.spatial import nearest_index
 
 SEVIRI_PROJ4 = (
-    "+proj=geos +lon_0=9.5 +h=35785831 +a=6378169 "
-    "+rf=295.488065897014 +sweep=x +units=m +no_defs"
+    "+proj=geos +lon_0=9.5 +h=35785831 +a=6378169 +rf=295.488065897014 +sweep=x +units=m +no_defs"
 )
 
 
@@ -44,9 +43,7 @@ def reshape_zarr_chunk(
     """Trim either compact or full padded edge chunks to their logical shape."""
     actual_shape = [
         min(chunk, size - index * chunk)
-        for chunk, size, index in zip(
-            spec["chunks"], spec["shape"], chunk_indices, strict=True
-        )
+        for chunk, size, index in zip(spec["chunks"], spec["shape"], chunk_indices, strict=True)
     ]
     actual_size = int(np.prod(actual_shape))
     full_size = int(np.prod(spec["chunks"]))

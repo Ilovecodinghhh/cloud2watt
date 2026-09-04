@@ -14,7 +14,7 @@ import pandas as pd
 import zarr
 
 from cloud2watt.data.alignment import aggregate_power_15min, to_utc
-from cloud2watt.data.quality import flag_power_quality
+from cloud2watt.data.quality import QualityFlag, flag_power_quality
 from cloud2watt.data.seviri import SeviriStore, SitePixel
 
 HISTORY_MINUTES = (-45, -30, -15, 0)
@@ -41,9 +41,7 @@ def select_compact_sites(
         raise ValueError("site_count and spatial_bin_degrees must be positive")
     source = power.loc[:, ["ss_id", "datetime_GMT"]].copy()
     source["datetime_GMT"] = to_utc(source["datetime_GMT"])
-    source = source.loc[
-        source["datetime_GMT"].gt(start_utc) & source["datetime_GMT"].le(end_utc)
-    ]
+    source = source.loc[source["datetime_GMT"].gt(start_utc) & source["datetime_GMT"].le(end_utc)]
     expected = int((end_utc - start_utc).total_seconds() // 300)
     counts = source.groupby("ss_id").size().rename("reading_count").reset_index()
     candidates = counts.loc[counts["reading_count"] >= expected * minimum_coverage].merge(
@@ -103,9 +101,7 @@ def discover_paired_window(
     satellite_set = set(satellite_times)
     for candidate in pd.date_range(first_day, last_start, freq="D"):
         end = candidate + pd.Timedelta(days=days)
-        required_power_start = candidate + pd.Timedelta(
-            minutes=min(HISTORY_MINUTES) - 15
-        )
+        required_power_start = candidate + pd.Timedelta(minutes=min(HISTORY_MINUTES) - 15)
         required_power_end = end + pd.Timedelta(minutes=max(FORECAST_MINUTES))
         if timestamps.min() > required_power_start or timestamps.max() < required_power_end:
             continue
@@ -119,9 +115,7 @@ def discover_paired_window(
             )
         except ValueError:
             continue
-        _, required_frames = paired_time_grid(
-            candidate.to_pydatetime(), end.to_pydatetime()
-        )
+        _, required_frames = paired_time_grid(candidate.to_pydatetime(), end.to_pydatetime())
         if all(timestamp in satellite_set for timestamp in required_frames):
             return candidate.to_pydatetime(), end.to_pydatetime(), sites
     raise ValueError("no continuous paired window satisfies the requested duration and site count")
@@ -154,6 +148,12 @@ def prepare_paired_power(
         value_semantics=value_semantics,
     )
     flagged, stats = flag_power_quality(aligned)
+    duplicate_mask = flagged["raw_duplicate"].fillna(False).astype(bool)
+    flagged.loc[duplicate_mask, "quality_flags"] = flagged.loc[
+        duplicate_mask, "quality_flags"
+    ].astype("uint16") | int(QualityFlag.DUPLICATE_TIMESTAMP)
+    flagged["is_valid"] = flagged["quality_flags"].eq(int(QualityFlag.OK))
+    stats.record(QualityFlag.DUPLICATE_TIMESTAMP, int(duplicate_mask.sum()))
     return flagged.reset_index(drop=True), stats.as_dict()
 
 
@@ -178,6 +178,7 @@ def build_sample_index(
     *,
     issue_times: pd.DatetimeIndex,
     satellite_times: pd.DatetimeIndex,
+    invalid_satellite_keys: set[tuple[str, pd.Timestamp]] | None = None,
 ) -> tuple[pd.DataFrame, dict[str, int]]:
     """Build references to deduplicated frames and power rows for every sample."""
     power = power.reset_index(drop=True).copy()
@@ -188,22 +189,25 @@ def build_sample_index(
     satellite_lookup = {timestamp: index for index, timestamp in enumerate(satellite_times)}
     records = []
     dropped_history = 0
+    dropped_satellite = 0
+    dropped_invalid_satellite = 0
+    invalid_satellite_keys = invalid_satellite_keys or set()
     for site_index, site in enumerate(sites.itertuples(index=False)):
         site_id = str(site.ss_id)
         for issue_time in issue_times:
-            history_times = [
-                issue_time + timedelta(minutes=offset) for offset in HISTORY_MINUTES
-            ]
-            target_times = [
-                issue_time + timedelta(minutes=offset) for offset in FORECAST_MINUTES
-            ]
+            history_times = [issue_time + timedelta(minutes=offset) for offset in HISTORY_MINUTES]
+            target_times = [issue_time + timedelta(minutes=offset) for offset in FORECAST_MINUTES]
             power_history = [power_lookup.get((site_id, time), -1) for time in history_times]
             if any(index < 0 or not bool(power.iloc[index]["is_valid"]) for index in power_history):
                 dropped_history += 1
                 continue
             satellite_indices = [satellite_lookup.get(time, -1) for time in history_times]
             if any(index < 0 for index in satellite_indices):
-                raise ValueError("satellite history grid is incomplete")
+                dropped_satellite += 1
+                continue
+            if any((site_id, time) in invalid_satellite_keys for time in history_times):
+                dropped_invalid_satellite += 1
+                continue
             target_indices = [power_lookup.get((site_id, time), -1) for time in target_times]
             target_mask = [
                 index >= 0 and bool(power.iloc[index]["is_valid"]) for index in target_indices
@@ -220,12 +224,30 @@ def build_sample_index(
                     "quality_flags": "" if all(target_mask) else "incomplete_target",
                 }
             )
-    return pd.DataFrame.from_records(records), {"dropped_invalid_history": dropped_history}
+    return pd.DataFrame.from_records(records), {
+        "dropped_invalid_history": dropped_history,
+        "dropped_missing_satellite_history": dropped_satellite,
+        "dropped_invalid_satellite_history": dropped_invalid_satellite,
+    }
 
 
-def match_satellite_indices(
+def partition_satellite_times(
     requested: pd.DatetimeIndex, available: pd.DatetimeIndex
-) -> list[int]:
+) -> tuple[pd.DatetimeIndex, list[int], pd.DatetimeIndex]:
+    """Partition requested frames into exact matches and auditable gaps."""
+    if available.has_duplicates:
+        raise ValueError("satellite time coordinate contains duplicates")
+    lookup = {timestamp: index for index, timestamp in enumerate(available)}
+    present = [timestamp for timestamp in requested if timestamp in lookup]
+    missing = [timestamp for timestamp in requested if timestamp not in lookup]
+    return (
+        pd.DatetimeIndex(present),
+        [lookup[timestamp] for timestamp in present],
+        pd.DatetimeIndex(missing),
+    )
+
+
+def match_satellite_indices(requested: pd.DatetimeIndex, available: pd.DatetimeIndex) -> list[int]:
     """Match exact UTC frame times and fail instead of selecting future data."""
     if available.has_duplicates:
         raise ValueError("satellite time coordinate contains duplicates")
@@ -249,9 +271,7 @@ def validate_sample_index(
     checked_power_references = 0
     for row in sample_index.itertuples(index=False):
         issue_time = pd.Timestamp(row.issue_time_utc)
-        expected_history = [
-            issue_time + timedelta(minutes=offset) for offset in HISTORY_MINUTES
-        ]
+        expected_history = [issue_time + timedelta(minutes=offset) for offset in HISTORY_MINUTES]
         actual_satellite = [satellite_times[int(index)] for index in row.satellite_frame_indices]
         if actual_satellite != expected_history or max(actual_satellite) > issue_time:
             raise ValueError("satellite history is misaligned or contains future data")
@@ -261,9 +281,7 @@ def validate_sample_index(
         ]
         if actual_power_history != expected_history:
             raise ValueError("power history is misaligned")
-        expected_targets = [
-            issue_time + timedelta(minutes=offset) for offset in FORECAST_MINUTES
-        ]
+        expected_targets = [issue_time + timedelta(minutes=offset) for offset in FORECAST_MINUTES]
         for target_index, expected_time in zip(
             row.target_row_indices, expected_targets, strict=True
         ):
@@ -291,6 +309,8 @@ def write_satellite_frames(
     channel_names: list[str],
     height: int = 128,
     width: int = 128,
+    quality_output_path: Path | None = None,
+    maximum_invalid_fraction: float = 0.05,
 ) -> dict[str, object]:
     """Write unique site/time frames to chunked Zarr without history duplication."""
     available_channels = client.channels()
@@ -323,6 +343,7 @@ def write_satellite_frames(
     )
     finite_count = 0
     value_count = 0
+    quality_records: list[dict[str, object]] = []
     for time_start in range(0, len(requested_times), 12):
         time_stop = min(time_start + 12, len(requested_times))
         block = np.empty(
@@ -335,9 +356,7 @@ def write_satellite_frames(
             ),
             dtype=np.float16,
         )
-        for local_time, source_index in enumerate(
-            source_time_indices[time_start:time_stop]
-        ):
+        for local_time, source_index in enumerate(source_time_indices[time_start:time_stop]):
             for site_index, site in enumerate(site_pixels):
                 block[site_index, local_time] = client.read_crop(
                     time_index=source_index,
@@ -346,10 +365,25 @@ def write_satellite_frames(
                     height=height,
                     width=width,
                 )
+                invalid_fraction = float(1.0 - np.isfinite(block[site_index, local_time]).mean())
+                quality_records.append(
+                    {
+                        "ss_id": site.site_id,
+                        "datetime_GMT": requested_times[time_start + local_time],
+                        "invalid_fraction": invalid_fraction,
+                        "quality_flags": int(QualityFlag.SATELLITE_INVALID)
+                        if invalid_fraction > maximum_invalid_fraction
+                        else int(QualityFlag.OK),
+                        "is_valid": invalid_fraction <= maximum_invalid_fraction,
+                    }
+                )
         finite_count += int(np.isfinite(block).sum())
         value_count += block.size
         frames[:, time_start:time_stop] = block
     elapsed = time.perf_counter() - started
+    frame_quality = pd.DataFrame.from_records(quality_records)
+    if quality_output_path is not None:
+        frame_quality.to_parquet(quality_output_path, index=False)
     return {
         "required_remote_chunks": len(required_keys),
         "network_fetches": client.network_fetches,
@@ -358,6 +392,8 @@ def write_satellite_frames(
         "downloaded_bytes": client.downloaded_bytes,
         "elapsed_seconds": elapsed,
         "finite_fraction": finite_count / value_count,
+        "missing_critical_frames": 0,
+        "invalid_frames": int((~frame_quality["is_valid"]).sum()),
     }
 
 

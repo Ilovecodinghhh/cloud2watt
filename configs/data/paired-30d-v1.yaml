@@ -1,0 +1,14 @@
+dataset_version: paired-30d-v1
+issue_start_utc: "2020-12-01T00:00:00Z"
+days: 30
+site_count: 20
+channels: [VIS006, IR_016, IR_108]
+crop_shape: [128, 128]
+power_value_semantics: interval_energy
+quality:
+  upper_capacity_fraction: 1.5
+  night_elevation_degrees: 0.0
+  night_nonzero_fraction: 0.01
+  daytime_elevation_degrees: 10.0
+  stuck_zero_bins: 8
+  maximum_satellite_invalid_fraction: 0.05

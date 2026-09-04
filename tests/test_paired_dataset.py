@@ -14,6 +14,7 @@ from cloud2watt.data.paired import (
     discover_paired_window,
     match_satellite_indices,
     paired_time_grid,
+    partition_satellite_times,
     select_compact_sites,
     validate_sample_index,
 )
@@ -42,6 +43,13 @@ def test_satellite_matching_is_exact_and_never_uses_nearest_future() -> None:
         match_satellite_indices(
             pd.DatetimeIndex([pd.Timestamp("2020-12-01 00:14", tz="UTC")]), available
         )
+    present, indices, missing = partition_satellite_times(
+        pd.DatetimeIndex([available[0], pd.Timestamp("2020-12-01 00:14", tz="UTC")]),
+        available,
+    )
+    assert present.tolist() == [available[0]]
+    assert indices == [0]
+    assert missing.tolist() == [pd.Timestamp("2020-12-01 00:14", tz="UTC")]
 
 
 def test_padded_zarr_edge_chunk_is_trimmed_to_logical_shape() -> None:
@@ -167,9 +175,7 @@ def test_overlap_discovery_skips_incomplete_satellite_day() -> None:
         }
     )
     satellite = pd.date_range("2020-12-01 23:30", "2020-12-04", freq="15min", tz="UTC")
-    start, end, sites = discover_paired_window(
-        power, metadata, satellite, days=1, site_count=2
-    )
+    start, end, sites = discover_paired_window(power, metadata, satellite, days=1, site_count=2)
     assert start == datetime(2020, 12, 2, tzinfo=UTC)
     assert end == datetime(2020, 12, 3, tzinfo=UTC)
     assert len(sites) == 2
@@ -190,13 +196,15 @@ def test_sample_index_uses_only_valid_history_and_masks_targets() -> None:
         }
     )
     sites = pd.DataFrame({"ss_id": [1]})
-    index, stats = build_sample_index(
-        power, sites, issue_times=issue, satellite_times=frames
-    )
+    index, stats = build_sample_index(power, sites, issue_times=issue, satellite_times=frames)
     assert len(index) == 1
     assert index.iloc[0]["satellite_frame_indices"] == [0, 1, 2, 3]
     assert index.iloc[0]["target_mask"] == [True, True, True, True, True, False]
-    assert stats == {"dropped_invalid_history": 0}
+    assert stats == {
+        "dropped_invalid_history": 0,
+        "dropped_missing_satellite_history": 0,
+        "dropped_invalid_satellite_history": 0,
+    }
     assert validate_sample_index(index, power, frames) == {
         "validated_samples": 1,
         "validated_satellite_references": 4,
@@ -204,8 +212,21 @@ def test_sample_index_uses_only_valid_history_and_masks_targets() -> None:
     }
 
     power.loc[0, "is_valid"] = False
+    index, stats = build_sample_index(power, sites, issue_times=issue, satellite_times=frames)
+    assert index.empty
+    assert stats == {
+        "dropped_invalid_history": 1,
+        "dropped_missing_satellite_history": 0,
+        "dropped_invalid_satellite_history": 0,
+    }
+
+    power.loc[0, "is_valid"] = True
     index, stats = build_sample_index(
-        power, sites, issue_times=issue, satellite_times=frames
+        power,
+        sites,
+        issue_times=issue,
+        satellite_times=frames,
+        invalid_satellite_keys={("1", frames[0])},
     )
     assert index.empty
-    assert stats == {"dropped_invalid_history": 1}
+    assert stats["dropped_invalid_satellite_history"] == 1

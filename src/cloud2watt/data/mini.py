@@ -38,9 +38,7 @@ def build_power_mini_dataset(
     end_utc = start_utc + timedelta(days=days)
     source = power.copy()
     source["datetime_GMT"] = to_utc(source["datetime_GMT"])
-    source = source.loc[
-        source["datetime_GMT"].gt(start_utc) & source["datetime_GMT"].le(end_utc)
-    ]
+    source = source.loc[source["datetime_GMT"].gt(start_utc) & source["datetime_GMT"].le(end_utc)]
     counts = source.groupby("ss_id", sort=True).size().rename("reading_count")
     ranking = counts.reset_index().sort_values(
         ["reading_count", "ss_id"], ascending=[False, True], kind="stable"
@@ -68,10 +66,9 @@ def build_power_mini_dataset(
     if bad_periods is not None:
         flagged = mark_source_bad_periods(flagged, bad_periods)
         source_bad_count = int(
-            (
-                flagged["quality_flags"].astype("uint16")
-                & int(QualityFlag.SOURCE_BAD_PERIOD)
-            ).ne(0).sum()
+            (flagged["quality_flags"].astype("uint16") & int(QualityFlag.SOURCE_BAD_PERIOD))
+            .ne(0)
+            .sum()
         )
         stats.record(QualityFlag.SOURCE_BAD_PERIOD, source_bad_count)
     manifest = build_fixture_manifest(
@@ -126,9 +123,8 @@ def mark_source_bad_periods(power: pd.DataFrame, bad_periods: pd.DataFrame) -> p
             & result["datetime_GMT"].ge(start)
             & result["datetime_GMT"].le(end)
         )
-        result.loc[mask, "quality_flags"] = (
-            result.loc[mask, "quality_flags"].astype("uint16")
-            | int(QualityFlag.SOURCE_BAD_PERIOD)
-        )
+        result.loc[mask, "quality_flags"] = result.loc[mask, "quality_flags"].astype(
+            "uint16"
+        ) | int(QualityFlag.SOURCE_BAD_PERIOD)
     result["is_valid"] = result["quality_flags"].eq(int(QualityFlag.OK))
     return result
