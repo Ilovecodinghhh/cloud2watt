@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 from datetime import datetime, timedelta
 from pathlib import Path
+from typing import Literal
 
 import pandas as pd
 
@@ -22,6 +23,7 @@ def build_power_mini_dataset(
     site_count: int = 20,
     bad_periods: pd.DataFrame | None = None,
     source_revision: str = "unknown",
+    power_value_semantics: Literal["interval_energy", "instantaneous_power"],
 ) -> tuple[pd.DataFrame, pd.DataFrame, dict[str, object]]:
     """Select well-covered sites, align power to 15 minutes, and return a manifest."""
     if start_utc.tzinfo is None or start_utc.utcoffset() != timedelta(0):
@@ -58,7 +60,9 @@ def build_power_mini_dataset(
         raise ValueError("selected sites are missing metadata")
     capacities = sites.set_index("ss_id")["kWp"]
     aligned = aggregate_power_15min(
-        source.loc[source["ss_id"].isin(selected_ids)], capacities
+        source.loc[source["ss_id"].isin(selected_ids)],
+        capacities,
+        value_semantics=power_value_semantics,
     )
     flagged, stats = flag_power_quality(aligned)
     if bad_periods is not None:
@@ -81,10 +85,7 @@ def build_power_mini_dataset(
             "quality_counts": stats.as_dict(),
             "rows": len(flagged),
             "valid_rows": int(flagged["is_valid"].sum()),
-            "power_semantics": (
-                "provisional 5-minute interval energy; summed to 15 minutes; "
-                "upstream card wording is contradictory"
-            ),
+            "power_value_semantics": power_value_semantics,
         }
     )
     return flagged, sites, manifest

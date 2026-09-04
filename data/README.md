@@ -77,6 +77,7 @@ python scripts/build_mini_dataset.py \
   --metadata "/path/to/metadata.csv" \
   --bad-data "/path/to/bad_data.csv" \
   --source-revision "Hugging-Face-commit-SHA" \
+  --power-value-semantics interval_energy \
   --start 2020-12-01 \
   --output data/processed/mini-v1
 ```
@@ -95,3 +96,31 @@ python scripts/build_mini_dataset.py \
 将 `generation_Wh` 视为区间能量，并在 manifest 中明确记录此假设；正式报告模型结果前
 仍需与 OCF 核实。卫星张量遵循 `ForecastSample` schema 并写入分块 Zarr，标量样本索引
 写入 Parquet。站点中心裁剪在越界时明确失败，不静默补边或移动中心。
+
+## 真实卫星—功率配对数据
+
+在完成单源探测后，使用一个明确的共同年份构建真实配对数据。以下示例中的路径应替换为
+本机 Hugging Face 缓存位置：
+
+```bash
+python scripts/build_paired_mini_dataset.py \
+  --power "/path/to/5_minutely/year=2020/month=12/data.parquet" \
+  --metadata "/path/to/metadata.csv" \
+  --bad-data "/path/to/bad_data.csv" \
+  --pv-revision "Hugging-Face-commit-SHA" \
+  --power-value-semantics interval_energy \
+  --issue-start auto \
+  --output data/processed/paired-mini-v1
+```
+
+脚本会：
+
+- 选择一个包含 20 个高覆盖率站点的紧凑空间区域；
+- 精确匹配 15 分钟 SEVIRI 帧，不用未来帧填补缺测；
+- 下载并缓存所需远程 Zarr chunk，网络中断时有限重试并可续传；
+- 保存去重的卫星帧和引用它们的样本索引；
+- 检查全部历史与目标时间引用；
+- 输出 100 个样本的读取延迟以及 5 站点投影预览。
+
+真实输出和远程缓存分别位于 `data/processed/` 与 `outputs/cache/`，两者均被 Git 忽略。
+决策和实测结果见 [ADR-002](../docs/adr/002-paired-mini-dataset.md)。
