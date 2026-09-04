@@ -1,0 +1,31 @@
+{
+  "days": 7,
+  "end_utc_inclusive": "2020-12-08T00:00:00Z",
+  "interval_minutes": 15,
+  "issue_times_per_site": 672,
+  "schema_version": 1,
+  "site_count": 20,
+  "site_ids": [
+    "fixture-001",
+    "fixture-002",
+    "fixture-003",
+    "fixture-004",
+    "fixture-005",
+    "fixture-006",
+    "fixture-007",
+    "fixture-008",
+    "fixture-009",
+    "fixture-010",
+    "fixture-011",
+    "fixture-012",
+    "fixture-013",
+    "fixture-014",
+    "fixture-015",
+    "fixture-016",
+    "fixture-017",
+    "fixture-018",
+    "fixture-019",
+    "fixture-020"
+  ],
+  "start_utc": "2020-12-01T00:00:00Z"
+}
