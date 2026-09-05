@@ -66,7 +66,7 @@ pytest
 - [x] 实现 Persistence、Smart Persistence 和 Climatology 基线
 - [x] 实现 Power-only MLP/TCN 与可复现训练框架
 - [x] 实现 Optical Flow 基线与卫星 DataLoader
-- [ ] 实现 ConvLSTM / U-Net 模型
+- [x] 实现轻量 CNN Late Fusion 与卫星置零/打乱对照
 - [ ] 建立滚动时间验证与爬坡事件评估
 - [ ] 制作交互式演示和案例动画
 - [ ] 提供 Docker 与推理 API
@@ -78,6 +78,8 @@ pytest
 ## 状态
 
 项目已完成 20 站点、30 天真实配对数据、质量控制、无泄漏评估、朴素基线、
-Power-only 模型，以及卫星 DataLoader 与 Optical Flow 基线。真实加载与光流实验记录见
-[`docs/SATELLITE_LOADER_REPORT.md`](docs/SATELLITE_LOADER_REPORT.md)。
+Power-only 模型、卫星 DataLoader、Optical Flow 基线，以及轻量 CNN Late Fusion 训练与
+消融框架。真实加载与光流实验记录见
+[`docs/SATELLITE_LOADER_REPORT.md`](docs/SATELLITE_LOADER_REPORT.md)，CNN 协议与当前验证
+状态见 [`docs/MODEL_CARD.md`](docs/MODEL_CARD.md)。
 固定测试集默认锁定；最终卫星模型结论将在候选模型、消融方案和评估协议冻结后发布。
