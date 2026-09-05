@@ -26,6 +26,9 @@ data = [
   "pyproj>=3.7",
   "pvlib>=0.11",
 ]
+ml = [
+  "torch>=2.4",
+]
 dev = [
   "pytest>=8.0",
   "ruff>=0.6",

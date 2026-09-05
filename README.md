@@ -52,7 +52,7 @@ cloud2watt/
 python -m venv .venv
 source .venv/bin/activate  # Windows Git Bash
 python -m pip install --upgrade pip
-pip install -e ".[dev]"
+pip install -e ".[data,dev,ml]"
 pytest
 ```
 
@@ -63,7 +63,9 @@ pytest
 - [x] 完成有凭据的 UK PV 小分区访问验证
 - [x] 建立 mini dataset 的 UTC 对齐、空间裁剪和质量控制管道
 - [x] 构建 20 站点、7 天真实卫星—功率配对数据
-- [ ] 实现 Persistence、晴空和 Optical Flow 基线
+- [x] 实现 Persistence、Smart Persistence 和 Climatology 基线
+- [x] 实现 Power-only MLP/TCN 与可复现训练框架
+- [ ] 实现 Optical Flow 基线与卫星 DataLoader
 - [ ] 实现 ConvLSTM / U-Net 模型
 - [ ] 建立滚动时间验证与爬坡事件评估
 - [ ] 制作交互式演示和案例动画
@@ -75,5 +77,6 @@ pytest
 
 ## 状态
 
-项目已完成英国路线的数据访问验证，以及 20 站点、连续 7 天真实卫星—功率配对数据门。
-当前进入 30 天数据扩展与完整质量控制阶段；尚未产生正式模型结果。
+项目已完成 20 站点、30 天真实配对数据、质量控制、无泄漏评估、朴素基线，以及
+Power-only MLP/TCN 训练框架。固定测试集默认锁定；正式模型结论将在多种子实验和模型
+选择冻结后发布。
