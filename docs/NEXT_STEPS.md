@@ -304,4 +304,5 @@ outputs/runs/<run_id>/
    late-fusion 模型。
 
 完成以上三个 PR 后，下一阶段依次是 Power-only MLP/TCN、卫星数据加载性能优化和
-CNN late-fusion 增量价值实验。
+CNN late-fusion 增量价值实验。PR #6–#9 的详细任务、测试、决策门和 Definition of Done
+见 [模型阶段实施计划](MODEL_PHASE_PLAN.md)。

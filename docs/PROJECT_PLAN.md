@@ -418,6 +418,9 @@ checkpoint path
 PR #3 至 PR #5 的任务拆分、交付物、测试、风险和 Definition of Done 见
 [下一阶段实施计划](NEXT_STEPS.md)。
 
+PR #6 至 PR #9 的训练框架、卫星加载、late-fusion、消融和统计审计计划见
+[模型阶段实施计划](MODEL_PHASE_PLAN.md)。
+
 ## 13. 主要风险
 
 | 风险 | 影响 | 缓解措施 |

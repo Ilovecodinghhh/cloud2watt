@@ -1,0 +1,17 @@
+run_name: power-only-v1
+data_version: paired-30d-v1
+random_seeds: [42, 123, 2026]
+embargo_hours: 4
+model:
+  name: tcn
+  channels: 64
+  dropout: 0.1
+training:
+  batch_size: 256
+  learning_rate: 0.001
+  max_epochs: 50
+  patience: 7
+  device: auto
+selection:
+  primary_horizons_minutes: [30, 60, 120]
+  test_locked_by_default: true
