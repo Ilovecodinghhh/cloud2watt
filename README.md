@@ -65,7 +65,7 @@ pytest
 - [x] 构建 20 站点、7 天真实卫星—功率配对数据
 - [x] 实现 Persistence、Smart Persistence 和 Climatology 基线
 - [x] 实现 Power-only MLP/TCN 与可复现训练框架
-- [ ] 实现 Optical Flow 基线与卫星 DataLoader
+- [x] 实现 Optical Flow 基线与卫星 DataLoader
 - [ ] 实现 ConvLSTM / U-Net 模型
 - [ ] 建立滚动时间验证与爬坡事件评估
 - [ ] 制作交互式演示和案例动画
@@ -77,6 +77,7 @@ pytest
 
 ## 状态
 
-项目已完成 20 站点、30 天真实配对数据、质量控制、无泄漏评估、朴素基线，以及
-Power-only MLP/TCN 训练框架。固定测试集默认锁定；正式模型结论将在多种子实验和模型
-选择冻结后发布。
+项目已完成 20 站点、30 天真实配对数据、质量控制、无泄漏评估、朴素基线、
+Power-only 模型，以及卫星 DataLoader 与 Optical Flow 基线。真实加载与光流实验记录见
+[`docs/SATELLITE_LOADER_REPORT.md`](docs/SATELLITE_LOADER_REPORT.md)。
+固定测试集默认锁定；最终卫星模型结论将在候选模型、消融方案和评估协议冻结后发布。
