@@ -118,7 +118,13 @@ def main() -> int:
             if stale >= int(training["patience"]):
                 break
     load_checkpoint(checkpoint, model)
-    partitions = {"validation_development": validation}
+    partitions = {
+        "validation_development": validation,
+        "validation_holdout": assigned.loc[
+            assigned["temporal_split"].eq("validation")
+            & assigned["site_split"].eq("holdout")
+        ],
+    }
     if args.unlock_test:
         for site_split in ("development", "holdout"):
             partitions[f"test_{site_split}"] = assigned.loc[
