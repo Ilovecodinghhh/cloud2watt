@@ -87,6 +87,7 @@ def main() -> int:
     if parameters >= 1_000_000:
         raise ValueError("power-only model must remain below one million parameters")
     optimizer = torch.optim.Adam(model.parameters(), lr=float(training["learning_rate"]))
+    max_epochs = args.max_epochs or int(training["max_epochs"])
     identity = {
         "git_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
         "config_hash": hashlib.sha256(args.config.read_bytes()).hexdigest(),
@@ -94,6 +95,7 @@ def main() -> int:
         "split_manifest_hash": split_manifest["split_manifest_sha256"],
         "feature_statistics_sha256": statistics.sha256,
         "model": name, "parameters": parameters, "seed": seed,
+        "max_epochs": max_epochs,
         "test_unlocked": args.unlock_test,
     }
     run_hash = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()[:12]
@@ -101,7 +103,6 @@ def main() -> int:
     output.mkdir(parents=True, exist_ok=False)
     checkpoint = output / "best.pt"
     best, stale, history = np.inf, 0, []
-    max_epochs = args.max_epochs or int(training["max_epochs"])
     for epoch in range(1, max_epochs + 1):
         train_loss = run_epoch(model, train_loader, device=device, optimizer=optimizer)
         validation_loss = run_epoch(model, validation_loader, device=device)
