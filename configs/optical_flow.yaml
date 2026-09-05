@@ -1,0 +1,16 @@
+run_name: optical-flow-v1
+data_version: paired-30d-v1
+random_seed: 42
+embargo_hours: 4
+satellite:
+  ir_channel: 2
+  downsample: 4
+  statistics_maximum_frames: 2048
+loader:
+  batch_size: 8
+  num_workers: 2
+  prefetch_factor: 2
+  time_chunk: 12
+ridge:
+  alpha_candidates: [0.1, 1.0, 10.0]
+test_locked_by_default: true
