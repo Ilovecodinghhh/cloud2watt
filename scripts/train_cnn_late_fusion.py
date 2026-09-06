@@ -36,6 +36,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-epochs", type=int)
     parser.add_argument("--max-train-samples", type=int)
     parser.add_argument("--max-validation-samples", type=int)
+    parser.add_argument("--resume-run", type=Path)
     parser.add_argument("--unlock-test", action="store_true")
     return parser.parse_args()
 
@@ -134,11 +135,33 @@ def main() -> int:
         "test_unlocked": args.unlock_test,
     }
     run_hash = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()[:12]
-    output = args.output_root / f"{config['run_name']}-{mode}-s{seed}-{run_hash}"
-    output.mkdir(parents=True, exist_ok=False)
+    output = args.resume_run or args.output_root / f"{config['run_name']}-{mode}-s{seed}-{run_hash}"
+    if args.resume_run is None:
+        output.mkdir(parents=True, exist_ok=False)
+    elif not output.is_dir():
+        raise ValueError(f"resume run does not exist: {output}")
     checkpoint = output / "best.pt"
-    best, stale, history = np.inf, 0, []
-    for epoch in range(1, max_epochs + 1):
+    latest_checkpoint = output / "latest.pt"
+    best, stale, history, first_epoch = np.inf, 0, [], 1
+    if args.resume_run is not None:
+        resume_checkpoint = latest_checkpoint if latest_checkpoint.exists() else checkpoint
+        payload = torch.load(resume_checkpoint, map_location=device, weights_only=False)
+        previous = payload["metadata"]
+        immutable = (
+            "config_hash", "data_manifest_hash", "split_manifest_hash", "mode", "parameters",
+            "seed", "max_epochs", "max_train_samples", "max_validation_samples", "test_unlocked",
+        )
+        mismatched = [key for key in immutable if previous.get(key) != identity.get(key)]
+        if mismatched:
+            raise ValueError(f"resume metadata mismatch: {', '.join(mismatched)}")
+        model.load_state_dict(payload["model_state"])
+        optimizer.load_state_dict(payload["optimizer_state"])
+        best = float(payload.get("best_validation_loss", payload["validation_loss"]))
+        stale = int(payload.get("stale_epochs", 0))
+        history = list(payload.get("history", []))
+        first_epoch = int(payload["epoch"]) + 1
+        identity = previous | {"resumed_with_git_commit": identity["git_commit"]}
+    for epoch in range(first_epoch, max_epochs + 1):
         train_loss = run_satellite_epoch(
             model, train_loader, device=device, optimizer=optimizer, use_amp=use_amp,
             accumulation_steps=int(loader_config["accumulation_steps"]),
@@ -146,18 +169,29 @@ def main() -> int:
         validation_loss = run_satellite_epoch(model, validation_loader, device=device)
         history.append({"epoch": epoch, "train_mae": train_loss,
                         "validation_mae": validation_loss})
-        if validation_loss < best:
+        improved = validation_loss < best
+        if improved:
             best, stale = validation_loss, 0
-            torch.save({
-                "model_state": model.state_dict(), "optimizer_state": optimizer.state_dict(),
-                "epoch": epoch, "validation_loss": validation_loss,
-                "feature_statistics": asdict(feature_statistics),
-                "satellite_statistics": asdict(satellite_statistics), "metadata": identity,
-            }, checkpoint)
         else:
             stale += 1
-            if stale >= int(loader_config["patience"]):
-                break
+        state = {
+            "model_state": model.state_dict(), "optimizer_state": optimizer.state_dict(),
+            "epoch": epoch, "validation_loss": validation_loss,
+            "best_validation_loss": best, "stale_epochs": stale, "history": history,
+            "feature_statistics": asdict(feature_statistics),
+            "satellite_statistics": asdict(satellite_statistics), "metadata": identity,
+        }
+        torch.save(state, latest_checkpoint)
+        if improved:
+            torch.save(state, checkpoint)
+        pd.DataFrame(history).to_csv(output / "training_history.csv", index=False)
+        print(
+            f"epoch={epoch} train_mae={train_loss:.6f} "
+            f"validation_mae={validation_loss:.6f} best={best:.6f}",
+            flush=True,
+        )
+        if stale >= int(loader_config["patience"]):
+            break
     payload = torch.load(checkpoint, map_location=device, weights_only=False)
     model.load_state_dict(payload["model_state"])
     partitions = {
