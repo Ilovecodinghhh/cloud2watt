@@ -1,8 +1,11 @@
+import json
+
 import numpy as np
 import pytest
 import torch
 from torch.utils.data import DataLoader, Dataset
 
+from cloud2watt.experiment_matrix import completed_formal_run
 from cloud2watt.models import SatelliteLateFusion, SharedSatelliteEncoder
 from cloud2watt.satellite_training import predict_satellite, run_satellite_epoch
 
@@ -104,3 +107,23 @@ def test_invalid_mode_and_perturbation_are_rejected() -> None:
     model = SatelliteLateFusion(cnn_width=8, embedding_size=16)
     with pytest.raises(ValueError, match="unsupported satellite perturbation"):
         model(*_inputs(), satellite_perturbation="rotate")
+
+
+def test_matrix_only_skips_completed_uncapped_run(tmp_path) -> None:
+    run = tmp_path / "cnn-late-fusion-v1-full-s42-deadbeef"
+    run.mkdir()
+    (run / "metrics.json").write_text("{}\n", encoding="utf-8")
+    provenance = {
+        "mode": "full", "seed": 42, "max_epochs": 30,
+        "max_train_samples": None, "max_validation_samples": None,
+        "test_unlocked": False,
+    }
+    (run / "provenance.json").write_text(
+        json.dumps(provenance), encoding="utf-8"
+    )
+    assert completed_formal_run(tmp_path, "cnn-late-fusion-v1", "full", 42, 30)
+    provenance["max_train_samples"] = 8
+    (run / "provenance.json").write_text(
+        json.dumps(provenance), encoding="utf-8"
+    )
+    assert not completed_formal_run(tmp_path, "cnn-late-fusion-v1", "full", 42, 30)
