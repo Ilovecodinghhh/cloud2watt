@@ -5,9 +5,9 @@ import pytest
 import torch
 from torch.utils.data import DataLoader, Dataset
 
+from cloud2watt.experiment_matrix import completed_formal_run
 from cloud2watt.models import SatelliteLateFusion, SharedSatelliteEncoder
 from cloud2watt.satellite_training import predict_satellite, run_satellite_epoch
-from scripts.run_cnn_experiment_matrix import completed_formal_run
 
 
 def _inputs(batch: int = 2) -> tuple[torch.Tensor, ...]:
