@@ -1,0 +1,11 @@
+{
+  "requested_window_local_frames": 192,
+  "required_unique_source_objects": 196,
+  "encoded_source_bytes_for_window": 249895341,
+  "network_probe_key": "data/7362.10.20.0",
+  "network_probe_bytes": 1202166,
+  "network_probe_elapsed_seconds": 3.1750378999859095,
+  "network_probe_sha256": "2c3e885b93c4265628413d3b8675d9a066620d0865e91a7b9926c88c944db629",
+  "matches_local_cached_object": true,
+  "scope": "one bounded fresh HTTP GET; window byte total from cached encoded objects, not a full cold download"
+}

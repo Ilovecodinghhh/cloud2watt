@@ -67,7 +67,7 @@ def test_dataset_exposes_only_approved_inputs() -> None:
     stats = FeatureStatistics.fit(samples.iloc[[0]], power, sites)
     item = PowerForecastDataset(samples, power, sites, stats)[0]
     assert set(item) == {"power_history", "solar_future", "site", "target", "target_mask",
-                         "site_id", "issue_time_utc"}
+                         "site_id", "issue_time_utc", "target_solar_elevation_deg"}
     assert item["power_history"].shape == (4,)
     assert item["solar_future"].shape == (6, 3)
 

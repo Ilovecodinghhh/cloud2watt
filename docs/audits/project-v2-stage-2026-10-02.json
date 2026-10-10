@@ -1,0 +1,146 @@
+{
+  "project_version": "2.0",
+  "date": "2026-10-02",
+  "stage": "route-b-development-pilot-and-partial-e02",
+  "status": "pilot_passed_formal_training_not_started",
+  "decision": "docs/adr/009-route-b-conda-and-data-freeze.md",
+  "pilot": {
+    "path": "data/processed/route-b-pilot-r0-20210101-v3",
+    "complete_sha256": "8d56141d2db0cef6256ef05d26639518c8566e37bcd23e3e0d1f8d9851c384f7",
+    "samples": 1647,
+    "sites": 10,
+    "stored_frames": 175,
+    "crop_checks": 30,
+    "source_objects": 176,
+    "derived_bytes": 8471007,
+    "cache_bytes": 218373580,
+    "quality": {
+      "above_capacity_limit": 0,
+      "daytime_stuck_zero": 29,
+      "duplicate_timestamp": 0,
+      "missing": 9,
+      "negative": 0,
+      "night_nonzero": 0,
+      "satellite_invalid": 0,
+      "satellite_missing": 0,
+      "site_metadata_missing": 0,
+      "source_bad_period": 0
+    }
+  },
+  "runtime": {
+    "interpreter": "C:/Users/admin/miniforge3/envs/raincalib-gpu/python.exe",
+    "benchmark": "outputs/project-v2/e02-pilot-200-20261002/acceptance.json",
+    "benchmark_sha256": "8323e3e51ac48e0c2be23c50ea0d8b8a023dc3640309889ca0698a443120f056",
+    "results": [
+      {
+        "amp_forward_max_abs_error": 0.00041025876998901367,
+        "amp_forward_pass": true,
+        "amp_training_accepted": false,
+        "full_pilot_epoch_with_io": [],
+        "gpu_optimizer_resume": "exact",
+        "mode": "mlp",
+        "timings": [
+          {
+            "device": "cpu",
+            "last_loss": 0.007650880608707666,
+            "peak_cuda_allocated": 0,
+            "samples_per_second": 190382.13277229003,
+            "seconds": 0.1344663999043405,
+            "steps": 200
+          },
+          {
+            "device": "cuda",
+            "last_loss": 0.00736751826480031,
+            "peak_cuda_allocated": 74707456,
+            "samples_per_second": 47307.88562684099,
+            "seconds": 0.5411360000725836,
+            "steps": 200
+          }
+        ]
+      },
+      {
+        "amp_forward_max_abs_error": 0.0002796649932861328,
+        "amp_forward_pass": true,
+        "amp_training_accepted": false,
+        "full_pilot_epoch_with_io": [],
+        "gpu_optimizer_resume": "exact",
+        "mode": "power_solar",
+        "timings": [
+          {
+            "device": "cpu",
+            "last_loss": 0.011478283442556858,
+            "peak_cuda_allocated": 0,
+            "samples_per_second": 160232.33699294267,
+            "seconds": 0.15976799989584833,
+            "steps": 200
+          },
+          {
+            "device": "cuda",
+            "last_loss": 0.011478283442556858,
+            "peak_cuda_allocated": 74846720,
+            "samples_per_second": 52252.12794147377,
+            "seconds": 0.48993220005650073,
+            "steps": 200
+          }
+        ]
+      },
+      {
+        "amp_forward_max_abs_error": 0.0001830458641052246,
+        "amp_forward_pass": true,
+        "amp_training_accepted": false,
+        "full_pilot_epoch_with_io": [
+          {
+            "device": "cpu",
+            "loss": 0.04751288913689768,
+            "samples": 1647,
+            "samples_per_second": 530.1768656575583,
+            "seconds": 3.106510499957949
+          },
+          {
+            "device": "cuda",
+            "loss": 0.0475128902548284,
+            "samples": 1647,
+            "samples_per_second": 529.4865838415112,
+            "seconds": 3.1105603999458253
+          }
+        ],
+        "gpu_optimizer_resume": "exact",
+        "mode": "full",
+        "timings": [
+          {
+            "device": "cpu",
+            "last_loss": 0.008091282099485397,
+            "peak_cuda_allocated": 0,
+            "samples_per_second": 6323.469889595456,
+            "seconds": 4.048410199931823,
+            "steps": 200
+          },
+          {
+            "device": "cuda",
+            "last_loss": 0.008028725162148476,
+            "peak_cuda_allocated": 212581376,
+            "samples_per_second": 13422.354302363874,
+            "seconds": 1.9072659999364987,
+            "steps": 200
+          }
+        ]
+      }
+    ],
+    "amp_training_accepted": false
+  },
+  "tests": {
+    "full_suite_passed": 112,
+    "full_suite_xml": "outputs/project-v2/pytest-route-b-fixed-20261002.xml",
+    "after_sparse_fix_related_passed": 27,
+    "related_xml": "outputs/project-v2/pytest-sparse-regression.xml",
+    "ruff": "passed"
+  },
+  "formal_training_runs": 0,
+  "test_labels_read": false,
+  "next_gates": [
+    "resumable multi-region seasonal data build",
+    "explicit fit/inner/outer support partitions",
+    "stochastic GPU interrupted-process recovery",
+    "freeze formal same-budget controls before model comparisons"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "boundaries_passed": true,
+  "cpu_replayed_models": [
+    "power_solar-20261008",
+    "power_solar-20261009",
+    "power_solar-20261010",
+    "satellite_stats-20261008",
+    "satellite_stats-20261009",
+    "satellite_stats-20261010",
+    "local32-20261008",
+    "local32-20261009",
+    "local32-20261010"
+  ],
+  "frozen_model_hashes_passed": true,
+  "metrics_independently_recomputed": true,
+  "passed": true,
+  "replay_samples_each": 101,
+  "results_sha256": "3d0cb0a6c551619dc73bec4e3c9e22e127b2ae7a7c8fc974dd7a50efade545d6",
+  "same_targets_masks_keys": true
+}

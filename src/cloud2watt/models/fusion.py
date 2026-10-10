@@ -27,11 +27,21 @@ class SharedSatelliteEncoder(nn.Module):
         if satellite.ndim != 5:
             raise ValueError("satellite must have [batch, time, channel, height, width] shape")
         batch, steps, channels, height, width = satellite.shape
-        encoded = self.frame_encoder(satellite.reshape(batch * steps, channels, height, width))
-        encoded = encoded.reshape(batch, steps, -1) * mask.float().unsqueeze(-1)
-        output, _state = self.temporal(encoded)
-        lengths = mask.long().sum(dim=1).clamp(min=1) - 1
-        return output[torch.arange(batch, device=output.device), lengths]
+        if mask.shape != (batch, steps):
+            raise ValueError("satellite mask must have [batch, time] shape")
+        mask = mask.bool()
+        if not torch.isfinite(satellite[mask]).all():
+            raise ValueError("non-finite pixels in valid satellite frame")
+        clean = torch.where(mask[:, :, None, None, None], satellite, 0.0)
+        encoded = self.frame_encoder(clean.reshape(batch * steps, channels, height, width))
+        encoded = encoded.reshape(batch, steps, -1)
+        # Masked recurrent update: a missing frame never updates hidden state.
+        # All-missing histories yield a neutral zero embedding, including zero ablation.
+        state = encoded.new_zeros(1, batch, encoded.shape[-1])
+        for step in range(steps):
+            _, proposed = self.temporal(encoded[:, step:step + 1], state)
+            state = torch.where(mask[:, step][None, :, None], proposed, state)
+        return state[0]
 
 
 class SatelliteLateFusion(nn.Module):
@@ -42,11 +52,14 @@ class SatelliteLateFusion(nn.Module):
     def __init__(self, *, mode: str = "full", cnn_width: int = 32,
                  embedding_size: int = 96, dropout: float = 0.1,
                  forecast_steps: int = 6, solar_features: int = 3,
-                 site_features: int = 5) -> None:
+                 site_features: int = 5, input_pool: int = 1) -> None:
         super().__init__()
         if mode not in self.MODES:
             raise ValueError(f"unsupported fusion mode: {mode}")
         self.mode = mode
+        if input_pool not in (1, 2, 4):
+            raise ValueError("input_pool must be 1, 2, or 4")
+        self.input_pool = input_pool
         self.satellite_encoder = SharedSatelliteEncoder(
             width=cnn_width, embedding_size=embedding_size
         ) if mode != "power_solar" else None
@@ -80,5 +93,11 @@ class SatelliteLateFusion(nn.Module):
         if self.power_encoder is not None:
             branches.append(self.power_encoder(power_history))
         if self.satellite_encoder is not None:
+            if self.input_pool > 1:
+                batch, steps, channels, height, width = satellite.shape
+                satellite = torch.nn.functional.avg_pool2d(
+                    satellite.reshape(batch * steps, channels, height, width), self.input_pool
+                ).reshape(batch, steps, channels, height // self.input_pool,
+                          width // self.input_pool)
             branches.append(self.satellite_encoder(satellite, satellite_mask))
         return self.head(torch.cat(branches, dim=1))

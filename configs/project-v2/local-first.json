@@ -1,0 +1,503 @@
+{
+  "schema": "c2w-local-first-v1",
+  "project_version": "2.0",
+  "revision": 3,
+  "decision": "docs/adr/011-existing-data-first.md",
+  "created_utc": "2026-10-07T08:41:06.888Z",
+  "status": "quality_and_split_acceptance_pending",
+  "completed_snapshot": {
+    "spring/20210401/r0": {
+      "receipt_sha256": "c3eceb3e395f81efe83167fb43a719f14823afe25bb5d6c1a6ae9bbb59fcebc0",
+      "samples": 903
+    },
+    "spring/20210401/r1": {
+      "receipt_sha256": "87707b4e588e27edd21ff8a9fa2f4568ff06e6e66535c690df7f62f95dd0da21",
+      "samples": 817
+    },
+    "spring/20210401/r2": {
+      "receipt_sha256": "b3f937dfc3c607db6e2f6dc68e20d8b8c08f372b8eab01bbecdad297aaa02608",
+      "samples": 854
+    },
+    "spring/20210402/r0": {
+      "receipt_sha256": "f63c3c749a9d4e284e45c8f9b4e837be516fcb1b013b69c6c92c0b3ffea5a9d4",
+      "samples": 955
+    },
+    "spring/20210402/r1": {
+      "receipt_sha256": "979f05bada3f576fb915e5f7ee3e6d9ede880bef3792767602d6e11648bd7b88",
+      "samples": 858
+    },
+    "spring/20210402/r2": {
+      "receipt_sha256": "ecb4fe222f74183a69363e0c7ff97c3e2c0f37e11a393dc3d7508ca36cf0a64d",
+      "samples": 923
+    },
+    "spring/20210403/r0": {
+      "receipt_sha256": "302c7dcfcf32233e8dd56c7c07b936321f053df9d3d52afc64c79dafa49c4c31",
+      "samples": 915
+    },
+    "spring/20210403/r1": {
+      "receipt_sha256": "f1f5631e0ac5e834a5ffdc2eb449337b2c277614688c2f2f0a9a00fa7be2601d",
+      "samples": 819
+    },
+    "spring/20210403/r2": {
+      "receipt_sha256": "ed1fa4b622371c9f0a3b653d6987ff1a08d9e7372871eefa524aa4080444053b",
+      "samples": 917
+    },
+    "spring/20210404/r0": {
+      "receipt_sha256": "872f46db76c55c77c54efbbc9caf5b31061457b072f6b280105e2ed51e830129",
+      "samples": 960
+    },
+    "spring/20210404/r1": {
+      "receipt_sha256": "9f181ed1e62cb830d2b36f2bfd92749807004e93031c8fff7de811267b4c0fe0",
+      "samples": 850
+    },
+    "spring/20210404/r2": {
+      "receipt_sha256": "f17880e328cf56d7da4ea7ac0ce2c67475a8414589a181133fd3bbf3cd22c45c",
+      "samples": 944
+    },
+    "spring/20210405/r0": {
+      "receipt_sha256": "3db334af62de855a7acc6ab102ba2f6129e7dc986ddcb7ad04f926bcec17210e",
+      "samples": 880
+    },
+    "spring/20210405/r1": {
+      "receipt_sha256": "5217ad97163a3e2ba193fc7d567522fdef08575dce18ba7b331ea21825a2897d",
+      "samples": 811
+    },
+    "spring/20210405/r2": {
+      "receipt_sha256": "1d064bddd517c66c8eb07fcbd6cc71908a3f036ea387a767a66fbd1dc6230735",
+      "samples": 902
+    },
+    "spring/20210406/r0": {
+      "receipt_sha256": "fa71762f7910503a0dcdc3fa1eab241592d33385b4394f91cf38c5f6245f9bd6",
+      "samples": 940
+    },
+    "spring/20210406/r1": {
+      "receipt_sha256": "896d92c6c41b34526d3473cc2a1680795a102253567437234de172d191ab120d",
+      "samples": 830
+    },
+    "spring/20210406/r2": {
+      "receipt_sha256": "99b841e6faa84ff8405647e9ba55cc265d2bdd530dd1d3c6d5dcb61faa258064",
+      "samples": 945
+    },
+    "winter_fit/20210101/r0": {
+      "receipt_sha256": "a6386e6f1503ae364ce9646b0299cd7a44015fb32b53c647fd11817fccfc7755",
+      "samples": 872
+    },
+    "winter_fit/20210101/r1": {
+      "receipt_sha256": "cd6e9c110629209a6ab6fb71ad656cc81da2b7fb38fc3a8333bf8b09905d766d",
+      "samples": 801
+    },
+    "winter_fit/20210101/r2": {
+      "receipt_sha256": "7564945cb5a67944dc2fd143c811bf4f893f965513e8c8da06dd4357078d4cdb",
+      "samples": 894
+    },
+    "winter_fit/20210102/r0": {
+      "receipt_sha256": "fa5ab0c8b547602ce39290ca3c6d2932632a4d7b05d53901f35b4dab7bb7582f",
+      "samples": 935
+    },
+    "winter_fit/20210102/r2": {
+      "receipt_sha256": "af5da31b80a3ead909d1c1c73fbad0646d84048d15b7c088a0d3d99af93b1ca6",
+      "samples": 947
+    },
+    "winter_fit/20210103/r0": {
+      "receipt_sha256": "9886218a588deab43d9cfb0ee6bf832453832817f2f4e140752de0ff286ed3c0",
+      "samples": 926
+    },
+    "winter_fit/20210103/r1": {
+      "receipt_sha256": "2bab26fbb4cb3810514643a0fbd5670d3fb0fc37b2b8cc16ea2a9d766aefedc2",
+      "samples": 880
+    },
+    "winter_fit/20210103/r2": {
+      "receipt_sha256": "a4502c7668349c6d812bd09f767a3f95dd9876b7c085fc8a5de73010d966a6b2",
+      "samples": 937
+    },
+    "winter_fit/20210104/r0": {
+      "receipt_sha256": "8463540b8a1978e172184f82be24840fa3fb1d1494c9dcc128f790e0a4ae1ef7",
+      "samples": 941
+    },
+    "winter_fit/20210104/r1": {
+      "receipt_sha256": "f1b75584b59940152a2630fff560cd4b1b1f894e18cf6fc3e0be1222ab4beebb",
+      "samples": 936
+    },
+    "winter_fit/20210104/r2": {
+      "receipt_sha256": "9aeab9c3c97ca81310d23fc18964ae4e3a8c963a4898c592761825ee708689ea",
+      "samples": 931
+    },
+    "winter_fit/20210105/r0": {
+      "receipt_sha256": "0b675a8e1f832f22e6659efb3d62d3baec414e18b0818b94f2a59e04173e8a3a",
+      "samples": 954
+    },
+    "winter_fit/20210105/r1": {
+      "receipt_sha256": "fccca285aba721d3605225997d43dd0740d0e6f79e1f0f38c28c4aae868fe253",
+      "samples": 898
+    },
+    "winter_fit/20210105/r2": {
+      "receipt_sha256": "631019a20c8099d0f102e235f8a5c249b74e30ae074e9da401d3b04fabd21fb1",
+      "samples": 933
+    },
+    "winter_fit/20210106/r0": {
+      "receipt_sha256": "4f323474c197fe90896c519bea96a153dfba1ad9196bf7651cffbf8da66fd2e5",
+      "samples": 935
+    },
+    "winter_fit/20210106/r1": {
+      "receipt_sha256": "258a06c3ff412787813c3cb42b3fde7e7d1b985929588992ca30e4ce77f1cd31",
+      "samples": 855
+    },
+    "winter_fit/20210106/r2": {
+      "receipt_sha256": "f0331adfa12f56c3b0ea2e81cb1b2336659ff534658ac75bda3a28ab2434f281",
+      "samples": 925
+    },
+    "winter_fit/20210107/r0": {
+      "receipt_sha256": "7ddb999c1c678daadaf137c97ec6cff84e30cf5d9a8ffa532b983e7ecba045b9",
+      "samples": 956
+    },
+    "winter_fit/20210107/r1": {
+      "receipt_sha256": "a5ddf77f205043b9c76e1707aaf6c6ec20f4c1d5c9423b1367357742e1d3bd1b",
+      "samples": 836
+    },
+    "winter_fit/20210107/r2": {
+      "receipt_sha256": "f091a73e1e8ea03d673bbeaaaf44fbd59d79b7408b1647554fb1c569d10bdc6e",
+      "samples": 931
+    },
+    "winter_fit/20210108/r0": {
+      "receipt_sha256": "0d1d0922c03d7d21473ad10289b77de183bd191a4466db9551b8990934c696df",
+      "samples": 938
+    },
+    "winter_fit/20210108/r1": {
+      "receipt_sha256": "fd4199882111ed377e4b6c26be7af43cd6611216f5c8f553ed3c615c7f528ab2",
+      "samples": 895
+    },
+    "winter_fit/20210108/r2": {
+      "receipt_sha256": "9f14d40cc8159a1a135bd079f5609af03259751e400318b9a873fe7b31624b51",
+      "samples": 925
+    },
+    "winter_fit/20210109/r0": {
+      "receipt_sha256": "6b90591fba1a3d39937f3b7ef72eb5d43bb13603ceb9523d32e522bdbe10520a",
+      "samples": 932
+    },
+    "winter_fit/20210109/r1": {
+      "receipt_sha256": "24d5e7bbbdcc7d4d5aed4031c3e6923638919e541941af542f98270092783371",
+      "samples": 960
+    },
+    "winter_fit/20210109/r2": {
+      "receipt_sha256": "5c252fe2d515198ae316828db59d1b6a16c2db1192db5af11ccc014e165f2d53",
+      "samples": 956
+    },
+    "winter_fit/20210110/r0": {
+      "receipt_sha256": "8acaa0329a11f1ca9128de9a2f416a475c3e4dd714b069a7989e81e1b51de341",
+      "samples": 905
+    },
+    "winter_fit/20210110/r1": {
+      "receipt_sha256": "d4880bca86367c8384673d61f9e5085431178131a84c676cc0b2330016805adb",
+      "samples": 895
+    },
+    "winter_fit/20210110/r2": {
+      "receipt_sha256": "d082b4b3cc316d489bc06cce36ef51fde35a4d0434b40cfa439f1c8e0ab2b382",
+      "samples": 892
+    },
+    "winter_fit/20210111/r0": {
+      "receipt_sha256": "d4bff865b3b7dc5ef9eab844d38ce674b33299a6c279be7daece9fd56e94f69a",
+      "samples": 647
+    },
+    "winter_fit/20210111/r1": {
+      "receipt_sha256": "a79a7bcc92587362b6e98165bc9ae89b0e8ba24273c1321983c2cd04dfc62e44",
+      "samples": 623
+    },
+    "winter_fit/20210111/r2": {
+      "receipt_sha256": "dd08f497156c290d5be72c47cb5e198145d4f9a9e318e3dd23ecfbdae989bfd1",
+      "samples": 624
+    },
+    "winter_fit/20210112/r0": {
+      "receipt_sha256": "9b4d2ecd6ccbaae9eb0dbc4fd6e9a6d9197d6a868fe9bd957d3305b7dd6516b6",
+      "samples": 849
+    },
+    "winter_fit/20210112/r1": {
+      "receipt_sha256": "b82904c5c609691ba4d959bab0bc91e0c5336b31d68a53a62ec3e848e3486026",
+      "samples": 900
+    },
+    "winter_fit/20210112/r2": {
+      "receipt_sha256": "8f4a4fb5f7355bc360d4e76bf64612740706bc20d08c35cf4f55c35351e1b147",
+      "samples": 893
+    },
+    "winter_fit/20210113/r0": {
+      "receipt_sha256": "708186fd01de21b0d7630efd5a174d0818c0954a2a8bebb142287bb2d9574e4b",
+      "samples": 920
+    },
+    "winter_fit/20210113/r1": {
+      "receipt_sha256": "55972b769308bf32c232507f26585d7fb9f509eca2b34629640feb86b7875509",
+      "samples": 930
+    },
+    "winter_fit/20210113/r2": {
+      "receipt_sha256": "64e0f8c437568d23be1864be600b3084f466d2dc92aa4d8870a88bb8a3d8a60d",
+      "samples": 950
+    },
+    "winter_fit/20210114/r0": {
+      "receipt_sha256": "6432035476f8a2928c1c9fd132fba105dc8cf2264dbe7f49af64c8171ee7e379",
+      "samples": 849
+    },
+    "winter_fit/20210114/r1": {
+      "receipt_sha256": "aad30015fdf2581d2fa3a79888f838e41abc733f77d745ff0d411e6441125139",
+      "samples": 809
+    },
+    "winter_fit/20210114/r2": {
+      "receipt_sha256": "c85b43fa6a06f11c77668a46900ebdba742bc963a0b519830d5732af71f32407",
+      "samples": 893
+    },
+    "winter_fit/20210115/r0": {
+      "receipt_sha256": "fd58532b34a5d321dcd3dd33c273e86ddb29ca3ef6c1144ee2e5161a065e9382",
+      "samples": 886
+    },
+    "winter_fit/20210115/r1": {
+      "receipt_sha256": "6267231716331f9930bee648f819ec1d0e055647ab5afc5f61c8cb92ae8639d9",
+      "samples": 865
+    },
+    "winter_fit/20210115/r2": {
+      "receipt_sha256": "f749f84f0c74bd1c58ea88e9f68e47db4e0da146c8e900a146eea180b4dcbce6",
+      "samples": 887
+    },
+    "winter_fit/20210116/r0": {
+      "receipt_sha256": "d41e13a2a8304dfcfab626d4e9a4c0fea3f93dd0bdee5814348ffb59ef1a373f",
+      "samples": 904
+    },
+    "winter_fit/20210116/r1": {
+      "receipt_sha256": "3ae81f71854ca9f9755afd95b0bac93a399bc1f5e01f2554128b91e9d27c7b55",
+      "samples": 934
+    },
+    "winter_fit/20210116/r2": {
+      "receipt_sha256": "286e0cbf31893c6daee977203efd9518dbb54a67758d956073122ff169c50750",
+      "samples": 952
+    },
+    "winter_fit/20210117/r0": {
+      "receipt_sha256": "a8e283b07b00077a1e55d4b7b8246d08174f39f466036f3f3c605c6019f6742d",
+      "samples": 888
+    },
+    "winter_fit/20210117/r1": {
+      "receipt_sha256": "b433316d598ce10035174e57c7fc3723cafd5f46ad0843aaee8afbc80c6651fc",
+      "samples": 867
+    },
+    "winter_fit/20210117/r2": {
+      "receipt_sha256": "a04043e2825b95c10c5bae6bc322d50053469b908455654f84abe901b8b63201",
+      "samples": 901
+    },
+    "winter_fit/20210118/r0": {
+      "receipt_sha256": "f7e923e76d572fb428ba941c54da93ddd543d1ba549dae23d14686fdfc21cd80",
+      "samples": 920
+    },
+    "winter_fit/20210118/r1": {
+      "receipt_sha256": "db2ee4e7794adc663bde885a925adfd6a0a9ecdd53d5700f09d75d1b0d0611da",
+      "samples": 898
+    },
+    "winter_fit/20210118/r2": {
+      "receipt_sha256": "e0de8bf9b03b9424187f791232b35296868c5f38c6ea431fcaac3ad384b13339",
+      "samples": 911
+    },
+    "winter_fit/20210119/r0": {
+      "receipt_sha256": "1c49e865eccd3ee5e811a6fe07ecc43f6f0906384e87770688ea63041c19a65e",
+      "samples": 906
+    },
+    "winter_fit/20210119/r1": {
+      "receipt_sha256": "ca0f33a08ee7a230c89e70d5ed21228203a47ebcca9b5df04f5de0274d81fc73",
+      "samples": 875
+    },
+    "winter_fit/20210119/r2": {
+      "receipt_sha256": "cb66e843b49fc2bb7c5f0aa90c9b6d737e3cfadb092dd2e8045f2ca286e1102c",
+      "samples": 866
+    },
+    "winter_fit/20210120/r0": {
+      "receipt_sha256": "3e7e53b7c043520a51798c62663c079f3aa49229b469e7ff28ace49485974c17",
+      "samples": 904
+    },
+    "winter_fit/20210120/r1": {
+      "receipt_sha256": "4bba6bb4913380e44e6d892ff620c4e172c74a583ddc7e8a481dc829e2380fa6",
+      "samples": 900
+    },
+    "winter_fit/20210120/r2": {
+      "receipt_sha256": "daa5cd2b15cfca7310da412f2247572d79d1d6a3108aea57754b5a1c6ae167b8",
+      "samples": 943
+    },
+    "winter_fit/20210121/r0": {
+      "receipt_sha256": "240704e9ced3ebd69b68461f8015e729eff8e727232a12d4a77248dc25fd5b2a",
+      "samples": 883
+    },
+    "winter_fit/20210121/r1": {
+      "receipt_sha256": "1452050362e9620253c852d26558b4b37858d96f2928c22fe7080d1896783e07",
+      "samples": 896
+    },
+    "winter_fit/20210121/r2": {
+      "receipt_sha256": "a02430d62af3d4cecc2dbfe9c17d3f3d09a661912325a65449e3b1835b2ab1aa",
+      "samples": 900
+    },
+    "winter_fit/20210122/r0": {
+      "receipt_sha256": "c857d0d41a17222ebcdd1f86449ecd54db4847dc2fc561c2aec99d3007dfe9ec",
+      "samples": 880
+    },
+    "winter_fit/20210122/r1": {
+      "receipt_sha256": "60d1537567d78fbe9e165d64e73cbb72b3eb26014beb7cd7f894aefa8ed9718f",
+      "samples": 901
+    },
+    "winter_fit/20210122/r2": {
+      "receipt_sha256": "a445d1738acfad0df746ede130d5fdccd9081820085e5864480d4da5abd1c3ce",
+      "samples": 894
+    },
+    "winter_fit/20210123/r0": {
+      "receipt_sha256": "d227e7b2d2ade29010cb51aeee1f2e4dbabde58b1f265db11d30f225a9d143b4",
+      "samples": 912
+    },
+    "winter_fit/20210123/r1": {
+      "receipt_sha256": "16aa7456bc2d2573e514a808e1d1da7fa2012cf8aea0fa17c0e7c20c41ee05f5",
+      "samples": 954
+    },
+    "winter_fit/20210123/r2": {
+      "receipt_sha256": "1acf7193b713da58ed01469cc41f1d5491abd58dd7e5d5e6a38ae12ad563975c",
+      "samples": 960
+    },
+    "winter_fit/20210124/r0": {
+      "receipt_sha256": "56b503d0e7b66f215d07cf6d68c955777375c5bba02a163359d32cf188e618df",
+      "samples": 786
+    },
+    "winter_fit/20210124/r1": {
+      "receipt_sha256": "9c881a6b274e6fff6353806a545dd337e852d4b58c15e32c2defffd1234b4686",
+      "samples": 836
+    },
+    "winter_fit/20210124/r2": {
+      "receipt_sha256": "1edb8f34cb31ddb87d18520d5f143078024ef32dade9749846a027e29cdb3c98",
+      "samples": 835
+    },
+    "winter_fit/20210125/r0": {
+      "receipt_sha256": "a29c6dbd0f678c01d5b553ca30340fa1540842d91f8fbdb5a012485e7c83df5f",
+      "samples": 938
+    },
+    "winter_fit/20210125/r1": {
+      "receipt_sha256": "6317d9ba7edaa3e34c994c90becde158baa57cddc5d01204e37bbf32b7a175e0",
+      "samples": 955
+    },
+    "winter_fit/20210125/r2": {
+      "receipt_sha256": "991f4466b6f0626d98d79cb9773833b1901f3654987b554d23f7ba25fd043b2d",
+      "samples": 956
+    },
+    "winter_fit/20210126/r0": {
+      "receipt_sha256": "cb0bad7174d1851a2b98e862d5897893ef4b40c5de64f380a0440277c95f81f3",
+      "samples": 904
+    },
+    "winter_fit/20210126/r1": {
+      "receipt_sha256": "4d97a7b357fb98eeec38403be01fb6cd34bc7fcd6201e140d84438574a7107a4",
+      "samples": 902
+    },
+    "winter_fit/20210126/r2": {
+      "receipt_sha256": "2a255c128be54f6c470ff4ff2861e4373b7e3abc1d928cd1f65955898658f502",
+      "samples": 899
+    },
+    "winter_fit/20210127/r0": {
+      "receipt_sha256": "6ea582e53c4a7aab61f4c46257bbf41d3bc94e51a6af0c20b6906dc0281cfb53",
+      "samples": 830
+    },
+    "winter_fit/20210127/r1": {
+      "receipt_sha256": "eb899a1aec6256c8789116a1a3c11f18a32f5e596f54dca9fb85f7f0375153dd",
+      "samples": 868
+    },
+    "winter_fit/20210127/r2": {
+      "receipt_sha256": "5311a69e40d4febc6de0cd12fb6a223f749e8f338df47408d7d957f521d093c3",
+      "samples": 860
+    },
+    "winter_fit/20210128/r0": {
+      "receipt_sha256": "9ee3db7bd2390522a288493feee9349ee5e222f663cd0aa50f6f3b47fcc34299",
+      "samples": 774
+    },
+    "winter_fit/20210128/r1": {
+      "receipt_sha256": "f87652afcb9ae4b388a56a9d6d4254fb62958c96e032748c74fe36ac366d5ee0",
+      "samples": 774
+    },
+    "winter_fit/20210128/r2": {
+      "receipt_sha256": "ccec1189f727f3bcb8eee0bdc5a88829220ea4b9bc89f816e408581df69466f5",
+      "samples": 761
+    }
+  },
+  "excluded_incomplete": "spring/20210407/r0",
+  "legacy_full_download_enabled": false,
+  "final_labels_locked": true,
+  "formal_training_ready": false,
+  "supplement": {
+    "enabled": false,
+    "objects": [],
+    "maximum_additional_transfer_bytes": 268435456,
+    "maximum_wall_minutes": 30,
+    "attempts_per_new_object": 2,
+    "preserve_existing_retry_limits": true,
+    "last_batch": {
+      "status": "stopped_partial_target_source_gap",
+      "dates": [
+        "2021-04-07"
+      ],
+      "planned_sites": 30,
+      "sites_with_power": 29,
+      "samples": 2723,
+      "acceptance": "outputs/project-v2/spring-supplement-20261008/acceptance.json",
+      "remaining_dates": [
+        "2021-04-08",
+        "2021-04-21"
+      ],
+      "training_started": false
+    },
+    "completion_authorization": {
+      "decision": "docs/adr/015-complete-spring-thirteen-days.md",
+      "dates": [
+        "2021-04-08",
+        "2021-04-21"
+      ],
+      "end_exclusive": true,
+      "transfer_cap_including_prior_batch": 3221225472,
+      "manifest": "outputs/project-v2/spring-supplement-20261008/completion-execution.json",
+      "stop_after_completion": true,
+      "training": false
+    }
+  },
+  "split": {
+    "fit": [
+      "2021-01-01T00:00:00Z",
+      "2021-01-16T00:00:00Z"
+    ],
+    "inner": [
+      "2021-01-16T04:00:00Z",
+      "2021-01-22T00:00:00Z"
+    ],
+    "outer_development": [
+      "2021-01-22T04:00:00Z",
+      "2021-01-29T00:00:00Z"
+    ],
+    "spring_stress_development": [
+      "2021-04-01T00:00:00Z",
+      "2021-04-07T00:00:00Z"
+    ],
+    "require_all_input_target_and_qc_support_inside_role": true,
+    "selection_basis": "calendar and availability only; no model errors",
+    "independent_final_test": false
+  },
+  "runtime": {
+    "python": "C:/Users/admin/miniforge3/envs/raincalib-gpu/python.exe",
+    "install_dependencies": false
+  },
+  "local_audit": {
+    "report": "docs/PROJECT_V2_LOCAL_PROVENANCE_20261007.md",
+    "summary": "outputs/project-v2/local-provenance-20261007/summary.json",
+    "safe_split_index": "outputs/project-v2/local-provenance-20261007/safe-split-index.parquet",
+    "sha256": "5558e7bec851c9b0f42f8fa2b7b89254ff58f9775e8471ef3f9f11ee7af8454d",
+    "status": "conservative_split_verified_training_acceptance_pending",
+    "qc_boundary_recomputed": false
+  },
+  "training_authorization": {
+    "date": "2026-10-08",
+    "decision": "docs/adr/012-local-gpu-diagnostic.md",
+    "scope": "single-seed compact local GPU comparison",
+    "output": "outputs/project-v2/local-gpu-20261008",
+    "supplement_objects": [],
+    "final_labels_locked": true
+  },
+  "mvp": {
+    "status": "first_four_steps_accepted",
+    "decision": "docs/adr/013-explainable-mvp.md",
+    "report": "docs/PROJECT_V2_MVP_ACCEPTANCE.md",
+    "acceptance": "outputs/project-v2/mvp-v2/acceptance.json",
+    "default_model": "power_solar",
+    "satellite_default_enabled": false,
+    "supplement_objects": []
+  }
+}

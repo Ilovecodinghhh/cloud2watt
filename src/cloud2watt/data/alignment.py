@@ -25,6 +25,12 @@ def aggregate_power_15min(
     ``datetime_GMT``. Three readings are summed, divided by 0.25 h, then
     normalized by nominal capacity in watts. Bins use their right edge, so an
     issue time cannot consume a future reading.
+
+    This is a numerical convention, not proof of temporal support: the pinned
+    UK PV card calls its 5-minute observations instantaneous while specifying
+    a factor of 12 to convert the stored values to watts. The same arithmetic
+    gives a three-sample power proxy; it does not establish interval integration.
+    See ADR-006 before constructing a new scientific dataset.
     """
     required = {"ss_id", "datetime_GMT", "generation_Wh"}
     missing = required.difference(frame.columns)

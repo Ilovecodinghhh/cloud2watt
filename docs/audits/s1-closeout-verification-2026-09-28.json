@@ -1,0 +1,18 @@
+{
+  "verified_on": "2026-09-28",
+  "source_hash": "306e628e81cf46bb5551b946e6fd35c8bf71faeea27c20c131ba010b62bc2432",
+  "results": [
+    {
+      "kind": "power",
+      "complete_artifacts_verified": true,
+      "current_source_matches": true,
+      "run": "outputs/s1-acceptance-20260910/power/s1-real-acceptance-mlp-s42-0d939d88a9fe"
+    },
+    {
+      "kind": "satellite",
+      "complete_artifacts_verified": true,
+      "current_source_matches": true,
+      "run": "outputs/s1-acceptance-20260910/satellite/s1-real-acceptance-full-s42-cfd62d81abe7"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-10",
+  "scope": "source, tests, decisions, reports and aggregate metrics; no raw data or checkpoints",
+  "pytest": {
+    "passed": 142,
+    "environment": "raincalib-gpu",
+    "temporary_directory": "D:/code/AI_atm/outputs/project-v2/github-sync-test-20261010",
+    "initial_attempt": "system temporary-directory PermissionError; rerun with dedicated D-drive directory passed"
+  },
+  "git_diff_check": "passed",
+  "credential_pattern_scan": "no matches",
+  "remote_ci": "not run by this local validation"
+}

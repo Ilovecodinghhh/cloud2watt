@@ -1,0 +1,164 @@
+{
+  "pv_card": {
+    "revision": "02f17566e1b1a56dc8fd25cfabec67f065066e07",
+    "url": "https://huggingface.co/datasets/openclimatefix/uk_pv/blob/02f17566e1b1a56dc8fd25cfabec67f065066e07/README.md",
+    "status": "retrieved",
+    "sha256": "fab51b6f5e2c75db8d0841fd50872317dea0ba11df5ecd3e0f38ed139d3e50b4",
+    "contains_instantaneous": true,
+    "contains_multiply_by_12": true
+  },
+  "pv_audit": {
+    "raw_sha256": "97d25973deef68816c7ac86413ac05ab04df42e48fff0a323dcb6607317a2072",
+    "raw_schema": "required group field_id=-1 root {\n  optional int32 field_id=-1 ss_id;\n  optional int64 field_id=-1 datetime_GMT (Timestamp(isAdjustedToUTC=true, timeUnit=nanoseconds, is_from_converted_type=false, force_set_converted_type=false));\n  optional float field_id=-1 generation_Wh;\n}\n",
+    "raw_rows_checked": 11373,
+    "aligned_bins_compared": 3770,
+    "max_abs_rebuild_error": 0.0,
+    "normalized_power_quantiles": {
+      "0.0": 0.0,
+      "0.5": 0.0,
+      "0.95": 0.1939595290411086,
+      "0.99": 0.4787012912132625,
+      "1.0": 0.69058720703125
+    },
+    "normalization": "mean(12 * generation_Wh) / (kWp * 1000), three valid readings",
+    "integrated_30min_comparison": "see halfhour_comparison below, fetched after initial audit",
+    "label_semantics_status": "5-minute instantaneous versus interval support unresolved"
+  },
+  "projection": "+proj=geos +lon_0=9.5 +h=35785831 +a=6378169 +rf=295.488065897014 +sweep=y +units=m +no_defs",
+  "site_checks": [
+    {
+      "site_id": "7517",
+      "old_pixel_xy": [
+        2095,
+        1077
+      ],
+      "correct_pixel_xy": [
+        2097,
+        1077
+      ],
+      "old_center_distance_m": 7246.788535032467,
+      "correct_center_distance_m": 3035.527346280211,
+      "local_ground_pixel_x_m": 3323.0408354839456,
+      "local_ground_pixel_y_m": 6421.002622502993,
+      "legacy_source_crop_exact": true
+    },
+    {
+      "site_id": "6815",
+      "old_pixel_xy": [
+        2096,
+        1077
+      ],
+      "correct_pixel_xy": [
+        2098,
+        1076
+      ],
+      "old_center_distance_m": 6778.220744786216,
+      "correct_center_distance_m": 1990.1949494716234,
+      "local_ground_pixel_x_m": 3323.24132734135,
+      "local_ground_pixel_y_m": 6409.544976194476,
+      "legacy_source_crop_exact": true
+    },
+    {
+      "site_id": "7445",
+      "old_pixel_xy": [
+        2093,
+        1077
+      ],
+      "correct_pixel_xy": [
+        2095,
+        1077
+      ],
+      "old_center_distance_m": 7885.63944644267,
+      "correct_center_distance_m": 1361.6862826489767,
+      "local_ground_pixel_x_m": 3320.9334014278124,
+      "local_ground_pixel_y_m": 6417.953562475519,
+      "legacy_source_crop_exact": true
+    },
+    {
+      "site_id": "26892",
+      "old_pixel_xy": [
+        2096,
+        1076
+      ],
+      "correct_pixel_xy": [
+        2098,
+        1076
+      ],
+      "old_center_distance_m": 7281.601450163735,
+      "correct_center_distance_m": 688.2013544945643,
+      "local_ground_pixel_x_m": 3323.24132734135,
+      "local_ground_pixel_y_m": 6409.544976194476,
+      "legacy_source_crop_exact": true
+    },
+    {
+      "site_id": "26893",
+      "old_pixel_xy": [
+        2097,
+        1076
+      ],
+      "correct_pixel_xy": [
+        2099,
+        1076
+      ],
+      "old_center_distance_m": 5187.6549043883415,
+      "correct_center_distance_m": 3299.1100804250796,
+      "local_ground_pixel_x_m": 3324.3041498334064,
+      "local_ground_pixel_y_m": 6411.078485879685,
+      "legacy_source_crop_exact": true
+    }
+  ],
+  "source_attributes": {
+    "IR_108_area": "msg_seviri_rss_3km:\n  description: MSG SEVIRI Rapid Scanning Service area definition with 3 km resolution\n  projection:\n    proj: geos\n    lon_0: 9.5\n    h: 35785831\n    x_0: 0\n    y_0: 0\n    a: 6378169\n    rf: 295.488065897014\n    no_defs: null\n    type: crs\n  shape:\n    height: 1392\n    width: 3712\n  area_extent:\n    lower_left_xy: [5567248.074173927, 5570248.477339745]\n    upper_right_xy: [-5570248.477339745, 1393687.2705221176]\n    units: m\n",
+    "IR_108_end_time": "2020-01-01T00:00:07.676580",
+    "IR_108_start_time": "2019-12-31T23:55:07.772388",
+    "IR_108_units": "K",
+    "VIS006_area": "msg_seviri_rss_3km:\n  description: MSG SEVIRI Rapid Scanning Service area definition with 3 km resolution\n  projection:\n    proj: geos\n    lon_0: 9.5\n    h: 35785831\n    x_0: 0\n    y_0: 0\n    a: 6378169\n    rf: 295.488065897014\n    no_defs: null\n    type: crs\n  shape:\n    height: 1392\n    width: 3712\n  area_extent:\n    lower_left_xy: [5567248.074173927, 5570248.477339745]\n    upper_right_xy: [-5570248.477339745, 1393687.2705221176]\n    units: m\n",
+    "VIS006_end_time": "2020-01-01T00:00:07.676580",
+    "VIS006_start_time": "2019-12-31T23:55:07.772388",
+    "VIS006_units": "%"
+  },
+  "satellite_metadata_sha256": "206d320ee51617fd294fc094997d40cf8719e446cd9cef373757032c27f2343d",
+  "availability_scenarios": [
+    {
+      "satellite_delay_minutes": 0,
+      "basis": "scenario",
+      "issue_times": 185,
+      "complete_histories": 185,
+      "missing_slots": 0,
+      "scores": "not evaluated; this is input-availability replay only"
+    },
+    {
+      "satellite_delay_minutes": 15,
+      "basis": "scenario",
+      "issue_times": 185,
+      "complete_histories": 184,
+      "missing_slots": 1,
+      "scores": "not evaluated; this is input-availability replay only"
+    },
+    {
+      "satellite_delay_minutes": 30,
+      "basis": "scenario",
+      "issue_times": 185,
+      "complete_histories": 183,
+      "missing_slots": 3,
+      "scores": "not evaluated; this is input-availability replay only"
+    }
+  ],
+  "source_network_bytes_this_audit": 0,
+  "raw_time_coordinate_hash": "53f821d38ffe2610202ab7ab6af3a65d16ff65df87bbd1a58146990d377760c2",
+  "satellite_time_semantics": "archive time coordinate; per-pixel scan and publication timestamps not provided; annual attributes do not establish per-frame availability",
+  "large_build_allowed": false,
+  "halfhour_comparison": {
+    "source_revision": "02f17566e1b1a56dc8fd25cfabec67f065066e07",
+    "file": "30_minutely/year=2020/month=12/data.parquet",
+    "file_size_bytes": 20584471,
+    "sha256": "772e6ea16506fb2f74330357461ea288f2ed03bd44886456e015ccd9dcb003f2",
+    "paired_complete_bins": 1874,
+    "day_bins_above_0_01": 431,
+    "proxy_vs_integrated_normalized_mae": 0.007786999256003331,
+    "proxy_vs_integrated_bias": -0.0020361326903842905,
+    "energy_ratio_sum_proxy_over_integrated": 0.9824920296669006,
+    "conclusion": "Scale check only; agreement does not prove five-minute integrated interval support."
+  },
+  "checked_on": "2026-09-28"
+}

@@ -1,0 +1,2152 @@
+{
+  "scope": "Restricted checkpoint metadata load and existing neural validation predictions; no inference or raw/test label reads",
+  "checks": [
+    {
+      "path": "outputs/runs/cnn-late-fusion-v1-full-s123-b57a48a9ea84",
+      "config_exists_at_recorded_commit": true,
+      "config_hash_matches_git_lf_or_crlf": true,
+      "entrypoint_exists_at_recorded_commit": true,
+      "checkpoints": {
+        "best.pt": {
+          "epoch": 23,
+          "validation_loss": 0.013656313565740026,
+          "metadata": {
+            "git_commit": "11aeb43a3d18ea974d607cdb76701fa3f627ca20",
+            "config_hash": "768ead5c491cdc2a752a4181b786d40c7dbd31b09ad93eaf64d6d5b7f8548790",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "0d03df9251050f5c5bf6c283e48de2a5dabebe9e7eed128c115496532a65e3d9",
+            "satellite_statistics_sha256": "81d7b2d9d77ee06e865e875008e90cc040d77eb900f014a2324f78c96f456efa",
+            "mode": "full",
+            "parameters": 5231430,
+            "seed": 123,
+            "max_epochs": 30,
+            "max_train_samples": null,
+            "max_validation_samples": null,
+            "test_unlocked": false
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "best_validation_loss",
+            "stale_epochs",
+            "history",
+            "feature_statistics",
+            "satellite_statistics",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        },
+        "latest.pt": {
+          "epoch": 28,
+          "validation_loss": 0.014339137431735054,
+          "metadata": {
+            "git_commit": "11aeb43a3d18ea974d607cdb76701fa3f627ca20",
+            "config_hash": "768ead5c491cdc2a752a4181b786d40c7dbd31b09ad93eaf64d6d5b7f8548790",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "0d03df9251050f5c5bf6c283e48de2a5dabebe9e7eed128c115496532a65e3d9",
+            "satellite_statistics_sha256": "81d7b2d9d77ee06e865e875008e90cc040d77eb900f014a2324f78c96f456efa",
+            "mode": "full",
+            "parameters": 5231430,
+            "seed": 123,
+            "max_epochs": 30,
+            "max_train_samples": null,
+            "max_validation_samples": null,
+            "test_unlocked": false
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "best_validation_loss",
+            "stale_epochs",
+            "history",
+            "feature_statistics",
+            "satellite_statistics",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        }
+      },
+      "validation": {
+        "validation_development": {
+          "rows": 6113,
+          "sample_key_hash": "f222bf572f69844757bab75b37a3c23a4fdad47b2095f7c2172419e60d9a5de3",
+          "mask_hash": "b36f26744247a4ba8d5f80ca9562a9f5c20dfce630516b5cabf31abc56100ff4",
+          "observed_hash": "77739cce5a3dde9f0e2295cbe236c3b2c72148865dd48d7c6a67b217171df977",
+          "duplicate_keys": 0,
+          "metrics": {
+            "full_satellite_shuffle": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.006223296280950308,
+                0.008774860762059689,
+                0.010878987610340118,
+                0.015433672815561295,
+                0.018837841227650642,
+                0.022000154480338097
+              ],
+              "all_day_primary": 0.011695840395987034,
+              "all_day_six_horizon_mean": 0.013691468862816691
+            },
+            "full": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.006223438773304224,
+                0.008773209527134895,
+                0.010877123102545738,
+                0.015431906096637249,
+                0.018838917836546898,
+                0.021982712671160698
+              ],
+              "all_day_primary": 0.011694079575439295,
+              "all_day_six_horizon_mean": 0.013687884667888284
+            },
+            "full_satellite_zero": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.5353766083717346,
+                0.9818593263626099,
+                1.279657244682312,
+                0.2573578357696533,
+                0.33602669835090637,
+                0.18367837369441986
+              ],
+              "all_day_primary": 0.839624802271525,
+              "all_day_six_horizon_mean": 0.5956593478719393
+            }
+          }
+        },
+        "validation_holdout": {
+          "rows": 1498,
+          "sample_key_hash": "f5a7ead137e36da63e3c92c4e302ed7eed49609e78e3ab237a0df98a2189d505",
+          "mask_hash": "5e300d3bb9017d66a17132588c7de5b3d888540ab29c8dec1eb64aeffaac366b",
+          "observed_hash": "591d1d0572f2ff78090ac2b13eb264fcb9c91af09661442f75c1380de1a2eb0f",
+          "duplicate_keys": 0,
+          "metrics": {
+            "full_satellite_shuffle": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.008522648364305496,
+                0.012359271757304668,
+                0.016229556873440742,
+                0.02406230941414833,
+                0.028771311044692993,
+                0.034251868724823
+              ],
+              "all_day_primary": 0.017550379348297913,
+              "all_day_six_horizon_mean": 0.020699494363119204
+            },
+            "full": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.008524658158421516,
+                0.012358966283500195,
+                0.016237420961260796,
+                0.024062173441052437,
+                0.028799207881093025,
+                0.03422849625349045
+              ],
+              "all_day_primary": 0.01755285356193781,
+              "all_day_six_horizon_mean": 0.020701820496469736
+            },
+            "full_satellite_zero": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.5572308897972107,
+                1.0015814304351807,
+                1.3007334470748901,
+                0.2658236026763916,
+                0.3494357466697693,
+                0.20980779826641083
+              ],
+              "all_day_primary": 0.8560461600621542,
+              "all_day_six_horizon_mean": 0.6141021524866422
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "outputs/runs/cnn-late-fusion-v1-full-s2026-3d6c403e0ca5",
+      "config_exists_at_recorded_commit": true,
+      "config_hash_matches_git_lf_or_crlf": true,
+      "entrypoint_exists_at_recorded_commit": true,
+      "checkpoints": {
+        "best.pt": {
+          "epoch": 18,
+          "validation_loss": 0.013586442643157438,
+          "metadata": {
+            "git_commit": "11aeb43a3d18ea974d607cdb76701fa3f627ca20",
+            "config_hash": "768ead5c491cdc2a752a4181b786d40c7dbd31b09ad93eaf64d6d5b7f8548790",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "0d03df9251050f5c5bf6c283e48de2a5dabebe9e7eed128c115496532a65e3d9",
+            "satellite_statistics_sha256": "81d7b2d9d77ee06e865e875008e90cc040d77eb900f014a2324f78c96f456efa",
+            "mode": "full",
+            "parameters": 5231430,
+            "seed": 2026,
+            "max_epochs": 30,
+            "max_train_samples": null,
+            "max_validation_samples": null,
+            "test_unlocked": false
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "best_validation_loss",
+            "stale_epochs",
+            "history",
+            "feature_statistics",
+            "satellite_statistics",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        },
+        "latest.pt": {
+          "epoch": 23,
+          "validation_loss": 0.01385212270989831,
+          "metadata": {
+            "git_commit": "11aeb43a3d18ea974d607cdb76701fa3f627ca20",
+            "config_hash": "768ead5c491cdc2a752a4181b786d40c7dbd31b09ad93eaf64d6d5b7f8548790",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "0d03df9251050f5c5bf6c283e48de2a5dabebe9e7eed128c115496532a65e3d9",
+            "satellite_statistics_sha256": "81d7b2d9d77ee06e865e875008e90cc040d77eb900f014a2324f78c96f456efa",
+            "mode": "full",
+            "parameters": 5231430,
+            "seed": 2026,
+            "max_epochs": 30,
+            "max_train_samples": null,
+            "max_validation_samples": null,
+            "test_unlocked": false
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "best_validation_loss",
+            "stale_epochs",
+            "history",
+            "feature_statistics",
+            "satellite_statistics",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        }
+      },
+      "validation": {
+        "validation_development": {
+          "rows": 6113,
+          "sample_key_hash": "f222bf572f69844757bab75b37a3c23a4fdad47b2095f7c2172419e60d9a5de3",
+          "mask_hash": "b36f26744247a4ba8d5f80ca9562a9f5c20dfce630516b5cabf31abc56100ff4",
+          "observed_hash": "77739cce5a3dde9f0e2295cbe236c3b2c72148865dd48d7c6a67b217171df977",
+          "duplicate_keys": 0,
+          "metrics": {
+            "full_satellite_shuffle": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.0063030654564499855,
+                0.009480292908847332,
+                0.012693732045590878,
+                0.015830576419830322,
+                0.018231261521577835,
+                0.0192729365080595
+              ],
+              "all_day_primary": 0.01266820045808951,
+              "all_day_six_horizon_mean": 0.013635310810059309
+            },
+            "full": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.006298101041465998,
+                0.00947558507323265,
+                0.012701991014182568,
+                0.015748953446745872,
+                0.018212325870990753,
+                0.019241202622652054
+              ],
+              "all_day_primary": 0.01264217651138703,
+              "all_day_six_horizon_mean": 0.013613026511544982
+            },
+            "full_satellite_zero": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.008559144102036953,
+                0.010431955568492413,
+                0.014063972979784012,
+                0.01704900711774826,
+                0.018766237422823906,
+                0.019611038267612457
+              ],
+              "all_day_primary": 0.013848311888674894,
+              "all_day_six_horizon_mean": 0.014746892576416334
+            }
+          }
+        },
+        "validation_holdout": {
+          "rows": 1498,
+          "sample_key_hash": "f5a7ead137e36da63e3c92c4e302ed7eed49609e78e3ab237a0df98a2189d505",
+          "mask_hash": "5e300d3bb9017d66a17132588c7de5b3d888540ab29c8dec1eb64aeffaac366b",
+          "observed_hash": "591d1d0572f2ff78090ac2b13eb264fcb9c91af09661442f75c1380de1a2eb0f",
+          "duplicate_keys": 0,
+          "metrics": {
+            "full_satellite_shuffle": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.008686834946274757,
+                0.013001984916627407,
+                0.019260331988334656,
+                0.02625543810427189,
+                0.03014671429991722,
+                0.03241376951336861
+              ],
+              "all_day_primary": 0.019505918336411316,
+              "all_day_six_horizon_mean": 0.02162751229479909
+            },
+            "full": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.00867931917309761,
+                0.01302687730640173,
+                0.019222084432840347,
+                0.026113709434866905,
+                0.030078405514359474,
+                0.03239354118704796
+              ],
+              "all_day_primary": 0.019454223724702995,
+              "all_day_six_horizon_mean": 0.021585656174769003
+            },
+            "full_satellite_zero": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.010903476737439632,
+                0.01402225811034441,
+                0.02076432667672634,
+                0.02804979868233204,
+                0.03136083856225014,
+                0.033145781606435776
+              ],
+              "all_day_primary": 0.020945461156467598,
+              "all_day_six_horizon_mean": 0.023041080062588055
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "outputs/runs/cnn-late-fusion-v1-full-s42-0d5636f42f60",
+      "config_exists_at_recorded_commit": false,
+      "entrypoint_exists_at_recorded_commit": false,
+      "checkpoints": {
+        "best.pt": {
+          "epoch": 1,
+          "validation_loss": 0.015093459282070398,
+          "metadata": {
+            "git_commit": "e42a7a5c858522dcefe6580ead5fa2fb7b9df3ed",
+            "config_hash": "3e9b183dab5c00eb2644bd181c6c2500fe7b59faef245bcb8778e2e84e0fd724",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "dc054f227fc1b9d33aba2087c4e414507e3741234a64e193b9f34a8077b00d5b",
+            "satellite_statistics_sha256": "9f3b8d58c28864fe4ab7848138ae473af2e331efc78f8f0a6cb37ea17792c524",
+            "mode": "full",
+            "parameters": 222918,
+            "seed": 42,
+            "max_epochs": 1,
+            "max_train_samples": 32,
+            "max_validation_samples": 16,
+            "test_unlocked": false
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "feature_statistics",
+            "satellite_statistics",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        }
+      },
+      "validation": {
+        "validation_development": {
+          "rows": 16,
+          "sample_key_hash": "10c2f04c19ee1631a94181b49bc183683de575c367e4300eb801fe7df20633a2",
+          "mask_hash": "8b3274a4709a50d0254b2cf4833edd91a724c6c60fc50ce94503055093db7fb0",
+          "observed_hash": "8533e0e65a6ff65ae9d078996384857e2d5819643cc7758b7e5b52ae1c0fa15d",
+          "duplicate_keys": 0,
+          "metrics": {
+            "full_satellite_shuffle": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.0219443216919899,
+                0.013250406831502914,
+                0.012220615521073341,
+                0.002296233084052801,
+                0.02980908192694187,
+                0.012752639129757881
+              ],
+              "all_day_primary": 0.009255751812209686,
+              "all_day_six_horizon_mean": 0.01537888303088645
+            },
+            "full": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.0219286922365427,
+                0.01335158385336399,
+                0.011387035250663757,
+                0.0018164769280701876,
+                0.02983628399670124,
+                0.012240685522556305
+              ],
+              "all_day_primary": 0.00885169867736598,
+              "all_day_six_horizon_mean": 0.015093459631316364
+            },
+            "full_satellite_zero": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.043357014656066895,
+                0.007316891103982925,
+                0.005746824666857719,
+                0.0018736158963292837,
+                0.03362985700368881,
+                0.011547379195690155
+              ],
+              "all_day_primary": 0.0049791105557233095,
+              "all_day_six_horizon_mean": 0.017245263753769297
+            }
+          }
+        },
+        "validation_holdout": {
+          "rows": 16,
+          "sample_key_hash": "ad74d129f97ce94b5a8d0b94eb941bba404ec950fcc50dc095354ad1383b9024",
+          "mask_hash": "8b3274a4709a50d0254b2cf4833edd91a724c6c60fc50ce94503055093db7fb0",
+          "observed_hash": "76f42fb403b8f2691625f397bbf001a2f4be03a8164f55414a33299c396d3545",
+          "duplicate_keys": 0,
+          "metrics": {
+            "full_satellite_shuffle": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.18171143531799316,
+                0.04603089392185211,
+                0.07001921534538269,
+                0.043981000781059265,
+                0.11152349412441254,
+                0.22938460111618042
+              ],
+              "all_day_primary": 0.05334370334943136,
+              "all_day_six_horizon_mean": 0.11377510676781337
+            },
+            "full": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.1817057728767395,
+                0.046032775193452835,
+                0.07002421468496323,
+                0.043990492820739746,
+                0.11153984814882278,
+                0.22937756776809692
+              ],
+              "all_day_primary": 0.053349160899718605,
+              "all_day_six_horizon_mean": 0.1137784452488025
+            },
+            "full_satellite_zero": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.2015540599822998,
+                0.04695837199687958,
+                0.08698084950447083,
+                0.04575134068727493,
+                0.11111818253993988,
+                0.2384256273508072
+              ],
+              "all_day_primary": 0.059896854062875114,
+              "all_day_six_horizon_mean": 0.1217980720102787
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "outputs/runs/cnn-late-fusion-v1-full-s42-8b85af90b7e0",
+      "config_exists_at_recorded_commit": false,
+      "entrypoint_exists_at_recorded_commit": false,
+      "checkpoints": {
+        "best.pt": {
+          "epoch": 1,
+          "validation_loss": 0.44533035159111023,
+          "metadata": {
+            "git_commit": "e42a7a5c858522dcefe6580ead5fa2fb7b9df3ed",
+            "config_hash": "768ead5c491cdc2a752a4181b786d40c7dbd31b09ad93eaf64d6d5b7f8548790",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "e1ee8a9cb3af87a36b2d1975d5467901353b230794b06a833f6b48cd2a4a8142",
+            "satellite_statistics_sha256": "22afca6604f2ed41522a5630a16fcc499af28b87c816831dba766e8fb6270d60",
+            "mode": "full",
+            "parameters": 5231430,
+            "seed": 42,
+            "max_epochs": 1,
+            "max_train_samples": 8,
+            "max_validation_samples": 4,
+            "test_unlocked": false
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "feature_statistics",
+            "satellite_statistics",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        }
+      },
+      "validation": {
+        "validation_development": {
+          "rows": 4,
+          "sample_key_hash": "07821bc41e7d60aea95840c15af87a27e818a113206222e467c04b4f8635bf2f",
+          "mask_hash": "5b8b4d29020ea5b1bc427c40a0cab2bf944be057ec482110f1d12b68008cd286",
+          "observed_hash": "b6f2f18970e8be9c5e3a84404596638ae6a3648bdb2b256aecfcaa0b90cb2c08",
+          "duplicate_keys": 0,
+          "metrics": {
+            "full_satellite_shuffle": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.3400886058807373,
+                0.2845550775527954,
+                0.49110671877861023,
+                0.8344764113426208,
+                0.3112140893936157,
+                0.41190433502197266
+              ],
+              "all_day_primary": 0.5367127358913422,
+              "all_day_six_horizon_mean": 0.44555753966172534
+            },
+            "full": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.3400716781616211,
+                0.28459542989730835,
+                0.4903565049171448,
+                0.8344598412513733,
+                0.3111368417739868,
+                0.4113616347312927
+              ],
+              "all_day_primary": 0.5364705920219421,
+              "all_day_six_horizon_mean": 0.44533032178878784
+            },
+            "full_satellite_zero": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.23486816883087158,
+                0.33822083473205566,
+                0.5280851721763611,
+                0.7862765789031982,
+                0.2827715277671814,
+                0.45367133617401123
+              ],
+              "all_day_primary": 0.550860861937205,
+              "all_day_six_horizon_mean": 0.43731560309727985
+            }
+          }
+        },
+        "validation_holdout": {
+          "rows": 4,
+          "sample_key_hash": "b8bc2b1480682328cc45555bd571cacec1bf4152f9c6cda2ccaf01ae1ab798c2",
+          "mask_hash": "5b8b4d29020ea5b1bc427c40a0cab2bf944be057ec482110f1d12b68008cd286",
+          "observed_hash": "c022de136915cd619fbb6cb378d289f355e373e7a98fb1f5702bfcbdb88a3305",
+          "duplicate_keys": 0,
+          "metrics": {
+            "full_satellite_shuffle": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.10455717146396637,
+                0.16847176849842072,
+                0.8948568105697632,
+                0.5867509841918945,
+                0.26119792461395264,
+                0.24474795162677765
+              ],
+              "all_day_primary": 0.5500265210866928,
+              "all_day_six_horizon_mean": 0.3767637684941292
+            },
+            "full": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.10456117242574692,
+                0.16853919625282288,
+                0.8948527574539185,
+                0.5867504477500916,
+                0.2610316574573517,
+                0.24440866708755493
+              ],
+              "all_day_primary": 0.5500474671522776,
+              "all_day_six_horizon_mean": 0.3766906497379144
+            },
+            "full_satellite_zero": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.20786190032958984,
+                0.2241087257862091,
+                0.9699639081954956,
+                0.5471712350845337,
+                0.24907620251178741,
+                0.2613829970359802
+              ],
+              "all_day_primary": 0.5804146230220795,
+              "all_day_six_horizon_mean": 0.40992749482393265
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "outputs/runs/cnn-late-fusion-v1-full-s42-a778e1c237a4",
+      "config_exists_at_recorded_commit": true,
+      "config_hash_matches_git_lf_or_crlf": true,
+      "entrypoint_exists_at_recorded_commit": true,
+      "checkpoints": {
+        "best.pt": {
+          "epoch": 13,
+          "validation_loss": 0.013566766925960731,
+          "metadata": {
+            "git_commit": "11aeb43a3d18ea974d607cdb76701fa3f627ca20",
+            "config_hash": "768ead5c491cdc2a752a4181b786d40c7dbd31b09ad93eaf64d6d5b7f8548790",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "0d03df9251050f5c5bf6c283e48de2a5dabebe9e7eed128c115496532a65e3d9",
+            "satellite_statistics_sha256": "81d7b2d9d77ee06e865e875008e90cc040d77eb900f014a2324f78c96f456efa",
+            "mode": "full",
+            "parameters": 5231430,
+            "seed": 42,
+            "max_epochs": 30,
+            "max_train_samples": null,
+            "max_validation_samples": null,
+            "test_unlocked": false
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "best_validation_loss",
+            "stale_epochs",
+            "history",
+            "feature_statistics",
+            "satellite_statistics",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        },
+        "latest.pt": {
+          "epoch": 18,
+          "validation_loss": 0.013858148892224203,
+          "metadata": {
+            "git_commit": "11aeb43a3d18ea974d607cdb76701fa3f627ca20",
+            "config_hash": "768ead5c491cdc2a752a4181b786d40c7dbd31b09ad93eaf64d6d5b7f8548790",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "0d03df9251050f5c5bf6c283e48de2a5dabebe9e7eed128c115496532a65e3d9",
+            "satellite_statistics_sha256": "81d7b2d9d77ee06e865e875008e90cc040d77eb900f014a2324f78c96f456efa",
+            "mode": "full",
+            "parameters": 5231430,
+            "seed": 42,
+            "max_epochs": 30,
+            "max_train_samples": null,
+            "max_validation_samples": null,
+            "test_unlocked": false
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "best_validation_loss",
+            "stale_epochs",
+            "history",
+            "feature_statistics",
+            "satellite_statistics",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        }
+      },
+      "validation": {
+        "validation_development": {
+          "rows": 6113,
+          "sample_key_hash": "f222bf572f69844757bab75b37a3c23a4fdad47b2095f7c2172419e60d9a5de3",
+          "mask_hash": "b36f26744247a4ba8d5f80ca9562a9f5c20dfce630516b5cabf31abc56100ff4",
+          "observed_hash": "77739cce5a3dde9f0e2295cbe236c3b2c72148865dd48d7c6a67b217171df977",
+          "duplicate_keys": 0,
+          "metrics": {
+            "full_satellite_shuffle": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.00665207440033555,
+                0.00920424796640873,
+                0.012713725678622723,
+                0.015735235065221786,
+                0.017820607870817184,
+                0.019470851868391037
+              ],
+              "all_day_primary": 0.012551069570084413,
+              "all_day_six_horizon_mean": 0.013599457141632834
+            },
+            "full": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.006644572131335735,
+                0.009200421161949635,
+                0.012695826590061188,
+                0.01572844199836254,
+                0.017820676788687706,
+                0.01946745067834854
+              ],
+              "all_day_primary": 0.012541563250124454,
+              "all_day_six_horizon_mean": 0.013592898224790892
+            },
+            "full_satellite_zero": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.006911076605319977,
+                0.009534431621432304,
+                0.01300288550555706,
+                0.016097500920295715,
+                0.018141012638807297,
+                0.019802836701273918
+              ],
+              "all_day_primary": 0.01287827268242836,
+              "all_day_six_horizon_mean": 0.013914957332114378
+            }
+          }
+        },
+        "validation_holdout": {
+          "rows": 1498,
+          "sample_key_hash": "f5a7ead137e36da63e3c92c4e302ed7eed49609e78e3ab237a0df98a2189d505",
+          "mask_hash": "5e300d3bb9017d66a17132588c7de5b3d888540ab29c8dec1eb64aeffaac366b",
+          "observed_hash": "591d1d0572f2ff78090ac2b13eb264fcb9c91af09661442f75c1380de1a2eb0f",
+          "duplicate_keys": 0,
+          "metrics": {
+            "full_satellite_shuffle": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.00903322733938694,
+                0.01298411563038826,
+                0.020490866154432297,
+                0.027140336111187935,
+                0.030515579506754875,
+                0.03323875367641449
+              ],
+              "all_day_primary": 0.020205105965336163,
+              "all_day_six_horizon_mean": 0.0222338130697608
+            },
+            "full": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.009031102061271667,
+                0.013021073304116726,
+                0.02047831378877163,
+                0.027091864496469498,
+                0.030491147190332413,
+                0.033234208822250366
+              ],
+              "all_day_primary": 0.020197083863119285,
+              "all_day_six_horizon_mean": 0.02222461827720205
+            },
+            "full_satellite_zero": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.009174738079309464,
+                0.013172485865652561,
+                0.020815707743167877,
+                0.02759074792265892,
+                0.031002691015601158,
+                0.0335548035800457
+              ],
+              "all_day_primary": 0.020526313843826454,
+              "all_day_six_horizon_mean": 0.02255186236773928
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "outputs/runs/cnn-late-fusion-v1-full-s42-f9f734279294",
+      "config_exists_at_recorded_commit": true,
+      "config_hash_matches_git_lf_or_crlf": true,
+      "entrypoint_exists_at_recorded_commit": true,
+      "checkpoints": {
+        "best.pt": {
+          "epoch": 1,
+          "validation_loss": 0.15561547502875328,
+          "metadata": {
+            "git_commit": "e992e006fb31708cb3c478f40748b2ea74072411",
+            "config_hash": "768ead5c491cdc2a752a4181b786d40c7dbd31b09ad93eaf64d6d5b7f8548790",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "dc054f227fc1b9d33aba2087c4e414507e3741234a64e193b9f34a8077b00d5b",
+            "satellite_statistics_sha256": "9f3b8d58c28864fe4ab7848138ae473af2e331efc78f8f0a6cb37ea17792c524",
+            "mode": "full",
+            "parameters": 5231430,
+            "seed": 42,
+            "max_epochs": 1,
+            "max_train_samples": 32,
+            "max_validation_samples": 16,
+            "test_unlocked": false
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "feature_statistics",
+            "satellite_statistics",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        }
+      },
+      "validation": {
+        "validation_development": {
+          "rows": 16,
+          "sample_key_hash": "10c2f04c19ee1631a94181b49bc183683de575c367e4300eb801fe7df20633a2",
+          "mask_hash": "8b3274a4709a50d0254b2cf4833edd91a724c6c60fc50ce94503055093db7fb0",
+          "observed_hash": "8533e0e65a6ff65ae9d078996384857e2d5819643cc7758b7e5b52ae1c0fa15d",
+          "duplicate_keys": 0,
+          "metrics": {
+            "full_satellite_shuffle": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.06055492162704468,
+                0.3254213333129883,
+                0.12207844853401184,
+                0.1390383541584015,
+                0.153431698679924,
+                0.13313861191272736
+              ],
+              "all_day_primary": 0.19551271200180054,
+              "all_day_six_horizon_mean": 0.1556105613708496
+            },
+            "full": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.060571618378162384,
+                0.32541927695274353,
+                0.12208223342895508,
+                0.13903799653053284,
+                0.15342959761619568,
+                0.1331520676612854
+              ],
+              "all_day_primary": 0.1955131689707438,
+              "all_day_six_horizon_mean": 0.15561546509464583
+            },
+            "full_satellite_zero": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.04633088782429695,
+                0.26328879594802856,
+                0.10745097696781158,
+                0.12752202153205872,
+                0.1414525806903839,
+                0.13960258662700653
+              ],
+              "all_day_primary": 0.16608726481596628,
+              "all_day_six_horizon_mean": 0.1376079749315977
+            }
+          }
+        },
+        "validation_holdout": {
+          "rows": 16,
+          "sample_key_hash": "ad74d129f97ce94b5a8d0b94eb941bba404ec950fcc50dc095354ad1383b9024",
+          "mask_hash": "8b3274a4709a50d0254b2cf4833edd91a724c6c60fc50ce94503055093db7fb0",
+          "observed_hash": "76f42fb403b8f2691625f397bbf001a2f4be03a8164f55414a33299c396d3545",
+          "duplicate_keys": 0,
+          "metrics": {
+            "full_satellite_shuffle": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.3332630693912506,
+                0.38283807039260864,
+                0.3211615979671478,
+                0.15322133898735046,
+                0.03548876568675041,
+                0.14684361219406128
+              ],
+              "all_day_primary": 0.28574033578236896,
+              "all_day_six_horizon_mean": 0.2288027424365282
+            },
+            "full": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.33324381709098816,
+                0.3828335404396057,
+                0.3211579918861389,
+                0.1532140076160431,
+                0.035252369940280914,
+                0.14685213565826416
+              ],
+              "all_day_primary": 0.2857351799805959,
+              "all_day_six_horizon_mean": 0.22875897710522017
+            },
+            "full_satellite_zero": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.34474748373031616,
+                0.31384676694869995,
+                0.3391458988189697,
+                0.1375589370727539,
+                0.03219868987798691,
+                0.16134002804756165
+              ],
+              "all_day_primary": 0.26351720094680786,
+              "all_day_six_horizon_mean": 0.22147296741604805
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "outputs/runs/cnn-late-fusion-v1-power_solar-s123-f110ad059363",
+      "config_exists_at_recorded_commit": true,
+      "config_hash_matches_git_lf_or_crlf": true,
+      "entrypoint_exists_at_recorded_commit": true,
+      "checkpoints": {
+        "best.pt": {
+          "epoch": 9,
+          "validation_loss": 0.014189910116264812,
+          "metadata": {
+            "git_commit": "11aeb43a3d18ea974d607cdb76701fa3f627ca20",
+            "config_hash": "768ead5c491cdc2a752a4181b786d40c7dbd31b09ad93eaf64d6d5b7f8548790",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "0d03df9251050f5c5bf6c283e48de2a5dabebe9e7eed128c115496532a65e3d9",
+            "satellite_statistics_sha256": "81d7b2d9d77ee06e865e875008e90cc040d77eb900f014a2324f78c96f456efa",
+            "mode": "power_solar",
+            "parameters": 1137846,
+            "seed": 123,
+            "max_epochs": 30,
+            "max_train_samples": null,
+            "max_validation_samples": null,
+            "test_unlocked": false
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "best_validation_loss",
+            "stale_epochs",
+            "history",
+            "feature_statistics",
+            "satellite_statistics",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        },
+        "latest.pt": {
+          "epoch": 14,
+          "validation_loss": 0.014195478006683752,
+          "metadata": {
+            "git_commit": "11aeb43a3d18ea974d607cdb76701fa3f627ca20",
+            "config_hash": "768ead5c491cdc2a752a4181b786d40c7dbd31b09ad93eaf64d6d5b7f8548790",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "0d03df9251050f5c5bf6c283e48de2a5dabebe9e7eed128c115496532a65e3d9",
+            "satellite_statistics_sha256": "81d7b2d9d77ee06e865e875008e90cc040d77eb900f014a2324f78c96f456efa",
+            "mode": "power_solar",
+            "parameters": 1137846,
+            "seed": 123,
+            "max_epochs": 30,
+            "max_train_samples": null,
+            "max_validation_samples": null,
+            "test_unlocked": false
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "best_validation_loss",
+            "stale_epochs",
+            "history",
+            "feature_statistics",
+            "satellite_statistics",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        }
+      },
+      "validation": {
+        "validation_development": {
+          "rows": 6113,
+          "sample_key_hash": "f222bf572f69844757bab75b37a3c23a4fdad47b2095f7c2172419e60d9a5de3",
+          "mask_hash": "b36f26744247a4ba8d5f80ca9562a9f5c20dfce630516b5cabf31abc56100ff4",
+          "observed_hash": "77739cce5a3dde9f0e2295cbe236c3b2c72148865dd48d7c6a67b217171df977",
+          "duplicate_keys": 0,
+          "metrics": {
+            "power_solar": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.0065278853289783,
+                0.009668041951954365,
+                0.013656035996973515,
+                0.016928471624851227,
+                0.019091535359621048,
+                0.01943090930581093
+              ],
+              "all_day_primary": 0.013417516524593035,
+              "all_day_six_horizon_mean": 0.01421714659469823
+            }
+          }
+        },
+        "validation_holdout": {
+          "rows": 1498,
+          "sample_key_hash": "f5a7ead137e36da63e3c92c4e302ed7eed49609e78e3ab237a0df98a2189d505",
+          "mask_hash": "5e300d3bb9017d66a17132588c7de5b3d888540ab29c8dec1eb64aeffaac366b",
+          "observed_hash": "591d1d0572f2ff78090ac2b13eb264fcb9c91af09661442f75c1380de1a2eb0f",
+          "duplicate_keys": 0,
+          "metrics": {
+            "power_solar": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.009005294181406498,
+                0.013615895994007587,
+                0.02152962237596512,
+                0.02855445258319378,
+                0.03168680891394615,
+                0.03269011527299881
+              ],
+              "all_day_primary": 0.021233323651055496,
+              "all_day_six_horizon_mean": 0.022847031553586323
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "outputs/runs/cnn-late-fusion-v1-power_solar-s2026-2aa9c8418e2c",
+      "config_exists_at_recorded_commit": true,
+      "config_hash_matches_git_lf_or_crlf": true,
+      "entrypoint_exists_at_recorded_commit": true,
+      "checkpoints": {
+        "best.pt": {
+          "epoch": 17,
+          "validation_loss": 0.013940713657769544,
+          "metadata": {
+            "git_commit": "11aeb43a3d18ea974d607cdb76701fa3f627ca20",
+            "config_hash": "768ead5c491cdc2a752a4181b786d40c7dbd31b09ad93eaf64d6d5b7f8548790",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "0d03df9251050f5c5bf6c283e48de2a5dabebe9e7eed128c115496532a65e3d9",
+            "satellite_statistics_sha256": "81d7b2d9d77ee06e865e875008e90cc040d77eb900f014a2324f78c96f456efa",
+            "mode": "power_solar",
+            "parameters": 1137846,
+            "seed": 2026,
+            "max_epochs": 30,
+            "max_train_samples": null,
+            "max_validation_samples": null,
+            "test_unlocked": false
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "best_validation_loss",
+            "stale_epochs",
+            "history",
+            "feature_statistics",
+            "satellite_statistics",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        },
+        "latest.pt": {
+          "epoch": 22,
+          "validation_loss": 0.014015331976846537,
+          "metadata": {
+            "git_commit": "11aeb43a3d18ea974d607cdb76701fa3f627ca20",
+            "config_hash": "768ead5c491cdc2a752a4181b786d40c7dbd31b09ad93eaf64d6d5b7f8548790",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "0d03df9251050f5c5bf6c283e48de2a5dabebe9e7eed128c115496532a65e3d9",
+            "satellite_statistics_sha256": "81d7b2d9d77ee06e865e875008e90cc040d77eb900f014a2324f78c96f456efa",
+            "mode": "power_solar",
+            "parameters": 1137846,
+            "seed": 2026,
+            "max_epochs": 30,
+            "max_train_samples": null,
+            "max_validation_samples": null,
+            "test_unlocked": false
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "best_validation_loss",
+            "stale_epochs",
+            "history",
+            "feature_statistics",
+            "satellite_statistics",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        }
+      },
+      "validation": {
+        "validation_development": {
+          "rows": 6113,
+          "sample_key_hash": "f222bf572f69844757bab75b37a3c23a4fdad47b2095f7c2172419e60d9a5de3",
+          "mask_hash": "b36f26744247a4ba8d5f80ca9562a9f5c20dfce630516b5cabf31abc56100ff4",
+          "observed_hash": "77739cce5a3dde9f0e2295cbe236c3b2c72148865dd48d7c6a67b217171df977",
+          "duplicate_keys": 0,
+          "metrics": {
+            "power_solar": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.006373052950948477,
+                0.009397074580192566,
+                0.012625651434063911,
+                0.017005680128932,
+                0.018635530024766922,
+                0.019775252789258957
+              ],
+              "all_day_primary": 0.013009468714396158,
+              "all_day_six_horizon_mean": 0.013968706984693805
+            }
+          }
+        },
+        "validation_holdout": {
+          "rows": 1498,
+          "sample_key_hash": "f5a7ead137e36da63e3c92c4e302ed7eed49609e78e3ab237a0df98a2189d505",
+          "mask_hash": "5e300d3bb9017d66a17132588c7de5b3d888540ab29c8dec1eb64aeffaac366b",
+          "observed_hash": "591d1d0572f2ff78090ac2b13eb264fcb9c91af09661442f75c1380de1a2eb0f",
+          "duplicate_keys": 0,
+          "metrics": {
+            "power_solar": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.008851032704114914,
+                0.012912923470139503,
+                0.019002823159098625,
+                0.028152424842119217,
+                0.03082326613366604,
+                0.03356408327817917
+              ],
+              "all_day_primary": 0.020022723823785782,
+              "all_day_six_horizon_mean": 0.022217758931219578
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "outputs/runs/cnn-late-fusion-v1-power_solar-s42-f00f00c0cd86",
+      "config_exists_at_recorded_commit": true,
+      "config_hash_matches_git_lf_or_crlf": true,
+      "entrypoint_exists_at_recorded_commit": true,
+      "checkpoints": {
+        "best.pt": {
+          "epoch": 30,
+          "validation_loss": 0.013411331868733176,
+          "metadata": {
+            "git_commit": "e992e006fb31708cb3c478f40748b2ea74072411",
+            "config_hash": "768ead5c491cdc2a752a4181b786d40c7dbd31b09ad93eaf64d6d5b7f8548790",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "0d03df9251050f5c5bf6c283e48de2a5dabebe9e7eed128c115496532a65e3d9",
+            "satellite_statistics_sha256": "81d7b2d9d77ee06e865e875008e90cc040d77eb900f014a2324f78c96f456efa",
+            "mode": "power_solar",
+            "parameters": 1137846,
+            "seed": 42,
+            "max_epochs": 30,
+            "max_train_samples": null,
+            "max_validation_samples": null,
+            "test_unlocked": false,
+            "resumed_with_git_commit": "315adf3336946957d3232af50dd339c8c0647bd3"
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "best_validation_loss",
+            "stale_epochs",
+            "history",
+            "feature_statistics",
+            "satellite_statistics",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        },
+        "latest.pt": {
+          "epoch": 30,
+          "validation_loss": 0.013411331868733176,
+          "metadata": {
+            "git_commit": "e992e006fb31708cb3c478f40748b2ea74072411",
+            "config_hash": "768ead5c491cdc2a752a4181b786d40c7dbd31b09ad93eaf64d6d5b7f8548790",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "0d03df9251050f5c5bf6c283e48de2a5dabebe9e7eed128c115496532a65e3d9",
+            "satellite_statistics_sha256": "81d7b2d9d77ee06e865e875008e90cc040d77eb900f014a2324f78c96f456efa",
+            "mode": "power_solar",
+            "parameters": 1137846,
+            "seed": 42,
+            "max_epochs": 30,
+            "max_train_samples": null,
+            "max_validation_samples": null,
+            "test_unlocked": false,
+            "resumed_with_git_commit": "315adf3336946957d3232af50dd339c8c0647bd3"
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "best_validation_loss",
+            "stale_epochs",
+            "history",
+            "feature_statistics",
+            "satellite_statistics",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        }
+      },
+      "validation": {
+        "validation_development": {
+          "rows": 6113,
+          "sample_key_hash": "f222bf572f69844757bab75b37a3c23a4fdad47b2095f7c2172419e60d9a5de3",
+          "mask_hash": "b36f26744247a4ba8d5f80ca9562a9f5c20dfce630516b5cabf31abc56100ff4",
+          "observed_hash": "77739cce5a3dde9f0e2295cbe236c3b2c72148865dd48d7c6a67b217171df977",
+          "duplicate_keys": 0,
+          "metrics": {
+            "power_solar": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.006096041761338711,
+                0.00934170838445425,
+                0.012111520394682884,
+                0.016028353944420815,
+                0.01795353926718235,
+                0.019097795709967613
+              ],
+              "all_day_primary": 0.01249386090785265,
+              "all_day_six_horizon_mean": 0.013438159910341104
+            }
+          }
+        },
+        "validation_holdout": {
+          "rows": 1498,
+          "sample_key_hash": "f5a7ead137e36da63e3c92c4e302ed7eed49609e78e3ab237a0df98a2189d505",
+          "mask_hash": "5e300d3bb9017d66a17132588c7de5b3d888540ab29c8dec1eb64aeffaac366b",
+          "observed_hash": "591d1d0572f2ff78090ac2b13eb264fcb9c91af09661442f75c1380de1a2eb0f",
+          "duplicate_keys": 0,
+          "metrics": {
+            "power_solar": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.008212238550186157,
+                0.012886998243629932,
+                0.018417704850435257,
+                0.02627614326775074,
+                0.03009728714823723,
+                0.03261667862534523
+              ],
+              "all_day_primary": 0.019193615453938644,
+              "all_day_six_horizon_mean": 0.021417841780930758
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "outputs/runs/cnn-late-fusion-v1-satellite_solar-s123-414992685ada",
+      "config_exists_at_recorded_commit": true,
+      "config_hash_matches_git_lf_or_crlf": true,
+      "entrypoint_exists_at_recorded_commit": true,
+      "checkpoints": {
+        "best.pt": {
+          "epoch": 8,
+          "validation_loss": 0.017524886570982282,
+          "metadata": {
+            "git_commit": "11aeb43a3d18ea974d607cdb76701fa3f627ca20",
+            "config_hash": "768ead5c491cdc2a752a4181b786d40c7dbd31b09ad93eaf64d6d5b7f8548790",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "0d03df9251050f5c5bf6c283e48de2a5dabebe9e7eed128c115496532a65e3d9",
+            "satellite_statistics_sha256": "81d7b2d9d77ee06e865e875008e90cc040d77eb900f014a2324f78c96f456efa",
+            "mode": "satellite_solar",
+            "parameters": 4671222,
+            "seed": 123,
+            "max_epochs": 30,
+            "max_train_samples": null,
+            "max_validation_samples": null,
+            "test_unlocked": false
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "best_validation_loss",
+            "stale_epochs",
+            "history",
+            "feature_statistics",
+            "satellite_statistics",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        },
+        "latest.pt": {
+          "epoch": 13,
+          "validation_loss": 0.018117178790119027,
+          "metadata": {
+            "git_commit": "11aeb43a3d18ea974d607cdb76701fa3f627ca20",
+            "config_hash": "768ead5c491cdc2a752a4181b786d40c7dbd31b09ad93eaf64d6d5b7f8548790",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "0d03df9251050f5c5bf6c283e48de2a5dabebe9e7eed128c115496532a65e3d9",
+            "satellite_statistics_sha256": "81d7b2d9d77ee06e865e875008e90cc040d77eb900f014a2324f78c96f456efa",
+            "mode": "satellite_solar",
+            "parameters": 4671222,
+            "seed": 123,
+            "max_epochs": 30,
+            "max_train_samples": null,
+            "max_validation_samples": null,
+            "test_unlocked": false
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "best_validation_loss",
+            "stale_epochs",
+            "history",
+            "feature_statistics",
+            "satellite_statistics",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        }
+      },
+      "validation": {
+        "validation_development": {
+          "rows": 6113,
+          "sample_key_hash": "f222bf572f69844757bab75b37a3c23a4fdad47b2095f7c2172419e60d9a5de3",
+          "mask_hash": "b36f26744247a4ba8d5f80ca9562a9f5c20dfce630516b5cabf31abc56100ff4",
+          "observed_hash": "77739cce5a3dde9f0e2295cbe236c3b2c72148865dd48d7c6a67b217171df977",
+          "duplicate_keys": 0,
+          "metrics": {
+            "satellite_solar": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.01654578186571598,
+                0.0164616871625185,
+                0.016418935731053352,
+                0.017678434029221535,
+                0.018758423626422882,
+                0.019321724772453308
+              ],
+              "all_day_primary": 0.01685301897426446,
+              "all_day_six_horizon_mean": 0.017530831197897594
+            }
+          }
+        },
+        "validation_holdout": {
+          "rows": 1498,
+          "sample_key_hash": "f5a7ead137e36da63e3c92c4e302ed7eed49609e78e3ab237a0df98a2189d505",
+          "mask_hash": "5e300d3bb9017d66a17132588c7de5b3d888540ab29c8dec1eb64aeffaac366b",
+          "observed_hash": "591d1d0572f2ff78090ac2b13eb264fcb9c91af09661442f75c1380de1a2eb0f",
+          "duplicate_keys": 0,
+          "metrics": {
+            "satellite_solar": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.02799934893846512,
+                0.028248678892850876,
+                0.028820065781474113,
+                0.030513452365994453,
+                0.031604111194610596,
+                0.032316021621227264
+              ],
+              "all_day_primary": 0.02919406568010648,
+              "all_day_six_horizon_mean": 0.029916946465770405
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "outputs/runs/cnn-late-fusion-v1-satellite_solar-s2026-9667ea3c5beb",
+      "config_exists_at_recorded_commit": true,
+      "config_hash_matches_git_lf_or_crlf": true,
+      "entrypoint_exists_at_recorded_commit": true,
+      "checkpoints": {
+        "best.pt": {
+          "epoch": 28,
+          "validation_loss": 0.01797098208028182,
+          "metadata": {
+            "git_commit": "11aeb43a3d18ea974d607cdb76701fa3f627ca20",
+            "config_hash": "768ead5c491cdc2a752a4181b786d40c7dbd31b09ad93eaf64d6d5b7f8548790",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "0d03df9251050f5c5bf6c283e48de2a5dabebe9e7eed128c115496532a65e3d9",
+            "satellite_statistics_sha256": "81d7b2d9d77ee06e865e875008e90cc040d77eb900f014a2324f78c96f456efa",
+            "mode": "satellite_solar",
+            "parameters": 4671222,
+            "seed": 2026,
+            "max_epochs": 30,
+            "max_train_samples": null,
+            "max_validation_samples": null,
+            "test_unlocked": false
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "best_validation_loss",
+            "stale_epochs",
+            "history",
+            "feature_statistics",
+            "satellite_statistics",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        },
+        "latest.pt": {
+          "epoch": 30,
+          "validation_loss": 0.018115429726890703,
+          "metadata": {
+            "git_commit": "11aeb43a3d18ea974d607cdb76701fa3f627ca20",
+            "config_hash": "768ead5c491cdc2a752a4181b786d40c7dbd31b09ad93eaf64d6d5b7f8548790",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "0d03df9251050f5c5bf6c283e48de2a5dabebe9e7eed128c115496532a65e3d9",
+            "satellite_statistics_sha256": "81d7b2d9d77ee06e865e875008e90cc040d77eb900f014a2324f78c96f456efa",
+            "mode": "satellite_solar",
+            "parameters": 4671222,
+            "seed": 2026,
+            "max_epochs": 30,
+            "max_train_samples": null,
+            "max_validation_samples": null,
+            "test_unlocked": false
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "best_validation_loss",
+            "stale_epochs",
+            "history",
+            "feature_statistics",
+            "satellite_statistics",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        }
+      },
+      "validation": {
+        "validation_development": {
+          "rows": 6113,
+          "sample_key_hash": "f222bf572f69844757bab75b37a3c23a4fdad47b2095f7c2172419e60d9a5de3",
+          "mask_hash": "b36f26744247a4ba8d5f80ca9562a9f5c20dfce630516b5cabf31abc56100ff4",
+          "observed_hash": "77739cce5a3dde9f0e2295cbe236c3b2c72148865dd48d7c6a67b217171df977",
+          "duplicate_keys": 0,
+          "metrics": {
+            "satellite_solar": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.01751568727195263,
+                0.01738528162240982,
+                0.017551423981785774,
+                0.01808316819369793,
+                0.0183155108243227,
+                0.018991930410265923
+              ],
+              "all_day_primary": 0.017673291265964508,
+              "all_day_six_horizon_mean": 0.017973833717405796
+            }
+          }
+        },
+        "validation_holdout": {
+          "rows": 1498,
+          "sample_key_hash": "f5a7ead137e36da63e3c92c4e302ed7eed49609e78e3ab237a0df98a2189d505",
+          "mask_hash": "5e300d3bb9017d66a17132588c7de5b3d888540ab29c8dec1eb64aeffaac366b",
+          "observed_hash": "591d1d0572f2ff78090ac2b13eb264fcb9c91af09661442f75c1380de1a2eb0f",
+          "duplicate_keys": 0,
+          "metrics": {
+            "satellite_solar": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.029397422447800636,
+                0.0295835193246603,
+                0.030358919873833656,
+                0.03136444836854935,
+                0.03170016407966614,
+                0.03272378817200661
+              ],
+              "all_day_primary": 0.030435629189014435,
+              "all_day_six_horizon_mean": 0.03085471037775278
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "outputs/runs/cnn-late-fusion-v1-satellite_solar-s42-1563c30f0f2e",
+      "config_exists_at_recorded_commit": true,
+      "config_hash_matches_git_lf_or_crlf": true,
+      "entrypoint_exists_at_recorded_commit": true,
+      "checkpoints": {
+        "best.pt": {
+          "epoch": 4,
+          "validation_loss": 0.019237329727066578,
+          "metadata": {
+            "git_commit": "11aeb43a3d18ea974d607cdb76701fa3f627ca20",
+            "config_hash": "768ead5c491cdc2a752a4181b786d40c7dbd31b09ad93eaf64d6d5b7f8548790",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "0d03df9251050f5c5bf6c283e48de2a5dabebe9e7eed128c115496532a65e3d9",
+            "satellite_statistics_sha256": "81d7b2d9d77ee06e865e875008e90cc040d77eb900f014a2324f78c96f456efa",
+            "mode": "satellite_solar",
+            "parameters": 4671222,
+            "seed": 42,
+            "max_epochs": 30,
+            "max_train_samples": null,
+            "max_validation_samples": null,
+            "test_unlocked": false
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "best_validation_loss",
+            "stale_epochs",
+            "history",
+            "feature_statistics",
+            "satellite_statistics",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        },
+        "latest.pt": {
+          "epoch": 9,
+          "validation_loss": 0.019267312299348804,
+          "metadata": {
+            "git_commit": "11aeb43a3d18ea974d607cdb76701fa3f627ca20",
+            "config_hash": "768ead5c491cdc2a752a4181b786d40c7dbd31b09ad93eaf64d6d5b7f8548790",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "0d03df9251050f5c5bf6c283e48de2a5dabebe9e7eed128c115496532a65e3d9",
+            "satellite_statistics_sha256": "81d7b2d9d77ee06e865e875008e90cc040d77eb900f014a2324f78c96f456efa",
+            "mode": "satellite_solar",
+            "parameters": 4671222,
+            "seed": 42,
+            "max_epochs": 30,
+            "max_train_samples": null,
+            "max_validation_samples": null,
+            "test_unlocked": false
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "best_validation_loss",
+            "stale_epochs",
+            "history",
+            "feature_statistics",
+            "satellite_statistics",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        }
+      },
+      "validation": {
+        "validation_development": {
+          "rows": 6113,
+          "sample_key_hash": "f222bf572f69844757bab75b37a3c23a4fdad47b2095f7c2172419e60d9a5de3",
+          "mask_hash": "b36f26744247a4ba8d5f80ca9562a9f5c20dfce630516b5cabf31abc56100ff4",
+          "observed_hash": "77739cce5a3dde9f0e2295cbe236c3b2c72148865dd48d7c6a67b217171df977",
+          "duplicate_keys": 0,
+          "metrics": {
+            "satellite_solar": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.019059598445892334,
+                0.01904396526515484,
+                0.019169142469763756,
+                0.01908879168331623,
+                0.019197968766093254,
+                0.019871484488248825
+              ],
+              "all_day_primary": 0.01910063313941161,
+              "all_day_six_horizon_mean": 0.019238491853078205
+            }
+          }
+        },
+        "validation_holdout": {
+          "rows": 1498,
+          "sample_key_hash": "f5a7ead137e36da63e3c92c4e302ed7eed49609e78e3ab237a0df98a2189d505",
+          "mask_hash": "5e300d3bb9017d66a17132588c7de5b3d888540ab29c8dec1eb64aeffaac366b",
+          "observed_hash": "591d1d0572f2ff78090ac2b13eb264fcb9c91af09661442f75c1380de1a2eb0f",
+          "duplicate_keys": 0,
+          "metrics": {
+            "satellite_solar": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.031030237674713135,
+                0.0312174204736948,
+                0.031572796404361725,
+                0.03163272887468338,
+                0.03248779475688934,
+                0.03321147710084915
+              ],
+              "all_day_primary": 0.0314743152509133,
+              "all_day_six_horizon_mean": 0.031858742547531925
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "outputs/runs/naive-baselines-v1-9f3d90ef59fc",
+      "config_exists_at_recorded_commit": true,
+      "config_hash_matches_git_lf_or_crlf": true,
+      "entrypoint_exists_at_recorded_commit": true,
+      "checkpoints": {}
+    },
+    {
+      "path": "outputs/runs/naive-baselines-v1-e687a40fc253",
+      "config_exists_at_recorded_commit": false,
+      "entrypoint_exists_at_recorded_commit": false,
+      "checkpoints": {}
+    },
+    {
+      "path": "outputs/runs/optical-flow-v1-4d925b1f1b20",
+      "config_exists_at_recorded_commit": false,
+      "entrypoint_exists_at_recorded_commit": false,
+      "checkpoints": {}
+    },
+    {
+      "path": "outputs/runs/optical-flow-v1-70a2e14f0fcc",
+      "config_exists_at_recorded_commit": false,
+      "entrypoint_exists_at_recorded_commit": false,
+      "checkpoints": {}
+    },
+    {
+      "path": "outputs/runs/optical-flow-v1-9d3ffdfe2bb7",
+      "config_exists_at_recorded_commit": false,
+      "entrypoint_exists_at_recorded_commit": false,
+      "checkpoints": {}
+    },
+    {
+      "path": "outputs/runs/power-only-v1-mlp-s123-aa37292f6d17",
+      "config_exists_at_recorded_commit": true,
+      "config_hash_matches_git_lf_or_crlf": true,
+      "entrypoint_exists_at_recorded_commit": true,
+      "checkpoints": {
+        "best.pt": {
+          "epoch": 39,
+          "validation_loss": 0.011657232460914121,
+          "metadata": {
+            "git_commit": "e0fba8d6be76c69925ec939408ef2d1efd36adc0",
+            "config_hash": "559e943d8acd126dcf125a661beb63160adc4080b0ac46bc896fce96b65b793c",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "0d03df9251050f5c5bf6c283e48de2a5dabebe9e7eed128c115496532a65e3d9",
+            "model": "mlp",
+            "parameters": 6342,
+            "seed": 123,
+            "max_epochs": 50,
+            "test_unlocked": false
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "feature_statistics",
+            "feature_statistics_sha256",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        }
+      },
+      "validation": {
+        "validation_development": {
+          "rows": 6113,
+          "sample_key_hash": "f222bf572f69844757bab75b37a3c23a4fdad47b2095f7c2172419e60d9a5de3",
+          "mask_hash": "b36f26744247a4ba8d5f80ca9562a9f5c20dfce630516b5cabf31abc56100ff4",
+          "observed_hash": "77739cce5a3dde9f0e2295cbe236c3b2c72148865dd48d7c6a67b217171df977",
+          "duplicate_keys": 0,
+          "metrics": {
+            "prediction": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.005704573821276426,
+                0.0076278140768408775,
+                0.009426684118807316,
+                0.013146251440048218,
+                0.01601213775575161,
+                0.018178096041083336
+              ],
+              "all_day_primary": 0.010066916545232138,
+              "all_day_six_horizon_mean": 0.011682592875634631
+            }
+          }
+        },
+        "validation_holdout": {
+          "rows": 1498,
+          "sample_key_hash": "f5a7ead137e36da63e3c92c4e302ed7eed49609e78e3ab237a0df98a2189d505",
+          "mask_hash": "5e300d3bb9017d66a17132588c7de5b3d888540ab29c8dec1eb64aeffaac366b",
+          "observed_hash": "591d1d0572f2ff78090ac2b13eb264fcb9c91af09661442f75c1380de1a2eb0f",
+          "duplicate_keys": 0,
+          "metrics": {
+            "prediction": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.00820966251194477,
+                0.011305669322609901,
+                0.015812790021300316,
+                0.021954914554953575,
+                0.027207037433981895,
+                0.031359050422906876
+              ],
+              "all_day_primary": 0.016357791299621265,
+              "all_day_six_horizon_mean": 0.019308187377949555
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "outputs/runs/power-only-v1-mlp-s2026-ad108d593d4f",
+      "config_exists_at_recorded_commit": true,
+      "config_hash_matches_git_lf_or_crlf": true,
+      "entrypoint_exists_at_recorded_commit": true,
+      "checkpoints": {
+        "best.pt": {
+          "epoch": 34,
+          "validation_loss": 0.01188233870732128,
+          "metadata": {
+            "git_commit": "e0fba8d6be76c69925ec939408ef2d1efd36adc0",
+            "config_hash": "559e943d8acd126dcf125a661beb63160adc4080b0ac46bc896fce96b65b793c",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "0d03df9251050f5c5bf6c283e48de2a5dabebe9e7eed128c115496532a65e3d9",
+            "model": "mlp",
+            "parameters": 6342,
+            "seed": 2026,
+            "max_epochs": 50,
+            "test_unlocked": false
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "feature_statistics",
+            "feature_statistics_sha256",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        }
+      },
+      "validation": {
+        "validation_development": {
+          "rows": 6113,
+          "sample_key_hash": "f222bf572f69844757bab75b37a3c23a4fdad47b2095f7c2172419e60d9a5de3",
+          "mask_hash": "b36f26744247a4ba8d5f80ca9562a9f5c20dfce630516b5cabf31abc56100ff4",
+          "observed_hash": "77739cce5a3dde9f0e2295cbe236c3b2c72148865dd48d7c6a67b217171df977",
+          "duplicate_keys": 0,
+          "metrics": {
+            "prediction": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.006030211225152016,
+                0.00788603350520134,
+                0.009792426601052284,
+                0.013575432822108269,
+                0.016044991090893745,
+                0.01811293512582779
+              ],
+              "all_day_primary": 0.010417964309453964,
+              "all_day_six_horizon_mean": 0.011907005061705908
+            }
+          }
+        },
+        "validation_holdout": {
+          "rows": 1498,
+          "sample_key_hash": "f5a7ead137e36da63e3c92c4e302ed7eed49609e78e3ab237a0df98a2189d505",
+          "mask_hash": "5e300d3bb9017d66a17132588c7de5b3d888540ab29c8dec1eb64aeffaac366b",
+          "observed_hash": "591d1d0572f2ff78090ac2b13eb264fcb9c91af09661442f75c1380de1a2eb0f",
+          "duplicate_keys": 0,
+          "metrics": {
+            "prediction": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.008275644853711128,
+                0.01112312264740467,
+                0.015226759947836399,
+                0.021946821361780167,
+                0.02698580175638199,
+                0.030927302315831184
+              ],
+              "all_day_primary": 0.01609890131900708,
+              "all_day_six_horizon_mean": 0.019080908813824255
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "outputs/runs/power-only-v1-mlp-s42-d49d4f075f61",
+      "config_exists_at_recorded_commit": true,
+      "config_hash_matches_git_lf_or_crlf": true,
+      "entrypoint_exists_at_recorded_commit": true,
+      "checkpoints": {
+        "best.pt": {
+          "epoch": 22,
+          "validation_loss": 0.012006262189281375,
+          "metadata": {
+            "git_commit": "e0fba8d6be76c69925ec939408ef2d1efd36adc0",
+            "config_hash": "559e943d8acd126dcf125a661beb63160adc4080b0ac46bc896fce96b65b793c",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "0d03df9251050f5c5bf6c283e48de2a5dabebe9e7eed128c115496532a65e3d9",
+            "model": "mlp",
+            "parameters": 6342,
+            "seed": 42,
+            "max_epochs": 50,
+            "test_unlocked": false
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "feature_statistics",
+            "feature_statistics_sha256",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        }
+      },
+      "validation": {
+        "validation_development": {
+          "rows": 6113,
+          "sample_key_hash": "f222bf572f69844757bab75b37a3c23a4fdad47b2095f7c2172419e60d9a5de3",
+          "mask_hash": "b36f26744247a4ba8d5f80ca9562a9f5c20dfce630516b5cabf31abc56100ff4",
+          "observed_hash": "77739cce5a3dde9f0e2295cbe236c3b2c72148865dd48d7c6a67b217171df977",
+          "duplicate_keys": 0,
+          "metrics": {
+            "prediction": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.005884756334125996,
+                0.00821511261165142,
+                0.010209359228610992,
+                0.013503738678991795,
+                0.016231859102845192,
+                0.01814141683280468
+              ],
+              "all_day_primary": 0.010642736839751402,
+              "all_day_six_horizon_mean": 0.012031040464838346
+            }
+          }
+        },
+        "validation_holdout": {
+          "rows": 1498,
+          "sample_key_hash": "f5a7ead137e36da63e3c92c4e302ed7eed49609e78e3ab237a0df98a2189d505",
+          "mask_hash": "5e300d3bb9017d66a17132588c7de5b3d888540ab29c8dec1eb64aeffaac366b",
+          "observed_hash": "591d1d0572f2ff78090ac2b13eb264fcb9c91af09661442f75c1380de1a2eb0f",
+          "duplicate_keys": 0,
+          "metrics": {
+            "prediction": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.008087612688541412,
+                0.011929884552955627,
+                0.016487887129187584,
+                0.022812670096755028,
+                0.02818468026816845,
+                0.031599562615156174
+              ],
+              "all_day_primary": 0.017076813926299412,
+              "all_day_six_horizon_mean": 0.019850382891794045
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "outputs/runs/power-only-v1-tcn-s123-0946dc2bbc36",
+      "config_exists_at_recorded_commit": true,
+      "config_hash_matches_git_lf_or_crlf": true,
+      "entrypoint_exists_at_recorded_commit": true,
+      "checkpoints": {
+        "best.pt": {
+          "epoch": 21,
+          "validation_loss": 0.01220022959201968,
+          "metadata": {
+            "git_commit": "e0fba8d6be76c69925ec939408ef2d1efd36adc0",
+            "config_hash": "559e943d8acd126dcf125a661beb63160adc4080b0ac46bc896fce96b65b793c",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "0d03df9251050f5c5bf6c283e48de2a5dabebe9e7eed128c115496532a65e3d9",
+            "model": "tcn",
+            "parameters": 30854,
+            "seed": 123,
+            "max_epochs": 50,
+            "test_unlocked": false
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "feature_statistics",
+            "feature_statistics_sha256",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        }
+      },
+      "validation": {
+        "validation_development": {
+          "rows": 6113,
+          "sample_key_hash": "f222bf572f69844757bab75b37a3c23a4fdad47b2095f7c2172419e60d9a5de3",
+          "mask_hash": "b36f26744247a4ba8d5f80ca9562a9f5c20dfce630516b5cabf31abc56100ff4",
+          "observed_hash": "77739cce5a3dde9f0e2295cbe236c3b2c72148865dd48d7c6a67b217171df977",
+          "duplicate_keys": 0,
+          "metrics": {
+            "prediction": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.006142611615359783,
+                0.008376207202672958,
+                0.010076805017888546,
+                0.013913084752857685,
+                0.01662062667310238,
+                0.018221229314804077
+              ],
+              "all_day_primary": 0.01078869899113973,
+              "all_day_six_horizon_mean": 0.012225094096114239
+            }
+          }
+        },
+        "validation_holdout": {
+          "rows": 1498,
+          "sample_key_hash": "f5a7ead137e36da63e3c92c4e302ed7eed49609e78e3ab237a0df98a2189d505",
+          "mask_hash": "5e300d3bb9017d66a17132588c7de5b3d888540ab29c8dec1eb64aeffaac366b",
+          "observed_hash": "591d1d0572f2ff78090ac2b13eb264fcb9c91af09661442f75c1380de1a2eb0f",
+          "duplicate_keys": 0,
+          "metrics": {
+            "prediction": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.008169283159077168,
+                0.011517954058945179,
+                0.015971258282661438,
+                0.022781454026699066,
+                0.027968287467956543,
+                0.031586654484272
+              ],
+              "all_day_primary": 0.016756888789435227,
+              "all_day_six_horizon_mean": 0.0196658152466019
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "outputs/runs/power-only-v1-tcn-s2026-350c071725f0",
+      "config_exists_at_recorded_commit": true,
+      "config_hash_matches_git_lf_or_crlf": true,
+      "entrypoint_exists_at_recorded_commit": true,
+      "checkpoints": {
+        "best.pt": {
+          "epoch": 34,
+          "validation_loss": 0.012210670952627397,
+          "metadata": {
+            "git_commit": "e0fba8d6be76c69925ec939408ef2d1efd36adc0",
+            "config_hash": "559e943d8acd126dcf125a661beb63160adc4080b0ac46bc896fce96b65b793c",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "0d03df9251050f5c5bf6c283e48de2a5dabebe9e7eed128c115496532a65e3d9",
+            "model": "tcn",
+            "parameters": 30854,
+            "seed": 2026,
+            "max_epochs": 50,
+            "test_unlocked": false
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "feature_statistics",
+            "feature_statistics_sha256",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        }
+      },
+      "validation": {
+        "validation_development": {
+          "rows": 6113,
+          "sample_key_hash": "f222bf572f69844757bab75b37a3c23a4fdad47b2095f7c2172419e60d9a5de3",
+          "mask_hash": "b36f26744247a4ba8d5f80ca9562a9f5c20dfce630516b5cabf31abc56100ff4",
+          "observed_hash": "77739cce5a3dde9f0e2295cbe236c3b2c72148865dd48d7c6a67b217171df977",
+          "duplicate_keys": 0,
+          "metrics": {
+            "prediction": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.005567905493080616,
+                0.007967257872223854,
+                0.010096651501953602,
+                0.01388545148074627,
+                0.016980882734060287,
+                0.018929438665509224
+              ],
+              "all_day_primary": 0.010649786951641241,
+              "all_day_six_horizon_mean": 0.012237931291262308
+            }
+          }
+        },
+        "validation_holdout": {
+          "rows": 1498,
+          "sample_key_hash": "f5a7ead137e36da63e3c92c4e302ed7eed49609e78e3ab237a0df98a2189d505",
+          "mask_hash": "5e300d3bb9017d66a17132588c7de5b3d888540ab29c8dec1eb64aeffaac366b",
+          "observed_hash": "591d1d0572f2ff78090ac2b13eb264fcb9c91af09661442f75c1380de1a2eb0f",
+          "duplicate_keys": 0,
+          "metrics": {
+            "prediction": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.00807533971965313,
+                0.01186409592628479,
+                0.016628557816147804,
+                0.022832946851849556,
+                0.028246691450476646,
+                0.03171824663877487
+              ],
+              "all_day_primary": 0.017108533531427383,
+              "all_day_six_horizon_mean": 0.0198943130671978
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "outputs/runs/power-only-v1-tcn-s42-c151c8a525be",
+      "config_exists_at_recorded_commit": true,
+      "config_hash_matches_git_lf_or_crlf": true,
+      "entrypoint_exists_at_recorded_commit": true,
+      "checkpoints": {
+        "best.pt": {
+          "epoch": 14,
+          "validation_loss": 0.01225710034412564,
+          "metadata": {
+            "git_commit": "e0fba8d6be76c69925ec939408ef2d1efd36adc0",
+            "config_hash": "559e943d8acd126dcf125a661beb63160adc4080b0ac46bc896fce96b65b793c",
+            "data_manifest_hash": "4403e787227381aacbfa8a661e9320dc5bd356323ac61d12f09722f7339941ab",
+            "split_manifest_hash": "f77fb51e54c7c36b3df5e9c7804759d670106c3b1755df81915db3fe3c1bbeec",
+            "feature_statistics_sha256": "0d03df9251050f5c5bf6c283e48de2a5dabebe9e7eed128c115496532a65e3d9",
+            "model": "tcn",
+            "parameters": 30854,
+            "seed": 42,
+            "max_epochs": 50,
+            "test_unlocked": false
+          },
+          "keys": [
+            "model_state",
+            "optimizer_state",
+            "epoch",
+            "validation_loss",
+            "feature_statistics",
+            "feature_statistics_sha256",
+            "metadata"
+          ],
+          "all_weights_finite": true
+        }
+      },
+      "validation": {
+        "validation_development": {
+          "rows": 6113,
+          "sample_key_hash": "f222bf572f69844757bab75b37a3c23a4fdad47b2095f7c2172419e60d9a5de3",
+          "mask_hash": "b36f26744247a4ba8d5f80ca9562a9f5c20dfce630516b5cabf31abc56100ff4",
+          "observed_hash": "77739cce5a3dde9f0e2295cbe236c3b2c72148865dd48d7c6a67b217171df977",
+          "duplicate_keys": 0,
+          "metrics": {
+            "prediction": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.005647268611937761,
+                0.008123833686113358,
+                0.01061397884041071,
+                0.014460103586316109,
+                0.016627561300992966,
+                0.018225133419036865
+              ],
+              "all_day_primary": 0.011065972037613392,
+              "all_day_six_horizon_mean": 0.012282979907467961
+            }
+          }
+        },
+        "validation_holdout": {
+          "rows": 1498,
+          "sample_key_hash": "f5a7ead137e36da63e3c92c4e302ed7eed49609e78e3ab237a0df98a2189d505",
+          "mask_hash": "5e300d3bb9017d66a17132588c7de5b3d888540ab29c8dec1eb64aeffaac366b",
+          "observed_hash": "591d1d0572f2ff78090ac2b13eb264fcb9c91af09661442f75c1380de1a2eb0f",
+          "duplicate_keys": 0,
+          "metrics": {
+            "prediction": {
+              "nonfinite_valid": 0,
+              "mae_by_horizon": [
+                0.0077701411210000515,
+                0.012157493270933628,
+                0.016969533637166023,
+                0.024176673963665962,
+                0.027828577905893326,
+                0.03168895095586777
+              ],
+              "all_day_primary": 0.01776790029058854,
+              "all_day_six_horizon_mean": 0.020098561809087794
+            }
+          }
+        }
+      }
+    },
+    {
+      "path": "outputs/runs-pr5-repro/naive-baselines-v1-9f3d90ef59fc",
+      "config_exists_at_recorded_commit": true,
+      "config_hash_matches_git_lf_or_crlf": true,
+      "entrypoint_exists_at_recorded_commit": true,
+      "checkpoints": {}
+    },
+    {
+      "path": "outputs/runs-pr5-validation/naive-baselines-v1-1d049f7cb416",
+      "config_exists_at_recorded_commit": false,
+      "entrypoint_exists_at_recorded_commit": false,
+      "checkpoints": {}
+    }
+  ]
+}

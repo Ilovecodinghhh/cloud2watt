@@ -1,0 +1,18 @@
+run_name: compact-dev-v21
+evaluation_protocol: c2w-eval-v2.1
+data_version: paired-30d-corrected-v2
+random_seeds: [42, 123, 2026]
+embargo_hours: 4
+model:
+  name: mlp
+  channels: 64
+  dropout: 0.1
+training:
+  batch_size: 128
+  learning_rate: 0.001
+  weight_decay: 0.0
+  max_epochs: 8
+  patience: 3
+  device: cpu
+selection:
+  metric: daylight_primary_mae

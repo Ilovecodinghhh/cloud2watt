@@ -1,5 +1,13 @@
 # Cloud2Watt 下一阶段实施计划
 
+2026-10-01：新的后续工作以[项目 2.0 总方案](PROJECT_V2_PLAN.md)和
+[实验计划](PROJECT_V2_EXPERIMENTS.md)为准，路线 B 已启动；当前阶段与待办见 [执行记录](PROJECT_V2_EXECUTION.md)。正式三折训练尚未开始。
+方案取舍与范围见 [ADR-008](adr/008-project-v2-satellite-value.md)。
+
+历史说明（2026-09-10）：本文的“当前状态”以早期 PR #2–#5 为背景，不代表今天的进度。
+后续执行使用 [S0 后路线](REVIEW_ROADMAP_2026-09.md) 和 [评估协议 V2](EVALUATION_PROTOCOL_V2.md)，
+现有运行盘点见 [实验状态](EXPERIMENT_STATUS.md)。下文保留历史设计与验收记录。
+
 本文档细化 `PROJECT_PLAN.md` 中 mini dataset 之后的三个实施步骤。每一步对应一个
 边界清晰、可独立审阅的 Pull Request。
 

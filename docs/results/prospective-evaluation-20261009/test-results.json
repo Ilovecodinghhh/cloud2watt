@@ -1,0 +1,9 @@
+{
+  "passed": 2,
+  "tests": "tests/test_prospective_statistics.py",
+  "checks": [
+    "constant paired difference under one-day and three-day blocks",
+    "equal horizon weighting with unequal valid counts"
+  ],
+  "python": "C:/Users/admin/miniforge3/envs/raincalib-gpu/python.exe"
+}

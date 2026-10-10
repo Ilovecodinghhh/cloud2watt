@@ -1,0 +1,267 @@
+{
+  "schema": "cloud2watt-route-b-plan-v1",
+  "project_version": "2.0",
+  "revision": 1,
+  "status": "development_build_acceptance",
+  "decision": "docs/adr/009-route-b-conda-and-data-freeze.md",
+  "runtime": {
+    "python": "C:/Users/admin/miniforge3/envs/raincalib-gpu/python.exe",
+    "torch": "2.11.0+cu128",
+    "precision": "FP32; AMP requires separate acceptance",
+    "data_root": "D:/code/AI_atm",
+    "install_dependencies": false,
+    "environment": {
+      "TORCHINDUCTOR_CACHE_DIR": "D:/code/AI_atm/outputs/project-v2/torchinductor-cache",
+      "PYTHONPATH": "src"
+    }
+  },
+  "preflight_artifact": "outputs/project-v2/b-preflight-five-minute-20261001/preflight.json",
+  "preflight_content_sha256": "b0459f16d029d0464389887da4841b510647d7d75188db435430ced3255cb0a5",
+  "pv_revision": "02f17566e1b1a56dc8fd25cfabec67f065066e07",
+  "regions": [
+    {
+      "centre": [
+        -1.875,
+        51.625
+      ],
+      "coordinate_cell": [
+        206,
+        -8
+      ],
+      "region_id": "r0",
+      "role": "development",
+      "site_ids": [
+        "6729",
+        "26979",
+        "6815",
+        "6949",
+        "27009",
+        "6801",
+        "26782",
+        "7408",
+        "7369",
+        "6727"
+      ]
+    },
+    {
+      "centre": [
+        -4.125,
+        55.875
+      ],
+      "coordinate_cell": [
+        223,
+        -17
+      ],
+      "region_id": "r1",
+      "role": "development",
+      "site_ids": [
+        "10702",
+        "3126",
+        "7314",
+        "6075",
+        "6962",
+        "3487",
+        "10649",
+        "8612",
+        "10169",
+        "16570"
+      ]
+    },
+    {
+      "centre": [
+        -2.875,
+        53.375
+      ],
+      "coordinate_cell": [
+        213,
+        -12
+      ],
+      "region_id": "r2",
+      "role": "development",
+      "site_ids": [
+        "26832",
+        "26957",
+        "26909",
+        "10003",
+        "26889",
+        "26839",
+        "18249",
+        "26905",
+        "26836",
+        "7528"
+      ]
+    },
+    {
+      "centre": [
+        -3.625,
+        50.375
+      ],
+      "coordinate_cell": [
+        201,
+        -15
+      ],
+      "region_id": "r3",
+      "role": "locked_geography",
+      "site_ids": [
+        "7550",
+        "7495",
+        "7262",
+        "7593",
+        "8453",
+        "27015",
+        "6601",
+        "7595",
+        "5427",
+        "6656"
+      ]
+    }
+  ],
+  "windows": [
+    {
+      "end": "2021-01-29T00:00Z",
+      "id": "winter_fit",
+      "role": "development",
+      "start": "2021-01-01T00:00Z"
+    },
+    {
+      "end": "2021-05-07T00:00Z",
+      "id": "spring",
+      "role": "development",
+      "start": "2021-04-01T00:00Z"
+    },
+    {
+      "end": "2021-08-06T00:00Z",
+      "id": "summer",
+      "role": "development",
+      "start": "2021-07-01T00:00Z"
+    },
+    {
+      "end": "2021-11-06T00:00Z",
+      "id": "autumn",
+      "role": "development",
+      "start": "2021-10-01T00:00Z"
+    },
+    {
+      "end": "2022-02-26T00:00Z",
+      "id": "final_winter",
+      "role": "locked_final",
+      "start": "2022-01-01T00:00Z"
+    }
+  ],
+  "folds": [
+    {
+      "embargo_hours": 4,
+      "fit_windows": [
+        "winter_fit"
+      ],
+      "fold": 0,
+      "inner_end": "2021-04-08T00:00:00+00:00",
+      "inner_start": "2021-04-01T00:00:00+00:00",
+      "outer_end": "2021-05-07T00:00Z",
+      "outer_start": "2021-04-08T04:00:00+00:00",
+      "require_complete_input_and_target_support": true
+    },
+    {
+      "embargo_hours": 4,
+      "fit_windows": [
+        "winter_fit",
+        "spring"
+      ],
+      "fold": 1,
+      "inner_end": "2021-07-08T00:00:00+00:00",
+      "inner_start": "2021-07-01T00:00:00+00:00",
+      "outer_end": "2021-08-06T00:00Z",
+      "outer_start": "2021-07-08T04:00:00+00:00",
+      "require_complete_input_and_target_support": true
+    },
+    {
+      "embargo_hours": 4,
+      "fit_windows": [
+        "winter_fit",
+        "spring",
+        "summer"
+      ],
+      "fold": 2,
+      "inner_end": "2021-10-08T00:00:00+00:00",
+      "inner_start": "2021-10-01T00:00:00+00:00",
+      "outer_end": "2021-11-06T00:00Z",
+      "outer_start": "2021-10-08T04:00:00+00:00",
+      "require_complete_input_and_target_support": true
+    }
+  ],
+  "satellite_sources": {
+    "2021": {
+      "data_spec": {
+        "chunks": [
+          12,
+          100,
+          100,
+          11
+        ],
+        "compressor": {
+          "clevel": 5,
+          "cname": "zstd",
+          "id": "blosc2"
+        },
+        "dtype": "<f2",
+        "fill_value": "NaN",
+        "filters": null,
+        "order": "C",
+        "shape": [
+          88225,
+          1392,
+          3712,
+          11
+        ],
+        "zarr_format": 2
+      },
+      "metadata_sha256": "c148d00e221508c97f4d44df1dc46a5be90eef2d38eaf3f53202697d1fcfe157",
+      "url": "https://storage.googleapis.com/public-datasets-eumetsat-solar-forecasting/satellite/EUMETSAT/SEVIRI_RSS/v4/2021_nonhrv.zarr"
+    },
+    "2022": {
+      "data_spec": {
+        "chunks": [
+          12,
+          100,
+          100,
+          11
+        ],
+        "compressor": {
+          "clevel": 5,
+          "cname": "zstd",
+          "id": "blosc2"
+        },
+        "dtype": "<f2",
+        "fill_value": "NaN",
+        "filters": null,
+        "order": "C",
+        "shape": [
+          89412,
+          1392,
+          3712,
+          11
+        ],
+        "zarr_format": 2
+      },
+      "metadata_sha256": "8ce00d1885e40e6a3ef426c5d6a55e105f70ef4039acbdf4e99251bd470efa95",
+      "url": "https://storage.googleapis.com/public-datasets-eumetsat-solar-forecasting/satellite/EUMETSAT/SEVIRI_RSS/v4/2022_nonhrv.zarr"
+    }
+  },
+  "label_contract": "c2w-sampled-power-v1",
+  "resource_limits": {
+    "source_cache_bytes": 4294967296,
+    "source_object_bytes": 16777216,
+    "cumulative_source_download_bytes": 107374182400,
+    "disk_free_fraction_floor": 0.2,
+    "pilot_max_days": 2,
+    "pilot_max_regions": 1,
+    "new_persistent_bytes_cap": 17179869184,
+    "gpu_hours_cap": 72
+  },
+  "final_test": {
+    "labels_locked": true,
+    "build_before_unlock": false,
+    "geography_history_used_for_training": false
+  },
+  "formal_training_ready": false
+}

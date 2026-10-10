@@ -16,7 +16,15 @@ def _masked_values(
     mask = np.asarray(mask, dtype=bool)
     if observed.shape != predicted.shape or observed.shape != mask.shape:
         raise ValueError("observed, predicted, and mask must have the same shape")
-    valid = mask & np.isfinite(observed) & np.isfinite(predicted)
+    valid = mask
+    bad_truth = valid & ~np.isfinite(observed)
+    bad_prediction = valid & ~np.isfinite(predicted)
+    if bad_truth.any() or bad_prediction.any():
+        raise ValueError(
+            f"non-finite valid targets/predictions: labels={int(bad_truth.sum())}, "
+            f"predictions={int(bad_prediction.sum())}, "
+            f"indices={np.argwhere(bad_truth | bad_prediction).tolist()}"
+        )
     if not valid.any():
         raise ValueError("metric has no valid targets")
     return observed[valid], predicted[valid]

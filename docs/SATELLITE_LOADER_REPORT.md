@@ -2,7 +2,12 @@
 
 版本：PR #7  
 数据：`paired-30d-v1`  
-评估状态：test 保持锁定
+评估状态：本批运行未输出 test 评分；同数据版本旧基线 test 已曝光
+
+2026-09-10 S0 补注：三组光流运行的指标与预测分别逐字节一致，但记录 commit 6b59b62
+尚不包含 optical-flow 入口/config，缺少当时 dirty 源码快照。负结果与缓存证据保留，
+严格复现需要补全源码身份或重跑。后续依据 [实验状态](EXPERIMENT_STATUS.md) 和
+[评估协议 V2](EVALUATION_PROTOCOL_V2.md)，旧数字不改写。
 
 ## 1. 结论
 

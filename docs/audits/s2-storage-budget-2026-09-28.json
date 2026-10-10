@@ -1,0 +1,44 @@
+{
+  "date": "2026-09-28",
+  "measured_window_days": 2,
+  "observed_region_sites": 20,
+  "annual_shared_bytes_per_equivalent_region": 1685092398,
+  "annual_source_cache_bytes_per_equivalent_region": 44588681890,
+  "regions": [
+    {
+      "equivalent_regions": 1,
+      "annual_shared_bytes": 1685092398,
+      "annual_shared_2x_compression_sensitivity_bytes": 3370184795,
+      "annual_source_cache_bytes": 44588681890
+    },
+    {
+      "equivalent_regions": 4,
+      "annual_shared_bytes": 6740369590,
+      "annual_shared_2x_compression_sensitivity_bytes": 13480739180,
+      "annual_source_cache_bytes": 178354727558
+    },
+    {
+      "equivalent_regions": 15,
+      "annual_shared_bytes": 25276385962,
+      "annual_shared_2x_compression_sensitivity_bytes": 50552771925,
+      "annual_source_cache_bytes": 668830228342
+    },
+    {
+      "equivalent_regions": 300,
+      "annual_shared_bytes": 505527719250,
+      "annual_shared_2x_compression_sensitivity_bytes": 1011055438500,
+      "annual_source_cache_bytes": 13376604566850
+    }
+  ],
+  "disk_total_bytes": 666517893120,
+  "disk_free_bytes": 145569734656,
+  "minimum_free_reserve_bytes": 133303578624,
+  "new_allocation_budget_bytes": 12266156032,
+  "candidate_four_month_four_region_shared_bytes": 2216011920,
+  "proposed_source_cache_cap_bytes": 4000000000,
+  "temporary_workspace_budget_bytes": 1000000000,
+  "weights_budget_bytes": 1000000000,
+  "large_build_allowed": false,
+  "reason": "label temporal support unresolved; annual full source cache exceeds local free-space reserve",
+  "estimate_warning": "winter two-day compression and this compact geometry only; regions must be planned from actual site coordinates"
+}

@@ -72,6 +72,22 @@ def test_lazy_dataset_schema_and_worker_pickle(tmp_path) -> None:
     assert pickle.loads(pickle.dumps(dataset))._root is None
 
 
+def test_fixed_pool_and_no_image_control_preserve_targets(tmp_path):
+    path, samples, power, sites = _fixture(tmp_path)
+    stats = FeatureStatistics.fit(samples, power, sites)
+    sat = fit_satellite_statistics(samples, path)
+    original = SatelliteForecastDataset(samples, power, sites, stats, sat, path)
+    pooled = SatelliteForecastDataset(samples, power, sites, stats, sat, path, spatial_pool=4)
+    control = SatelliteForecastDataset(samples, power, sites, stats, sat, path,
+                                        load_satellite=False)
+    expected = original[0]['satellite'].numpy().reshape(4, 3, 2, 4, 2, 4).mean(axis=(3, 5))
+    np.testing.assert_allclose(pooled[0]['satellite'].numpy(), expected)
+    np.testing.assert_array_equal(original[0]['target'], pooled[0]['target'])
+    np.testing.assert_array_equal(original[0]['target'], control[0]['target'])
+    assert control._root is None
+    assert not control[0]['satellite_mask'].any()
+
+
 def test_multiworker_loader_has_no_duplicate_samples(tmp_path) -> None:
     path, samples, power, sites = _fixture(tmp_path)
     dataset = SatelliteForecastDataset(

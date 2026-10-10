@@ -1,0 +1,116 @@
+{
+  "protocol": "c2w-eval-v2.1",
+  "source_hash": "d957e59e211e41c94542d0526f9152ea40650d80d25a5e11b660345f2add3d10",
+  "runs": [
+    {
+      "complete_sha256": "163545a147545f6570c8182f3ac3c061e9c186c11ce2d46f53eddc248692b744",
+      "mode": "mlp",
+      "run": "outputs\\compact-route-v21\\runs\\compact-dev-v21-mlp-s42-2ecb73c265ae",
+      "seconds": 25.583288799971342,
+      "seed": 42,
+      "epochs_completed": 8,
+      "train_targets_scope": "development",
+      "parameters": 6342
+    },
+    {
+      "complete_sha256": "000d7db6b0567e8793c20e7558b967957e6d869c6340282e9b2aad64ab31c5db",
+      "mode": "mlp",
+      "run": "outputs\\compact-route-v21\\runs\\compact-dev-v21-mlp-s123-aa272c06f253",
+      "seconds": 25.571204000036232,
+      "seed": 123,
+      "epochs_completed": 8,
+      "train_targets_scope": "development",
+      "parameters": 6342
+    },
+    {
+      "complete_sha256": "d9e15e24ddc3595f60992463f89725d383880d6d40c1b3291c1ccbdd7c08de84",
+      "mode": "mlp",
+      "run": "outputs\\compact-route-v21\\runs\\compact-dev-v21-mlp-s2026-f1e176ec0d27",
+      "seconds": 24.487937600002624,
+      "seed": 2026,
+      "epochs_completed": 8,
+      "train_targets_scope": "development",
+      "parameters": 6342
+    },
+    {
+      "complete_sha256": "cd18e712450845ea3a04450fa8239752aa6f908088ee35ab9c6d030e9d474cbf",
+      "mode": "power_solar",
+      "run": "outputs\\compact-route-v21\\runs\\compact-dev-v21-power_solar-s42-fde009589b40",
+      "seconds": 153.7609520999249,
+      "seed": 42,
+      "epochs_completed": 8,
+      "train_targets_scope": "development",
+      "parameters": 5478
+    },
+    {
+      "complete_sha256": "e0e3cc7179886eeabce33504b56fcd2e6b8bd0a7eb7a84f749d917c003d03c4a",
+      "mode": "power_solar",
+      "run": "outputs\\compact-route-v21\\runs\\compact-dev-v21-power_solar-s123-e8a54ed97f92",
+      "seconds": 156.93811820005067,
+      "seed": 123,
+      "epochs_completed": 8,
+      "train_targets_scope": "development",
+      "parameters": 5478
+    },
+    {
+      "complete_sha256": "42531423e4b56e3b9d5c7cc790b630cd33d062c3e7a8581fcbb8d50bf60950a2",
+      "mode": "power_solar",
+      "run": "outputs\\compact-route-v21\\runs\\compact-dev-v21-power_solar-s2026-726cec11d3eb",
+      "seconds": 138.0661363999825,
+      "seed": 2026,
+      "epochs_completed": 8,
+      "train_targets_scope": "development",
+      "parameters": 5478
+    },
+    {
+      "complete_sha256": "b83a2d3b4958b8b7d6abd4bbc243cb877ba60277ef5947aad2ff03f7219866a0",
+      "mode": "full",
+      "run": "outputs\\compact-route-v21\\runs\\compact-dev-v21-full-s42-4135252baee7",
+      "seconds": 491.7124184999848,
+      "seed": 42,
+      "epochs_completed": 6,
+      "train_targets_scope": "development",
+      "parameters": 21446
+    },
+    {
+      "complete_sha256": "f89845dbcc73d7c3d393053c6d691ea9afa1ff017fa3084adefd02f96f8ad4d3",
+      "mode": "full",
+      "run": "outputs\\compact-route-v21\\runs\\compact-dev-v21-full-s123-c8f1af1344ff",
+      "seconds": 625.0204244999913,
+      "seed": 123,
+      "epochs_completed": 8,
+      "train_targets_scope": "development",
+      "parameters": 21446
+    },
+    {
+      "complete_sha256": "b3490ad9d41a518e4fd13b69bec7ebafa771a53272c7c435c4040a045d011887",
+      "mode": "full",
+      "run": "outputs\\compact-route-v21\\runs\\compact-dev-v21-full-s2026-f1728a157739",
+      "seconds": 618.8995453000534,
+      "seed": 2026,
+      "epochs_completed": 8,
+      "train_targets_scope": "development",
+      "parameters": 21446
+    }
+  ],
+  "population_comparisons": {
+    "validation_development": {
+      "daylight_mask_sha256": "49a6a3ab4a016a7ee38ae8bec3ec891cffb492bd9915e97728b711b606f76bc3",
+      "keys_sha256": "853b997cf13046964444665e5d75ffa201e45c380d9f1f3fcd9f4977591909f4",
+      "mask_sha256": "4e79b4ea6f5daad88f047f5fa1fa2f828fd515dc67c97d8e9e68ede02ec682ce",
+      "targets_sha256": "5c5c44507deb7a5e57776e25bba97f188d4b70845675717bbad1abbe45fd5818"
+    },
+    "validation_holdout": {
+      "daylight_mask_sha256": "24b50f49c2ca2e6ca473230ac5a7d7ebb92bee956704a820b28196619b6d1ea9",
+      "keys_sha256": "a506991feb7881c6920c6bf2f06327ad4fa99d528f108af11c8b5d87c1c0428f",
+      "mask_sha256": "ffad1e5cb86d0832eeb9ef6c8e7637e49a81c6eb5f9ff95e00edd227f2903db2",
+      "targets_sha256": "42eb762e9a6af9e5551beea6c28dd20e2775af0c58740bbac786a14c568f4f56"
+    }
+  },
+  "ablation_development_mean": {
+    "none": 0.05396738098682549,
+    "zero": 0.05576972890700008,
+    "shuffle": 0.054240909593528924
+  },
+  "demo_sha256": "3ea120c8b37643e50eafb978a413e6eec50757ec382be9bf970151dad2655aba"
+}

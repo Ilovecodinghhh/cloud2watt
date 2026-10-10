@@ -39,3 +39,6 @@ wandb/
 # OS
 .DS_Store
 Thumbs.db
+
+# Isolated final-test source files
+data/quarantine/

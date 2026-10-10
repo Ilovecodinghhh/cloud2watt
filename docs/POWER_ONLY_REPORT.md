@@ -1,7 +1,16 @@
 # Power-only 模型实验报告
 
-状态：正式三种子 validation 实验已完成，test 仍锁定
+状态：V1 三种子 validation 实验已完成；这六组运行未输出 test 评估，旧基线 test 已曝光
 最后更新：2026-09-05
+
+2026-09-28 补注：[S1 已实现统一 V2 训练与恢复](S1_CORRECTNESS_REPORT.md)。
+下文命令与实验数字为 V1 历史记录；当前入口拒绝 test 解锁，旧 checkpoint 不支持 V2 恢复。
+
+2026-09-10 S0 补注：六组预测与 checkpoint 已核验，旧数字保留。实际 checkpoint 选择为
+六时效全部有效目标平均误差，不能直接当作按日间主指标选择的 V2 模型。
+后续复用范围与新独立测试规则见 [实验状态](EXPERIMENT_STATUS.md) 和
+[评估协议 V2](EVALUATION_PROTOCOL_V2.md)。文中“test 未读取”限于训练/评分选样，不代表
+底层 Parquet 文件从未包含或读取测试行，也不代表整个项目的测试结果从未曝光。
 
 ## 实验目的
 

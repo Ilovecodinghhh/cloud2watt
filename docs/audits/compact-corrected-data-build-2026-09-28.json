@@ -1,0 +1,14 @@
+{
+  "all_corrected_bbox_pixels_finite": true,
+  "corrected_frames": 2880,
+  "derived_bytes": 139308410,
+  "direct_source_crop_checks": 60,
+  "downloaded_bytes": 0,
+  "elapsed_seconds": 59.573638499947265,
+  "output": "data\\processed\\paired-30d-corrected-v2",
+  "power_and_sample_files_unchanged": true,
+  "site_count": 20,
+  "source": "data\\processed\\paired-30d-v1",
+  "tiles": 4,
+  "uncached_source_chunks": 0
+}

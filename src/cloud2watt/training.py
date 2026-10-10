@@ -15,7 +15,7 @@ import torch
 from torch import nn
 from torch.utils.data import DataLoader, Dataset
 
-from cloud2watt.data.paired import FORECAST_MINUTES
+from cloud2watt.evaluation.forecast import horizon_metrics
 
 SOLAR_COLUMNS = ("solar_elevation_deg", "solar_azimuth_deg", "clear_sky_ghi_wm2")
 SITE_COLUMNS = ("kWp", "tilt", "orientation", "latitude_rounded", "longitude_rounded")
@@ -89,6 +89,7 @@ class PowerForecastDataset(Dataset):
             self.records.append({
                 "power_history": power_values[history_index], "solar_future": solar,
                 "site": site, "target": target, "target_mask": mask,
+                "target_solar_elevation_deg": np.where(mask, solar_values[safe_index, 0], 0),
                 "site_id": str(row.site_id),
                 "issue_time_utc": pd.Timestamp(row.issue_time_utc).isoformat(),
             })
@@ -110,7 +111,11 @@ def masked_mae_loss(prediction: torch.Tensor, target: torch.Tensor,
     valid = mask.bool()
     if not torch.any(valid):
         raise ValueError("masked loss requires at least one valid target")
-    return torch.abs(prediction - target)[valid].mean()
+    if prediction.shape != target.shape or valid.shape != target.shape:
+        raise ValueError("prediction, target and mask shapes must match")
+    if not torch.isfinite(prediction[valid]).all() or not torch.isfinite(target[valid]).all():
+        raise ValueError("non-finite valid targets/predictions in training loss")
+    return torch.abs(prediction[valid].float() - target[valid].float()).mean()
 
 
 def seed_everything(seed: int) -> None:
@@ -129,27 +134,8 @@ def create_loader(dataset: Dataset, *, batch_size: int, shuffle: bool,
 
 def run_epoch(model: nn.Module, loader: DataLoader, *, device: torch.device,
               optimizer: torch.optim.Optimizer | None = None) -> float:
-    training = optimizer is not None
-    model.train(training)
-    total_loss, total_targets = 0.0, 0
-    with torch.enable_grad() if training else torch.no_grad():
-        for batch in loader:
-            prediction = model(batch["power_history"].to(device),
-                               batch["solar_future"].to(device), batch["site"].to(device))
-            target = batch["target"].to(device)
-            mask = batch["target_mask"].to(device).bool()
-            loss = masked_mae_loss(prediction, target, mask)
-            if optimizer is not None:
-                optimizer.zero_grad(set_to_none=True)
-                loss.backward()
-                nn.utils.clip_grad_norm_(model.parameters(), 1.0)
-                optimizer.step()
-            count = int(mask.sum())
-            total_loss += float(loss.detach()) * count
-            total_targets += count
-    if total_targets == 0:
-        raise ValueError("epoch contains no valid targets")
-    return total_loss / total_targets
+    from cloud2watt.epoch import train_epoch
+    return train_epoch(model, loader, device=device, optimizer=optimizer)
 
 
 def predict(model: nn.Module, loader: DataLoader,
@@ -188,11 +174,4 @@ def load_checkpoint(path: Path, model: nn.Module,
 
 def metrics_by_horizon(prediction: np.ndarray, target: np.ndarray,
                        mask: np.ndarray) -> list[dict[str, float | int]]:
-    rows = []
-    for index, horizon in enumerate(FORECAST_MINUTES):
-        valid = mask[:, index]
-        error = prediction[valid, index] - target[valid, index]
-        rows.append({"horizon_minutes": horizon, "mae": float(np.mean(np.abs(error))),
-                     "rmse": float(np.sqrt(np.mean(error**2))),
-                     "valid_targets": int(valid.sum())})
-    return rows
+    return horizon_metrics(prediction, target, mask)

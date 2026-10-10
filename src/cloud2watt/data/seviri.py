@@ -22,7 +22,7 @@ from pyproj import CRS, Transformer
 from cloud2watt.data.spatial import nearest_index
 
 SEVIRI_PROJ4 = (
-    "+proj=geos +lon_0=9.5 +h=35785831 +a=6378169 +rf=295.488065897014 +sweep=x +units=m +no_defs"
+    "+proj=geos +lon_0=9.5 +h=35785831 +a=6378169 +rf=295.488065897014 +sweep=y +units=m +no_defs"
 )
 
 

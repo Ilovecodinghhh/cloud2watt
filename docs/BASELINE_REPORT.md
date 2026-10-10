@@ -1,5 +1,10 @@
 # Cloud2Watt 朴素基线报告
 
+2026-09-10 S0 测试使用补注：本报告是已公开的 V1 历史测试结果。主运行与
+outputs/runs-pr5-repro 下同名运行均标记 test_unlocked=true，属于冻结配置后的测试及复现。
+下文“一次”不表示全项目只有一次测试访问。所有原始数字保留；该数据版本后续仅作为开发/
+回归资料，新的独立测试按 [ADR-005](adr/005-evaluation-v2-and-test-history.md) 建立。
+
 ## 结论
 
 本报告是 `paired-30d-v1` 上第一份冻结配置后的无泄漏基线结果。Smart Persistence 是后续

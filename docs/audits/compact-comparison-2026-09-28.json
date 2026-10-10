@@ -1,0 +1,212 @@
+{
+  "label_contract": "c2w-sampled-power-v1",
+  "protocol": "c2w-eval-v2.1",
+  "ranking": {
+    "candidates": [
+      {
+        "candidate_id": "4079776e2bae2353de745fc9aa2b42aefe5b67e03dbad54093d1f3e11e5b17a3",
+        "daylight_primary_mae": 0.043752823492233556,
+        "mode": "mlp",
+        "parameters": 6342,
+        "runs": [
+          {
+            "path": "outputs\\compact-route-v21\\runs\\compact-dev-v21-mlp-s42-2ecb73c265ae",
+            "score": 0.04285060624122253,
+            "seed": 42
+          },
+          {
+            "path": "outputs\\compact-route-v21\\runs\\compact-dev-v21-mlp-s123-aa272c06f253",
+            "score": 0.04255278069550165,
+            "seed": 123
+          },
+          {
+            "path": "outputs\\compact-route-v21\\runs\\compact-dev-v21-mlp-s2026-f1e176ec0d27",
+            "score": 0.045855083539976506,
+            "seed": 2026
+          }
+        ],
+        "seeds": [
+          42,
+          123,
+          2026
+        ],
+        "selection_ready": true
+      },
+      {
+        "candidate_id": "120292766416d93fd682e149deec283ee49571b44c5a1c3e78e5c31abf7a5f19",
+        "daylight_primary_mae": 0.051031914590757906,
+        "mode": "power_solar",
+        "parameters": 5478,
+        "runs": [
+          {
+            "path": "outputs\\compact-route-v21\\runs\\compact-dev-v21-power_solar-s42-fde009589b40",
+            "score": 0.05204403813527462,
+            "seed": 42
+          },
+          {
+            "path": "outputs\\compact-route-v21\\runs\\compact-dev-v21-power_solar-s123-e8a54ed97f92",
+            "score": 0.04985498329507009,
+            "seed": 123
+          },
+          {
+            "path": "outputs\\compact-route-v21\\runs\\compact-dev-v21-power_solar-s2026-726cec11d3eb",
+            "score": 0.05119672234192901,
+            "seed": 2026
+          }
+        ],
+        "seeds": [
+          42,
+          123,
+          2026
+        ],
+        "selection_ready": true
+      },
+      {
+        "candidate_id": "b90be81bde882dd8b3d8f04fd1cbae39fe03d490900d93cd864db83d57acfd07",
+        "daylight_primary_mae": 0.05396738098682549,
+        "mode": "full",
+        "parameters": 21446,
+        "runs": [
+          {
+            "path": "outputs\\compact-route-v21\\runs\\compact-dev-v21-full-s42-4135252baee7",
+            "score": 0.0553671873463221,
+            "seed": 42
+          },
+          {
+            "path": "outputs\\compact-route-v21\\runs\\compact-dev-v21-full-s123-c8f1af1344ff",
+            "score": 0.05364483433983785,
+            "seed": 123
+          },
+          {
+            "path": "outputs\\compact-route-v21\\runs\\compact-dev-v21-full-s2026-f1728a157739",
+            "score": 0.052890121274316526,
+            "seed": 2026
+          }
+        ],
+        "seeds": [
+          42,
+          123,
+          2026
+        ],
+        "selection_ready": true
+      }
+    ],
+    "note": "Not a multi-season or final-test victory; S3/S7/S8 remain required",
+    "protocol": "c2w-eval-v2.1",
+    "scope": "single_development_fold",
+    "selection_metric": "daylight_primary_mae"
+  },
+  "rows": [
+    {
+      "best_epochs": [
+        8,
+        7,
+        7
+      ],
+      "development_mean": 0.043752823492233556,
+      "holdout_mean": 0.07461457149213165,
+      "model": "mlp",
+      "parameters": 6342,
+      "runs": [
+        {
+          "path": "outputs\\compact-route-v21\\runs\\compact-dev-v21-mlp-s42-2ecb73c265ae",
+          "score": 0.04285060624122253,
+          "seed": 42
+        },
+        {
+          "path": "outputs\\compact-route-v21\\runs\\compact-dev-v21-mlp-s123-aa272c06f253",
+          "score": 0.04255278069550165,
+          "seed": 123
+        },
+        {
+          "path": "outputs\\compact-route-v21\\runs\\compact-dev-v21-mlp-s2026-f1e176ec0d27",
+          "score": 0.045855083539976506,
+          "seed": 2026
+        }
+      ],
+      "seed_sd": 0.0018266904486456137,
+      "selection_ready": true
+    },
+    {
+      "best_epochs": [],
+      "development_mean": 0.0495420859096135,
+      "holdout_mean": 0.06982736196568153,
+      "model": "smart_persistence",
+      "parameters": 0,
+      "runs": [],
+      "seed_sd": null,
+      "selection_ready": true
+    },
+    {
+      "best_epochs": [
+        8,
+        8,
+        5
+      ],
+      "development_mean": 0.051031914590757906,
+      "holdout_mean": 0.08314816825181916,
+      "model": "power_solar",
+      "parameters": 5478,
+      "runs": [
+        {
+          "path": "outputs\\compact-route-v21\\runs\\compact-dev-v21-power_solar-s42-fde009589b40",
+          "score": 0.05204403813527462,
+          "seed": 42
+        },
+        {
+          "path": "outputs\\compact-route-v21\\runs\\compact-dev-v21-power_solar-s123-e8a54ed97f92",
+          "score": 0.04985498329507009,
+          "seed": 123
+        },
+        {
+          "path": "outputs\\compact-route-v21\\runs\\compact-dev-v21-power_solar-s2026-726cec11d3eb",
+          "score": 0.05119672234192901,
+          "seed": 2026
+        }
+      ],
+      "seed_sd": 0.0011037941245949237,
+      "selection_ready": true
+    },
+    {
+      "best_epochs": [
+        3,
+        5,
+        8
+      ],
+      "development_mean": 0.05396738098682549,
+      "holdout_mean": 0.09118878505385399,
+      "model": "full",
+      "parameters": 21446,
+      "runs": [
+        {
+          "path": "outputs\\compact-route-v21\\runs\\compact-dev-v21-full-s42-4135252baee7",
+          "score": 0.0553671873463221,
+          "seed": 42
+        },
+        {
+          "path": "outputs\\compact-route-v21\\runs\\compact-dev-v21-full-s123-c8f1af1344ff",
+          "score": 0.05364483433983785,
+          "seed": 123
+        },
+        {
+          "path": "outputs\\compact-route-v21\\runs\\compact-dev-v21-full-s2026-f1728a157739",
+          "score": 0.052890121274316526,
+          "seed": 2026
+        }
+      ],
+      "seed_sd": 0.0012696422078217592,
+      "selection_ready": true
+    },
+    {
+      "best_epochs": [],
+      "development_mean": 0.055604658910670145,
+      "holdout_mean": 0.08341130977335144,
+      "model": "persistence",
+      "parameters": 0,
+      "runs": [],
+      "seed_sd": null,
+      "selection_ready": true
+    }
+  ],
+  "scope": "winter historical development, fixed eight-epoch budget"
+}

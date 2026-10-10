@@ -1,5 +1,10 @@
 # Cloud2Watt `paired-30d-v1` 数据卡
 
+2026-09-28 S2 更正：以下保留 V1 构建记录。5 分钟读数的积分时间支持尚未确认，
+数值换算可重现，但不应无条件称为真实区间平均功率；原投影 sweep=x 亦存在中心偏移，
+后续构建已修正为 sweep=y，旧数据未覆盖。详见 [S2 报告](DATA_SCALING_REPORT.md) 与
+[ADR-006](adr/006-data-semantics-geolocation-and-shared-tiles.md)。
+
 ## 概览
 
 `paired-30d-v1` 是用于验证光伏临近预测管道和初始基线的真实配对数据版本。它覆盖英国
@@ -24,7 +29,7 @@
 ## 数据契约
 
 - 所有时间均为 timezone-aware UTC；15 分钟功率 bin 使用右闭区间和右边界标签；
-- `generation_Wh` 明确解释为 5 分钟区间能量，三个读数求和后除以 0.25 小时，再除以
+- V1 将 `generation_Wh` 假设为 5 分钟区间能量，三个读数求和后除以 0.25 小时，再除以
   `kWp × 1000` 得到 `normalized_power`；
 - 每个样本使用 issue time 的 `[-45, -30, -15, 0]` 分钟历史；
 - 目标时效为 `[15, 30, 60, 120, 180, 240]` 分钟；

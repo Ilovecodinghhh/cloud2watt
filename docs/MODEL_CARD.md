@@ -1,9 +1,18 @@
 # Cloud2Watt 轻量 CNN Late Fusion 模型卡（草案）
 
+2026-09-28 更新：修正数据上的 c2w-eval-v2.1 精简矩阵已完成，结果见
+[精简开发验收报告](COMPACT_DEVELOPMENT_REPORT.md)。下述状态与模型说明保留为 V1 历史记录。
+
 版本：PR #8  
-状态：代码与真实数据小样本闭环已验证；正式三种子 GPU 实验待执行  
+状态：S0 已核实 V1 三模式三种子 GPU 产物完成；其中 power_solar seed 42 恢复历史待核实。S1 已实现 V2 核心并完成 CPU 验收，未开展 V2 正式矩阵。
 数据：`paired-30d-v1`  
-测试集：锁定
+测试集：本批运行未输出 test 评估；同数据版本的旧基线 test 已曝光
+
+本卡以下结构与训练说明为 V1 历史协议。后续选择与测试规则以
+[评估协议 V2](EVALUATION_PROTOCOL_V2.md) 为准；实际运行身份、结果与复用限制见
+[S0 实验盘点](EXPERIMENT_STATUS.md)。V1 checkpoint 按全部有效目标的 validation loss
+选择，并未实际使用下文所述的 30/60/120 选择指标。新入口已统一日间主指标，见
+[S1 验收报告](S1_CORRECTNESS_REPORT.md)。下文 V1 命令仅作历史记录；当前入口拒绝 test 解锁，旧 checkpoint 不能用于 V2 恢复。
 
 ## 模型用途
 
@@ -59,8 +68,10 @@ python scripts/run_cnn_experiment_matrix.py
 - 冒烟运行完整覆盖 best-checkpoint、正常/置零/打乱预测和产物写出；
 - 冒烟 provenance 明确记录 CPU、无 AMP、样本上限和 test 未解锁。
 
-小样本冒烟只验证工程闭环，不能用于模型优劣或卫星价值结论。当前机器没有 CUDA，尚未执行
-正式三种子真实数据矩阵，因此本模型卡不报告或暗示正式性能提升。
+小样本冒烟只验证工程闭环，不能用于模型优劣或卫星价值结论。S0 已核实后续九组无样本上限、
+最大 30 epoch 的 CUDA/AMP 运行产物。power_solar seed 42 的历史只记录 epoch 8–30，
+需要补证或重跑才能作为严格连续训练对照。按旧全天 30/60/120 MAE，full 三种子均值
+在 development 为 0.012293，弱于 PowerMLP 的 0.010376；当前不宣称达到新协议的卫星价值门。
 
 ## 已知限制
 

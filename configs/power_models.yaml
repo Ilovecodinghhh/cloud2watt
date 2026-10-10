@@ -1,4 +1,5 @@
-run_name: power-only-v1
+run_name: power-only-v2
+evaluation_protocol: c2w-eval-v2.1
 data_version: paired-30d-v1
 random_seeds: [42, 123, 2026]
 embargo_hours: 4
@@ -13,5 +14,6 @@ training:
   patience: 7
   device: auto
 selection:
+  metric: daylight_primary_mae
   primary_horizons_minutes: [30, 60, 120]
   test_locked_by_default: true

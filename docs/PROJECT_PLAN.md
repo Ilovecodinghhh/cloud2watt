@@ -1,8 +1,16 @@
 # Cloud2Watt 项目设计与实施计划
 
+2026-10-01：当前规划已升级为[项目 2.0](PROJECT_V2_PLAN.md)，实验执行顺序与预算见
+[2.0 实验计划](PROJECT_V2_EXPERIMENTS.md)，决策见 [ADR-008](adr/008-project-v2-satellite-value.md)。
+以下 0.1 设计保留为历史资料；2.0 路线 B 已开始实施，见 [执行记录](PROJECT_V2_EXECUTION.md) 和 [ADR-009](adr/009-route-b-conda-and-data-freeze.md)。
+
 版本：0.1  
 状态：设计草案  
 最后更新：2026-09-04
+
+2026-09-10 S0 更新：本文件保留原始设计。后续主指标、测试独立性、模型预算与胜出标准
+由 [评估协议 V2](EVALUATION_PROTOCOL_V2.md) 取代冲突条款；已有成果和复用范围见
+[实验状态](EXPERIMENT_STATUS.md)。原草案中的“测试只用一次”不表示旧数据 test 从未曝光。
 
 ## 1. 项目定位
 

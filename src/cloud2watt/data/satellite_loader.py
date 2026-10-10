@@ -15,6 +15,7 @@ import zarr
 from torch.utils.data import Dataset, Sampler
 
 from cloud2watt.data.paired import HISTORY_MINUTES
+from cloud2watt.data.shared_tiles import open_satellite_frames
 from cloud2watt.training import FeatureStatistics, PowerForecastDataset
 
 
@@ -57,7 +58,7 @@ def fit_satellite_statistics(
             raise ValueError("maximum_frames must be positive")
         positions = np.linspace(0, len(keys) - 1, min(maximum_frames, len(keys)), dtype=int)
         keys = [keys[position] for position in positions]
-    frames = zarr.open_group(zarr_path, mode="r")["frames"]
+    frames = open_satellite_frames(zarr_path)
     channel_count = int(frames.shape[2])
     sums = np.zeros(channel_count, dtype=np.float64)
     squares = np.zeros(channel_count, dtype=np.float64)
@@ -114,6 +115,8 @@ class SatelliteForecastDataset(Dataset):
         augment: bool = False,
         jitter_padding: int = 0,
         seed: int = 42,
+        spatial_pool: int = 1,
+        load_satellite: bool = True,
     ) -> None:
         self.samples = samples.reset_index(drop=True).copy()
         self.power_dataset = PowerForecastDataset(
@@ -124,6 +127,10 @@ class SatelliteForecastDataset(Dataset):
         self.augment = augment
         self.jitter_padding = jitter_padding
         self.seed = seed
+        if spatial_pool not in (1, 2, 4):
+            raise ValueError("spatial_pool must be 1, 2, or 4")
+        self.spatial_pool = spatial_pool
+        self.load_satellite = load_satellite
         self._root: Any | None = None
         self._validate_times()
 
@@ -132,6 +139,9 @@ class SatelliteForecastDataset(Dataset):
         times = np.asarray(root["time_ns"][:], dtype=np.int64)
         for row in self.samples.itertuples(index=False):
             frame_indices = np.asarray(row.satellite_frame_indices, dtype=int)
+            if (frame_indices.shape != (len(HISTORY_MINUTES),)
+                    or np.any(frame_indices < 0) or np.any(frame_indices >= len(times))):
+                raise ValueError("satellite frame indices must reference four stored time slots")
             actual = pd.to_datetime(times[frame_indices], utc=True)
             expected = pd.DatetimeIndex(
                 [pd.Timestamp(row.issue_time_utc) + pd.Timedelta(minutes=value)
@@ -146,8 +156,8 @@ class SatelliteForecastDataset(Dataset):
 
     def _frames(self) -> Any:
         if self._root is None:
-            self._root = zarr.open_group(self.zarr_path, mode="r")
-        return self._root["frames"]
+            self._root = open_satellite_frames(self.zarr_path)
+        return self._root
 
     def __getstate__(self) -> dict[str, Any]:
         state = self.__dict__.copy()
@@ -160,6 +170,12 @@ class SatelliteForecastDataset(Dataset):
     def __getitem__(self, index: int) -> dict[str, Any]:
         row = self.samples.iloc[index]
         frame_indices = np.asarray(row["satellite_frame_indices"], dtype=int)
+        if not self.load_satellite:
+            result = self.power_dataset[index]
+            result["satellite"] = torch.zeros(4, len(self.statistics.mean), 1, 1)
+            result["satellite_mask"] = torch.zeros(4, dtype=torch.bool)
+            result["satellite_frame_indices"] = torch.tensor(frame_indices)
+            return result
         history = np.asarray(
             self._frames()[int(row["site_index"]), frame_indices], dtype=np.float32
         )
@@ -167,6 +183,7 @@ class SatelliteForecastDataset(Dataset):
         mean = np.asarray(self.statistics.mean, dtype=np.float32)[None, :, None, None]
         scale = np.asarray(self.statistics.scale, dtype=np.float32)[None, :, None, None]
         history = np.nan_to_num((history - mean) / scale)
+        history[~mask] = 0.0
         if self.augment and self.jitter_padding:
             rng = np.random.default_rng(self.seed + index)
             offset = rng.integers(-self.jitter_padding, self.jitter_padding + 1, size=2)
@@ -175,9 +192,16 @@ class SatelliteForecastDataset(Dataset):
                 padding=self.jitter_padding,
             )
         result = self.power_dataset[index]
+        if self.spatial_pool > 1:
+            frames, channels, height, width = history.shape
+            factor = self.spatial_pool
+            if height % factor or width % factor:
+                raise ValueError("spatial pool must divide image dimensions")
+            history = history.reshape(frames, channels, height//factor, factor,
+                                      width//factor, factor).mean(axis=(3, 5))
         result["satellite"] = torch.from_numpy(np.ascontiguousarray(history))
         result["satellite_mask"] = torch.from_numpy(mask)
-        result["satellite_frame_indices"] = torch.as_tensor(
+        result["satellite_frame_indices"] = torch.tensor(
             row["satellite_frame_indices"], dtype=torch.int64
         )
         return result
@@ -195,13 +219,17 @@ class ChunkBucketSampler(Sampler[int]):
         for index, row in enumerate(frame.itertuples(index=False)):
             key = (int(row.site_index), int(row.satellite_frame_indices[0]) // time_chunk)
             buckets.setdefault(key, []).append(index)
-        keys = sorted(buckets)
-        if shuffle_buckets:
-            np.random.default_rng(seed).shuffle(keys)
-        self.indices = [index for key in keys for index in buckets[key]]
+        self.buckets = buckets
+        self.shuffle_buckets, self.seed, self.epoch = shuffle_buckets, seed, 0
+
+    def set_epoch(self, epoch: int) -> None:
+        self.epoch = epoch
 
     def __iter__(self):
-        return iter(self.indices)
+        keys = sorted(self.buckets)
+        if self.shuffle_buckets:
+            np.random.default_rng(self.seed + self.epoch).shuffle(keys)
+        return iter([index for key in keys for index in self.buckets[key]])
 
     def __len__(self) -> int:
-        return len(self.indices)
+        return sum(map(len, self.buckets.values()))

@@ -121,7 +121,8 @@ def test_matrix_only_skips_completed_uncapped_run(tmp_path) -> None:
     (run / "provenance.json").write_text(
         json.dumps(provenance), encoding="utf-8"
     )
-    assert completed_formal_run(tmp_path, "cnn-late-fusion-v1", "full", 42, 30)
+    # Legacy metrics/provenance without a full identity and completion manifest cannot skip.
+    assert not completed_formal_run(tmp_path, "cnn-late-fusion-v1", "full", 42, 30)
     provenance["max_train_samples"] = 8
     (run / "provenance.json").write_text(
         json.dumps(provenance), encoding="utf-8"

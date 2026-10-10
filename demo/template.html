@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cloud2Watt · 冬季开发验证</title>
+<style>
+body{margin:0;background:#f1f5f7;color:#16303a;font:16px/1.65 system-ui,sans-serif}main{max-width:1100px;margin:auto;padding:36px 24px}h1{font-size:38px;line-height:1.2;margin:12px 0}h2{font-size:22px}small,.muted{color:#527079}.badge{display:inline-block;background:#d3e8e3;color:#205c4c;border-radius:30px;padding:5px 14px;font-weight:700}.card{background:white;border-radius:16px;padding:24px;margin:22px 0;box-shadow:0 3px 12px #15303a08}.warning{border-left:4px solid #c3832e;padding-left:16px}table{border-collapse:collapse;width:100%}td,th{text-align:left;padding:12px;border-bottom:1px solid #e3e9ec}select{padding:8px;border:1px solid #a5b8bd;border-radius:7px;margin:6px 18px 6px 5px;background:white;color:#16303a}svg{width:100%;height:auto;display:block}.legend{display:flex;flex-wrap:wrap;gap:15px;font-size:14px}.legend span:before{content:'●';color:var(--c);margin-right:6px}footer{font-size:13px;color:#527079}button{background:#205c4c;color:white;border:0;border-radius:8px;padding:10px 16px;cursor:pointer}@media(max-width:600px){main{padding:20px 12px}h1{font-size:28px}.card{padding:14px}table{font-size:12px}td,th{padding:8px 4px}}
+</style>
+<main><span class="badge">Cloud2Watt / 开发验证</span><h1>卫星图像，能让功率预测更准吗？</h1>
+<p class="muted">同一批英国冬季数据 · 20 个站点 · 30 天 · 定位修正后的共享卫星图像</p>
+<div class="warning">这是历史数据上的小预算开发实验。不能代表全年、其他地区或实时上线效果，也不是独立最终测试。</div>
+<section class="card"><h2>先看公平对照</h2><p>日间 30 / 60 / 120 分钟 MAE 等权平均，越低越好。单位为装机容量百分点；学习模型为三个随机种子的均值，最多训练八轮。</p>
+<table><thead><tr><th>模型</th><th>开发 MAE ↓</th><th>种子标准差</th><th>留出站点 MAE ↓</th></tr></thead><tbody>__TABLE__</tbody></table>
+<small>mlp：强纯功率模型；power_solar：配对纯功率对照；full：功率 + 卫星；其余为朴素基线。留出站点结果仍属开发诊断。</small></section>
+<section class="card"><h2>逐日回放</h2><p>曲线固定使用 seed 42，避免挑选表现最好的种子。观察值为三个五分钟采样功率的均值代理，非电表区间积分。</p>
+<label>站点<select id="site" aria-label="站点"></select></label><label>日期<select id="date" aria-label="日期"></select></label><label>预测提前量<select id="horizon" aria-label="预测提前量"><option value="0">15 分钟</option><option value="1">30 分钟</option><option value="2" selected>60 分钟</option><option value="3">120 分钟</option><option value="4">180 分钟</option><option value="5">240 分钟</option></select></label>
+<div class="legend" id="legend"></div><svg id="chart" viewBox="0 0 1000 360" role="img" aria-label="实际与预测功率曲线"></svg><p id="count" class="muted"></p><button id="download">下载当前曲线 CSV</button></section>
+<footer>协议 c2w-eval-v2.1 · 输入采用理想化卫星可用时间 · 卫星固定平均下采样至 32×32 · 无外部服务、无数据上传<br>模型排名不能代替跨季节验证；缺失目标不画观察值。页面仅含 validation/development 回放。</footer></main>
+<script>
+const raw=__DATA__, aligned=new Map();
+for(const row of raw){const time=new Date(row.time.replace(' ','T')).toISOString(),key=row.site+'|'+time;if(!aligned.has(key))aligned.set(key,{...row,time,predictions:{}});Object.assign(aligned.get(key).predictions,row.predictions)}
+const data=[...aligned.values()];
+const $=id=>document.getElementById(id), colors={observed:'#152f3a',mlp:'#d48235',power_solar:'#9273ad',full:'#128274',persistence:'#7a8b98',smart_persistence:'#438dc2'};
+const names={observed:'实际采样均值',mlp:'纯功率 MLP',power_solar:'配对纯功率',full:'功率 + 卫星',persistence:'Persistence',smart_persistence:'Smart Persistence'};
+function options(id,values){$(id).replaceChildren(...values.map(v=>{let o=document.createElement('option');o.value=v;o.textContent=v;return o}))}
+options('site',[...new Set(data.map(r=>r.site))].sort());
+function dates(){options('date',[...new Set(data.filter(r=>r.site===$('site').value).map(r=>r.time.slice(0,10)))].sort());draw()}
+function selected(){return data.filter(r=>r.site===$('site').value&&r.time.startsWith($('date').value)).sort((a,b)=>a.time.localeCompare(b.time))}
+function draw(){const rows=selected(),h=+$('horizon').value,mins=[15,30,60,120,180,240][h],models=Object.keys(colors),vals=rows.flatMap(r=>[r.observed[h],...Object.values(r.predictions).map(v=>v[h])]).filter(v=>v!==null),max=Math.max(.1,...vals),min=Math.min(0,...vals),t=rows.map(r=>Date.parse(r.time)),lo=Math.min(...t),hi=Math.max(...t),x=i=>65+(t[i]-lo)/Math.max(1,hi-lo)*905,y=v=>305-(v-min)/(max-min)*260;let parts=[];
+for(let k=0;k<=4;k++){let v=min+(max-min)*k/4;parts.push(`<line x1="65" x2="970" y1="${y(v)}" y2="${y(v)}" stroke="#e3e9ec"/><text x="8" y="${y(v)+5}" fill="#527079" font-size="13">${(v*100).toFixed(0)}%</text>`)}
+models.forEach(m=>{let path='',open=false;rows.forEach((r,i)=>{let v=m==='observed'?r.observed[h]:r.predictions[m]?.[h];if(v==null){open=false;return}path+=(open?'L':'M')+x(i).toFixed(2)+','+y(v).toFixed(2);open=true});parts.push(`<path d="${path}" fill="none" stroke="${colors[m]}" stroke-width="${m==='observed'?3:1.8}" opacity="${m==='observed'||m==='full'?1:.7}"/>`)});
+[0,Math.floor((rows.length-1)/2),rows.length-1].forEach(i=>{if(i>=0)parts.push(`<text x="${x(i)}" y="338" text-anchor="middle" fill="#527079" font-size="13">${new Date(t[i]+mins*60000).toISOString().slice(11,16)} UTC</text>`)});$('chart').innerHTML=parts.join('');$('legend').innerHTML=models.map(m=>`<span style="--c:${colors[m]}">${names[m]}</span>`).join('');$('count').textContent=`${rows.length} 次预测 · 横轴为目标时刻（发布时刻 + ${mins} 分钟），可能跨日 · 纵轴为装机容量比例。`;}
+$('site').onchange=dates;$('date').onchange=draw;$('horizon').onchange=draw;
+$('download').onclick=()=>{const h=+$('horizon').value,models=Object.keys(colors).filter(k=>k!=='observed'),rows=selected(),csv=['site,issue_time_utc,horizon_minutes,observed,'+models.join(','),...rows.map(r=>[r.site,r.time,[15,30,60,120,180,240][h],r.observed[h]??'',...models.map(m=>r.predictions[m]?.[h]??'')].join(','))].join('\n');const u=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=u;a.download='cloud2watt-development.csv';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};dates();
+</script></html>

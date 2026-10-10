@@ -15,7 +15,7 @@ import zarr
 
 from cloud2watt.data.alignment import aggregate_power_15min, to_utc
 from cloud2watt.data.quality import QualityFlag, flag_power_quality
-from cloud2watt.data.seviri import SeviriStore, SitePixel
+from cloud2watt.data.seviri import SEVIRI_PROJ4, SeviriStore, SitePixel
 
 HISTORY_MINUTES = (-45, -30, -15, 0)
 FORECAST_MINUTES = (15, 30, 60, 120, 180, 240)
@@ -149,6 +149,8 @@ def prepare_paired_power(
     )
     flagged, stats = flag_power_quality(aligned)
     duplicate_mask = flagged["raw_duplicate"].fillna(False).astype(bool)
+    # Empty resampling bins may mix float and bool; persist a stable boolean schema.
+    flagged["raw_duplicate"] = duplicate_mask
     flagged.loc[duplicate_mask, "quality_flags"] = flagged.loc[
         duplicate_mask, "quality_flags"
     ].astype("uint16") | int(QualityFlag.DUPLICATE_TIMESTAMP)
@@ -339,6 +341,7 @@ def write_satellite_frames(
             "channel_names": channel_names,
             "source_url": client.store_url,
             "source_metadata_sha256": client.metadata_sha256,
+            "projection_proj4": SEVIRI_PROJ4,
         }
     )
     finite_count = 0
